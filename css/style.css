@@ -363,3 +363,168 @@ min-height: 0;
 .bottom-nav {
 flex-shrink: 0;
 }
+/* ===== CASE RESULT ===== */
+
+.case-result {
+position: fixed;
+
+inset: 0;
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 24px;
+background: rgba(5, 7, 11, 0.94);
+backdrop-filter: blur(14px);
+opacity: 0;
+visibility: hidden;
+transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+
+}
+
+.case-result.show {
+opacity: 1;
+visibility: visible;
+}
+
+.case-result-card {
+width: min(100%, 420px);
+
+padding: 28px 20px;
+background: #151820;
+border: 1px solid #303643;
+border-radius: 28px;
+text-align: center;
+transform: scale(0.85);
+transition: transform 0.3s ease;
+
+}
+
+.case-result.show .case-result-card {
+transform: scale(1);
+}
+
+.result-title {
+font-size: 14px;
+font-weight: 800;
+
+color: #858c9b;
+letter-spacing: 1px;
+
+}
+
+.result-car {
+display: flex;
+align-items: center;
+justify-content: center;
+
+width: 190px;
+height: 190px;
+margin: 20px auto;
+background: #0d1016;
+border-radius: 35px;
+font-size: 90px;
+animation: carAppear 0.5s ease;
+
+}
+
+.result-name {
+font-size: 27px;
+font-weight: 900;
+}
+
+.result-rarity {
+display: inline-block;
+
+margin-top: 8px;
+padding: 7px 14px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: 800;
+
+}
+
+.result-price {
+margin-top: 12px;
+
+color: #858c9b;
+font-size: 14px;
+
+}
+
+.result-close {
+width: 100%;
+
+margin-top: 22px;
+padding: 14px;
+border-radius: 15px;
+background: #ffffff;
+color: #101218;
+font-size: 15px;
+font-weight: 900;
+
+}
+
+.rarity-common {
+background: #30343c;
+color: #d9dce2;
+}
+
+.rarity-uncommon {
+background: #173d70;
+color: #6db4ff;
+}
+
+.rarity-rare {
+background: #39216d;
+color: #b48cff;
+}
+
+.rarity-epic {
+background: #572052;
+color: #ff75e7;
+}
+
+.rarity-legendary {
+background: #634815;
+color: #ffd75e;
+}
+
+.rarity-mythic {
+background: #651c1c;
+color: #ff6b6b;
+}
+
+@keyframes carAppear {
+
+0% {
+    transform: scale(0.3) rotate(-8deg);
+    opacity: 0;
+}
+70% {
+    transform: scale(1.08) rotate(2deg);
+}
+100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+}
+
+}
+/* ===== CASE OPENING ===== */
+
+.case-opening {
+animation: openingPulse 0.7s ease infinite alternate;
+}
+
+@keyframes openingPulse {
+
+from {
+    transform: scale(0.96);
+}
+to {
+    transform: scale(1.04);
+}
+
+}
