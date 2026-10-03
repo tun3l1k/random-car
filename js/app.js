@@ -36,7 +36,7 @@ if (height) {
 updateViewport();
 
 if (tg) {
-tg.onEvent(“viewportChanged”, updateViewport);
+tg.onEvent("viewportChanged", updateViewport);
 }
 
 /* =========================
