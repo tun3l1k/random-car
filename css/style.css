@@ -1,530 +1,831 @@
+/* =====================================================
+   RANDOM CAR
+   Основные стили
+   ===================================================== */
+
+:root {
+    --app-height: 100vh;
+    --bg: #080808;
+    --card: #151515;
+    --card-light: #1d1d1d;
+    --text: #ffffff;
+    --muted: #8e8e93;
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #ffffff;
+}
+
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    }
+    -webkit-tap-highlight-color: transparent;
+}
 
 html,
 body {
-width: 100%;
-height: 100%;
-overflow: hidden;
-font-family: Arial, sans-serif;
-background: #0b0d12;
-color: #ffffff;
--webkit-tap-highlight-color: transparent;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Arial,
+        sans-serif;
 }
 
 body {
-min-height: 100dvh;
+    min-height: var(--app-height);
 }
 
 button {
-border: none;
-font: inherit;
-color: inherit;
-cursor: pointer;
--webkit-tap-highlight-color: transparent;
+    font: inherit;
+    color: inherit;
+    border: 0;
+    outline: none;
 }
+
+
+/* =====================================================
+   APP
+   ===================================================== */
 
 .app {
-width: 100%;
-max-width: 600px;
-height: 100dvh;
-margin: 0 auto;
-display: flex;
-flex-direction: column;
-overflow: hidden;
+    position: relative;
+
+    width: 100%;
+    height: var(--app-height);
+    min-height: 100%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(255, 255, 255, 0.055),
+            transparent 38%
+        ),
+        var(--bg);
 }
 
-/* ===== TOPBAR ===== */
+
+/* =====================================================
+   TOPBAR
+   ===================================================== */
 
 .topbar {
-flex-shrink: 0;
+    position: relative;
+    z-index: 10;
 
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 14px 16px;
-background: #11141b;
-border-bottom: 1px solid #20242d;
+    width: 100%;
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        max(14px, env(safe-area-inset-top))
+        18px
+        12px;
+
+    min-height: 70px;
 }
 
 .game-title {
-font-size: 19px;
-font-weight: 900;
-letter-spacing: 1px;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
 }
 
 .player-name {
-margin-top: 3px;
-font-size: 12px;
-color: #8c93a3;
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .balance {
-padding: 9px 12px;
+    display: flex;
+    align-items: center;
 
-background: #1b1f28;
-border: 1px solid #292e39;
-border-radius: 13px;
-font-size: 14px;
-font-weight: 800;
+    min-height: 40px;
 
+    padding: 0 12px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--border);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
 }
 
-/* ===== MAIN ===== */
+
+/* =====================================================
+   BURGER
+   ===================================================== */
+
+.burger-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border);
+
+    font-size: 23px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.burger-button:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+
+/* =====================================================
+   MAIN
+   ===================================================== */
 
 .main {
-flex: 1;
+    position: relative;
+    z-index: 1;
 
-display: flex;
-flex-direction: column;
-padding: 16px;
-overflow: hidden;
+    width: 100%;
 
+    height: calc(
+        var(--app-height) - 70px
+    );
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding:
+        20px
+        18px
+        max(24px, env(safe-area-inset-bottom));
+
+    overflow: hidden;
 }
 
+
+/* =====================================================
+   WELCOME
+   ===================================================== */
+
 .welcome {
-flex-shrink: 0;
-margin-bottom: 12px;
+    width: 100%;
+    max-width: 430px;
+
+    text-align: center;
+
+    margin-top: clamp(8px, 5vh, 40px);
 }
 
 .welcome-small {
-font-size: 10px;
-font-weight: 800;
-color: #777e8e;
-letter-spacing: 1px;
+    margin-bottom: 7px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
 }
 
 .welcome h1 {
-margin-top: 4px;
-font-size: 25px;
-font-weight: 900;
+    margin: 0;
+
+    font-size: clamp(27px, 7vw, 38px);
+    line-height: 1.05;
+
+    font-weight: 850;
+    letter-spacing: -1px;
 }
 
 .welcome p {
-margin-top: 4px;
+    max-width: 310px;
 
-color: #858c9b;
-font-size: 13px;
+    margin: 10px auto 0;
 
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.35;
 }
 
-/* ===== CASE ===== */
+
+/* =====================================================
+   CASE CARD
+   ===================================================== */
 
 .case-card {
-flex-shrink: 0;
+    width: 100%;
+    max-width: 390px;
 
-padding: 16px;
-background: linear-gradient(145deg, #1a1e27, #11141a);
-border: 1px solid #292e39;
-border-radius: 22px;
-text-align: center;
+    margin-top: clamp(22px, 5vh, 42px);
 
+    padding:
+        clamp(20px, 5vw, 28px)
+        clamp(18px, 5vw, 28px)
+        20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.085),
+            rgba(255, 255, 255, 0.035)
+        );
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.35);
 }
 
+
+/* =====================================================
+   CAR IMAGE
+   ===================================================== */
+
 .case-image {
-display: flex;
-align-items: center;
-justify-content: center;
+    width: clamp(105px, 30vw, 145px);
+    height: clamp(105px, 30vw, 145px);
 
-width: 105px;
-height: 105px;
-margin: 0 auto 10px;
-background: #0d1016;
-border-radius: 25px;
-font-size: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.025)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    font-size: clamp(55px, 15vw, 82px);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =====================================================
+   CASE INFO
+   ===================================================== */
+
+.case-info {
+    margin-top: 17px;
+
+    text-align: center;
 }
 
 .case-info h2 {
-font-size: 20px;
+    margin: 0;
+
+    font-size: clamp(21px, 5.5vw, 27px);
+    font-weight: 800;
+
+    letter-spacing: -0.4px;
 }
 
 .case-info p {
-margin-top: 4px;
+    margin: 5px 0 0;
 
-color: #8f96a5;
-font-size: 13px;
+    color: var(--muted);
 
+    font-size: 14px;
 }
 
+
+/* =====================================================
+   MAIN BUTTON
+   ===================================================== */
+
 .main-button {
-width: 100%;
+    width: 100%;
+    min-height: 54px;
 
-margin-top: 13px;
-padding: 14px;
-background: #ffffff;
-color: #101218;
-border-radius: 14px;
-font-size: 15px;
-font-weight: 900;
-transition: transform 0.12s;
+    margin-top: 22px;
 
+    border-radius: 17px;
+
+    background: var(--accent);
+    color: #080808;
+
+    font-size: 15px;
+    font-weight: 850;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 28px rgba(255, 255, 255, 0.08);
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
 }
 
 .main-button:active {
-transform: scale(0.97);
+    transform: scale(0.97);
 }
+
+.main-button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.main-button.case-opening {
+    animation: pulseButton 0.8s ease infinite alternate;
+}
+
+@keyframes pulseButton {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.97);
+    }
+}
+
+
+/* =====================================================
+   PRICE
+   ===================================================== */
 
 .case-price {
-margin-top: 8px;
+    margin-top: 12px;
 
-color: #858c9b;
-font-size: 11px;
+    color: var(--muted);
 
+    font-size: 12px;
 }
 
-/* ===== MENU ===== */
-
-.menu {
-flex: 1;
-
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
-margin-top: 12px;
-
+.case-price b {
+    color: var(--text);
 }
 
-.menu-button {
-min-height: 0;
 
-padding: 12px;
-background: #151820;
-border: 1px solid #252a34;
-border-radius: 16px;
-text-align: left;
-transition: transform 0.12s;
+/* =====================================================
+   MENU OVERLAY
+   ===================================================== */
 
+.menu-overlay {
+    position: fixed;
+    z-index: 90;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.58);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
-.menu-button:active {
-transform: scale(0.97);
+.menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
 }
 
-.menu-button span {
-display: block;
 
-font-size: 24px;
-margin-bottom: 6px;
+/* =====================================================
+   SIDE MENU
+   ===================================================== */
 
+.side-menu {
+    position: fixed;
+    z-index: 100;
+
+    top: 0;
+    right: 0;
+
+    width: min(84vw, 360px);
+    height: 100%;
+
+    padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        max(20px, env(safe-area-inset-bottom));
+
+    background:
+        linear-gradient(
+            180deg,
+            #171717,
+            #101010
+        );
+
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        -20px 0 60px rgba(0, 0, 0, 0.45);
+
+    transform: translateX(105%);
+
+    transition:
+        transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+
+    overflow: hidden;
 }
 
-.menu-button strong {
-display: block;
-
-font-size: 14px;
-
+.side-menu.open {
+    transform: translateX(0);
 }
 
-.menu-button small {
-display: block;
 
-margin-top: 3px;
-color: #7f8695;
-font-size: 10px;
+/* =====================================================
+   MENU HEADER
+   ===================================================== */
 
+.side-menu-header {
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
 }
 
-/* ===== BOTTOM NAV ===== */
+.side-menu-header strong {
+    font-size: 17px;
+    font-weight: 850;
 
-.bottom-nav {
-flex-shrink: 0;
-
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
-background: rgba(14, 16, 22, 0.98);
-border-top: 1px solid #252a34;
-
+    letter-spacing: 1px;
 }
 
-.nav-button {
-display: flex;
-flex-direction: column;
-align-items: center;
+.close-menu {
+    width: 42px;
+    height: 42px;
 
-gap: 3px;
-background: transparent;
-font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-}
+    border-radius: 50%;
 
-.nav-button span {
-font-size: 10px;
-color: #777e8e;
-}
+    background: rgba(255, 255, 255, 0.08);
 
-.nav-button.active span {
-color: #ffffff;
-}
-
-/* ===== VERY SMALL SCREENS ===== */
-
-@media (max-height: 650px) {
-
-.topbar {
-    padding: 10px 14px;
-}
-.main {
-    padding: 12px;
-}
-.welcome {
-    margin-bottom: 8px;
-}
-.welcome h1 {
     font-size: 22px;
-}
-.case-card {
-    padding: 11px;
-}
-.case-image {
-    width: 80px;
-    height: 80px;
-    font-size: 40px;
-}
-.main-button {
-    margin-top: 9px;
-    padding: 11px;
-}
-.menu {
-    margin-top: 8px;
-    gap: 7px;
-}
-.menu-button {
-    padding: 9px;
-}
-.menu-button span {
-    font-size: 20px;
-    margin-bottom: 3px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
 }
 
-}
-/* ===== FIXED MOBILE APP ===== */
-
-html,
-body {
-width: 100%;
-height: 100%;
-margin: 0;
-padding: 0;
-
-overflow: hidden !important;
-overscroll-behavior: none;
-touch-action: pan-x;
-
+.close-menu:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.15);
 }
 
-body {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
 
-width: 100%;
-height: 100%;
-overflow: hidden !important;
+/* =====================================================
+   MENU ITEMS
+   ===================================================== */
 
+.side-menu-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 18px;
 }
 
-.app {
-position: fixed;
+.side-menu-item {
+    width: 100%;
+    min-height: 56px;
 
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-max-width: 600px;
-margin: 0 auto;
-overflow: hidden;
-display: flex;
-flex-direction: column;
+    display: flex;
+    align-items: center;
 
+    padding: 0 15px;
+
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    border: 1px solid rgba(255, 255, 255, 0.045);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
 }
 
-.main {
-min-height: 0;
-overflow: hidden;
+.side-menu-item span {
+    width: 34px;
+
+    margin-right: 10px;
+
+    font-size: 23px;
+
+    text-align: center;
 }
 
-.menu {
-min-height: 0;
-grid-template-rows: repeat(2, minmax(0, 1fr));
+.side-menu-item strong {
+    font-size: 15px;
+    font-weight: 700;
 }
 
-.menu-button {
-min-height: 0;
+.side-menu-item:active {
+    transform: scale(0.97);
+
+    background: rgba(255, 255, 255, 0.10);
 }
 
-.bottom-nav {
-flex-shrink: 0;
-}
-/* ===== CASE RESULT ===== */
+
+/* =====================================================
+   RESULT WINDOW
+   ===================================================== */
 
 .case-result {
-position: fixed;
+    position: fixed;
+    z-index: 200;
 
-inset: 0;
-z-index: 1000;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 24px;
-background: rgba(5, 7, 11, 0.94);
-backdrop-filter: blur(14px);
-opacity: 0;
-visibility: hidden;
-transition:
-    opacity 0.25s ease,
-    visibility 0.25s ease;
+    inset: 0;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    opacity: 0;
+
+    transition: opacity 0.25s ease;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .case-result.show {
-opacity: 1;
-visibility: visible;
-}
-
-.case-result-card {
-width: min(100%, 420px);
-
-padding: 28px 20px;
-background: #151820;
-border: 1px solid #303643;
-border-radius: 28px;
-text-align: center;
-transform: scale(0.85);
-transition: transform 0.3s ease;
-
-}
-
-.case-result.show .case-result-card {
-transform: scale(1);
-}
-
-.result-title {
-font-size: 14px;
-font-weight: 800;
-
-color: #858c9b;
-letter-spacing: 1px;
-
-}
-
-.result-car {
-display: flex;
-align-items: center;
-justify-content: center;
-
-width: 190px;
-height: 190px;
-margin: 20px auto;
-background: #0d1016;
-border-radius: 35px;
-font-size: 90px;
-animation: carAppear 0.5s ease;
-
-}
-
-.result-name {
-font-size: 27px;
-font-weight: 900;
-}
-
-.result-rarity {
-display: inline-block;
-
-margin-top: 8px;
-padding: 7px 14px;
-border-radius: 20px;
-font-size: 13px;
-font-weight: 800;
-
-}
-
-.result-price {
-margin-top: 12px;
-
-color: #858c9b;
-font-size: 14px;
-
-}
-
-.result-close {
-width: 100%;
-
-margin-top: 22px;
-padding: 14px;
-border-radius: 15px;
-background: #ffffff;
-color: #101218;
-font-size: 15px;
-font-weight: 900;
-
-}
-
-.rarity-common {
-background: #30343c;
-color: #d9dce2;
-}
-
-.rarity-uncommon {
-background: #173d70;
-color: #6db4ff;
-}
-
-.rarity-rare {
-background: #39216d;
-color: #b48cff;
-}
-
-.rarity-epic {
-background: #572052;
-color: #ff75e7;
-}
-
-.rarity-legendary {
-background: #634815;
-color: #ffd75e;
-}
-
-.rarity-mythic {
-background: #651c1c;
-color: #ff6b6b;
-}
-
-@keyframes carAppear {
-
-0% {
-    transform: scale(0.3) rotate(-8deg);
-    opacity: 0;
-}
-70% {
-    transform: scale(1.08) rotate(2deg);
-}
-100% {
-    transform: scale(1) rotate(0);
     opacity: 1;
 }
 
-}
-/* ===== CASE OPENING ===== */
+.case-result-card {
+    width: min(90vw, 360px);
 
-.case-opening {
-animation: openingPulse 0.7s ease infinite alternate;
+    padding: 28px 22px 22px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #202020,
+            #111111
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55);
+
+    transform: scale(0.92);
+
+    transition: transform 0.3s ease;
 }
 
-@keyframes openingPulse {
-
-from {
-    transform: scale(0.96);
-}
-to {
-    transform: scale(1.04);
+.case-result.show .case-result-card {
+    transform: scale(1);
 }
 
+.result-title {
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.result-car {
+    margin-top: 18px;
+
+    font-size: 90px;
+
+    line-height: 1;
+}
+
+.result-name {
+    margin-top: 16px;
+
+    font-size: 24px;
+    font-weight: 850;
+}
+
+.result-price {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.result-price b {
+    color: var(--text);
+}
+
+.result-close {
+    width: 100%;
+    min-height: 52px;
+
+    margin-top: 22px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+    color: #080808;
+
+    font-weight: 850;
+
+    cursor: pointer;
+}
+
+.result-close:active {
+    transform: scale(0.97);
+}
+
+
+/* =====================================================
+   RARITY
+   ===================================================== */
+
+.result-rarity {
+    margin-top: 7px;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.rarity-common {
+    color: #aaaaaa;
+}
+
+.rarity-uncommon {
+    color: #4da3ff;
+}
+
+.rarity-rare {
+    color: #a56cff;
+}
+
+.rarity-epic {
+    color: #ff66c4;
+}
+
+.rarity-legendary {
+    color: #ffb84d;
+}
+
+
+/* =====================================================
+   SMALL IPHONES
+   ===================================================== */
+
+@media (max-height: 700px) {
+
+    .topbar {
+        min-height: 62px;
+    }
+
+    .main {
+        height: calc(
+            var(--app-height) - 62px
+        );
+
+        padding-top: 10px;
+    }
+
+    .welcome {
+        margin-top: 2px;
+    }
+
+    .welcome p {
+        margin-top: 6px;
+    }
+
+    .case-card {
+        margin-top: 16px;
+
+        padding-top: 16px;
+        padding-bottom: 15px;
+    }
+
+    .case-image {
+        width: 95px;
+        height: 95px;
+
+        font-size: 52px;
+    }
+
+    .case-info {
+        margin-top: 11px;
+    }
+
+    .main-button {
+        margin-top: 15px;
+        min-height: 48px;
+    }
+
+    .case-price {
+        margin-top: 8px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL SCREENS
+   ===================================================== */
+
+@media (max-height: 600px) {
+
+    .welcome h1 {
+        font-size: 25px;
+    }
+
+    .welcome p {
+        font-size: 12px;
+    }
+
+    .case-card {
+        margin-top: 10px;
+    }
+
+    .case-image {
+        width: 80px;
+        height: 80px;
+
+        font-size: 44px;
+    }
+
+    .case-info h2 {
+        font-size: 20px;
+    }
+
+    .case-info p {
+        font-size: 12px;
+    }
+
+    .main-button {
+        min-height: 44px;
+        margin-top: 12px;
+
+        font-size: 13px;
+    }
 }
