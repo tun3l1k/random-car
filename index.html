@@ -1029,19 +1029,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function closeSideMenu() {
 
-        if (sideMenu) {
+    if (sideMenu) {
 
-            sideMenu.classList.remove(
-                "active"
-            );
+        sideMenu.classList.remove("open");
+        sideMenu.classList.remove("active");
 
-            sideMenu.setAttribute(
-                "aria-hidden",
-                "true"
-            );
+        sideMenu.setAttribute(
+            "aria-hidden",
+            "true"
+        );
 
-        }
+    }
 
+    if (menuOverlay) {
+
+        menuOverlay.classList.remove("open");
+        menuOverlay.classList.remove("active");
+
+    }
 
         if (menuOverlay) {
 
