@@ -19,28 +19,43 @@ const defaultProfile = {
 // =========================================
 
 function getProfile() {
-    const saved = localStorage.getItem(PROFILE_STORAGE_KEY);
+
+    const saved =
+        localStorage.getItem(
+            PROFILE_STORAGE_KEY
+        );
 
     if (!saved) {
         return { ...defaultProfile };
     }
 
     try {
+
         return {
             ...defaultProfile,
             ...JSON.parse(saved)
         };
+
     } catch (error) {
-        return { ...defaultProfile };
+
+        console.error(
+            "Ошибка загрузки профиля:",
+            error
+        );
+
+        return {
+            ...defaultProfile
+        };
     }
 }
 
 
 // =========================================
-// СОХРАНЕНИЕ ПРОФИЛЯ
+// СОХРАНЕНИЕ
 // =========================================
 
 function saveProfile(profile) {
+
     localStorage.setItem(
         PROFILE_STORAGE_KEY,
         JSON.stringify(profile)
@@ -61,7 +76,8 @@ function getPlayerName() {
         Telegram.WebApp.initDataUnsafe.user
     ) {
 
-        const user = Telegram.WebApp.initDataUnsafe.user;
+        const user =
+            Telegram.WebApp.initDataUnsafe.user;
 
         if (user.first_name) {
             return user.first_name;
@@ -77,10 +93,36 @@ function getPlayerName() {
 
 
 // =========================================
-// XP ДЛЯ СЛЕДУЮЩЕГО УРОВНЯ
+// USERNAME
+// =========================================
+
+function getPlayerUsername() {
+
+    if (
+        window.Telegram &&
+        Telegram.WebApp &&
+        Telegram.WebApp.initDataUnsafe &&
+        Telegram.WebApp.initDataUnsafe.user
+    ) {
+
+        const user =
+            Telegram.WebApp.initDataUnsafe.user;
+
+        if (user.username) {
+            return "@" + user.username;
+        }
+    }
+
+    return "RANDOM CAR";
+}
+
+
+// =========================================
+// XP
 // =========================================
 
 function getNextLevelXP(level) {
+
     return level * 100;
 }
 
@@ -91,18 +133,25 @@ function getNextLevelXP(level) {
 
 function addProfileXP(amount) {
 
-    const profile = getProfile();
+    const profile =
+        getProfile();
 
     profile.xp += amount;
 
+
     while (
-        profile.xp >= getNextLevelXP(profile.level)
+        profile.xp >=
+        getNextLevelXP(profile.level)
     ) {
 
-        profile.xp -= getNextLevelXP(profile.level);
+        profile.xp -=
+            getNextLevelXP(
+                profile.level
+            );
 
         profile.level += 1;
     }
+
 
     saveProfile(profile);
 
@@ -111,77 +160,399 @@ function addProfileXP(amount) {
 
 
 // =========================================
-// ЗАПИСЬ ОТКРЫТИЯ КЕЙСА
+// СОХРАНИТЬ ОТКРЫТИЕ
 // =========================================
 
 function registerCaseOpening(car) {
 
-    const profile = getProfile();
+    if (!car) {
+        return getProfile();
+    }
+
+
+    const profile =
+        getProfile();
+
 
     profile.openedCases += 1;
 
     profile.carsCount += 1;
 
-    profile.collectionValue += Number(car.price) || 0;
+    profile.collectionValue +=
+        Number(car.price) || 0;
 
 
-    // Проверяем лучшее авто
+    // -------------------------
+    // ЛУЧШАЯ МАШИНА
+    // -------------------------
 
-    if (!profile.bestCar) {
+    const newPrice =
+        Number(car.price) || 0;
+
+
+    const currentBestPrice =
+        profile.bestCar
+            ? Number(
+                profile.bestCar.price
+            ) || 0
+            : 0;
+
+
+    if (
+        !profile.bestCar ||
+        newPrice > currentBestPrice
+    ) {
 
         profile.bestCar = {
-            name: car.name,
-            rarity: car.rarity,
-            rarityName: car.rarityName,
-            price: car.price,
-            emoji: car.emoji
+
+            name:
+                car.name || "Неизвестный автомобиль",
+
+            rarity:
+                car.rarity || "",
+
+            rarityName:
+                car.rarityName || "",
+
+            price:
+                newPrice,
+
+            emoji:
+                car.emoji || "🚘"
         };
-
-    } else {
-
-        const currentBestPrice =
-            Number(profile.bestCar.price) || 0;
-
-        const newCarPrice =
-            Number(car.price) || 0;
-
-        if (newCarPrice > currentBestPrice) {
-
-            profile.bestCar = {
-                name: car.name,
-                rarity: car.rarity,
-                rarityName: car.rarityName,
-                price: car.price,
-                emoji: car.emoji
-            };
-
-        }
     }
 
 
-    // За открытие кейса даём XP
+    // -------------------------
+    // XP
+    // -------------------------
 
-    addProfileXP(25);
+    profile.xp += 25;
 
-    return getProfile();
+
+    while (
+        profile.xp >=
+        getNextLevelXP(profile.level)
+    ) {
+
+        profile.xp -=
+            getNextLevelXP(
+                profile.level
+            );
+
+        profile.level += 1;
+    }
+
+
+    saveProfile(profile);
+
+    updateProfileScreen();
+
+    return profile;
 }
 
 
 // =========================================
-// ПОЛУЧИТЬ ИМЯ ДЛЯ ПРОФИЛЯ
+// ОБНОВЛЕНИЕ ПРОФИЛЯ НА ЭКРАНЕ
 // =========================================
 
-function updatePlayerNames() {
+function updateProfileScreen() {
 
-    const playerName = getPlayerName();
+    const profile =
+        getProfile();
 
-    const elements = document.querySelectorAll(
-        ".player-name"
+
+    // -------------------------
+    // ИМЯ
+    // -------------------------
+
+    const playerName =
+        document.getElementById(
+            "profilePlayerName"
+        );
+
+    if (playerName) {
+
+        playerName.textContent =
+            getPlayerName();
+    }
+
+
+    // -------------------------
+    // USERNAME
+    // -------------------------
+
+    const username =
+        document.getElementById(
+            "profileUsername"
+        );
+
+    if (username) {
+
+        username.textContent =
+            getPlayerUsername();
+    }
+
+
+    // -------------------------
+    // УРОВЕНЬ
+    // -------------------------
+
+    const level =
+        document.getElementById(
+            "profileLevel"
+        );
+
+    if (level) {
+
+        level.textContent =
+            profile.level;
+    }
+
+
+    // -------------------------
+    // XP
+    // -------------------------
+
+    const xp =
+        document.getElementById(
+            "profileXP"
+        );
+
+    const nextXP =
+        document.getElementById(
+            "profileNextXP"
+        );
+
+    const xpProgress =
+        document.getElementById(
+            "profileXPProgress"
+        );
+
+
+    const requiredXP =
+        getNextLevelXP(
+            profile.level
+        );
+
+
+    if (xp) {
+
+        xp.textContent =
+            profile.xp;
+    }
+
+
+    if (nextXP) {
+
+        nextXP.textContent =
+            requiredXP;
+    }
+
+
+    if (xpProgress) {
+
+        const percent =
+            Math.min(
+                100,
+                Math.max(
+                    0,
+                    (
+                        profile.xp /
+                        requiredXP
+                    ) * 100
+                )
+            );
+
+        xpProgress.style.width =
+            percent + "%";
+    }
+
+
+    // -------------------------
+    // БАЛАНС
+    // -------------------------
+
+    const profileBalance =
+        document.getElementById(
+            "profileBalance"
+        );
+
+    const mainBalance =
+        document.getElementById(
+            "balance"
+        );
+
+
+    let balance = 0;
+
+
+    if (mainBalance) {
+
+        const rawBalance =
+            mainBalance.textContent
+                .replace(/\s/g, "")
+                .replace(/[^\d]/g, "");
+
+        balance =
+            Number(rawBalance) || 0;
+    }
+
+
+    if (profileBalance) {
+
+        profileBalance.textContent =
+            balance.toLocaleString(
+                "ru-RU"
+            );
+    }
+
+
+    // -------------------------
+    // ОТКРЫТЫЕ КЕЙСЫ
+    // -------------------------
+
+    const openedCases =
+        document.getElementById(
+            "profileOpenedCases"
+        );
+
+    if (openedCases) {
+
+        openedCases.textContent =
+            profile.openedCases;
+    }
+
+
+    // -------------------------
+    // КОЛИЧЕСТВО МАШИН
+    // -------------------------
+
+    const carsCount =
+        document.getElementById(
+            "profileCarsCount"
+        );
+
+    if (carsCount) {
+
+        carsCount.textContent =
+            profile.carsCount;
+    }
+
+
+    // -------------------------
+    // СТОИМОСТЬ КОЛЛЕКЦИИ
+    // -------------------------
+
+    const collectionValue =
+        document.getElementById(
+            "profileCollectionValue"
+        );
+
+    if (collectionValue) {
+
+        collectionValue.textContent =
+            profile.collectionValue.toLocaleString(
+                "ru-RU"
+            );
+    }
+
+
+    // -------------------------
+    // ЛУЧШАЯ МАШИНА
+    // -------------------------
+
+    updateBestCar(
+        profile.bestCar
     );
+}
 
-    elements.forEach(element => {
-        element.textContent = playerName;
-    });
+
+// =========================================
+// ЛУЧШАЯ МАШИНА
+// =========================================
+
+function updateBestCar(bestCar) {
+
+    const container =
+        document.getElementById(
+            "profileBestCar"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    if (!bestCar) {
+
+        container.innerHTML = `
+
+            <div class="profile-best-car-emoji">
+                🚘
+            </div>
+
+            <div class="profile-best-car-info">
+
+                <div class="profile-best-car-name">
+                    Пока нет машин
+                </div>
+
+                <div class="profile-best-car-rarity">
+                    Открой первый кейс
+                </div>
+
+                <div class="profile-best-car-price">
+                    —
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const emoji =
+        bestCar.emoji || "🚘";
+
+    const name =
+        bestCar.name || "Автомобиль";
+
+    const rarity =
+        bestCar.rarityName ||
+        bestCar.rarity ||
+        "Неизвестная редкость";
+
+    const price =
+        Number(bestCar.price) || 0;
+
+
+    container.innerHTML = `
+
+        <div class="profile-best-car-emoji">
+            ${emoji}
+        </div>
+
+        <div class="profile-best-car-info">
+
+            <div class="profile-best-car-name">
+                ${name}
+            </div>
+
+            <div class="profile-best-car-rarity">
+                ${rarity}
+            </div>
+
+            <div class="profile-best-car-price">
+                ${price.toLocaleString("ru-RU")} 🪙
+            </div>
+
+        </div>
+
+    `;
 }
 
 
@@ -191,15 +562,14 @@ function updatePlayerNames() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    function () {
 
-        updatePlayerNames();
-
-        // Создаём профиль, если его ещё нет
-
-        const profile = getProfile();
+        const profile =
+            getProfile();
 
         saveProfile(profile);
+
+        updateProfileScreen();
 
     }
 );
