@@ -13,18 +13,21 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 
 <body>
 
 <div class="app">
 
-    <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
+    <!-- =========================================
+         ВЕРХНЯЯ ПАНЕЛЬ
+         ========================================= -->
 
     <header class="topbar">
 
-        <div>
+        <div class="topbar-left">
+
             <div class="game-title">
                 RANDOM CAR
             </div>
@@ -32,13 +35,17 @@
             <div class="player-name">
                 Игрок
             </div>
+
         </div>
+
 
         <div class="topbar-right">
 
             <div class="balance">
-                🪙 <span id="balance">10000</span>
+                🪙
+                <span id="balance">10000</span>
             </div>
+
 
             <button
                 id="menuButton"
@@ -54,7 +61,9 @@
     </header>
 
 
-    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <!-- =========================================
+         ГЛАВНЫЙ ЭКРАН
+         ========================================= -->
 
     <main class="main">
 
@@ -75,13 +84,16 @@
         </section>
 
 
-        <!-- ===== КЕЙС ===== -->
+        <!-- =====================================
+             ТЕКУЩИЙ КЕЙС
+             ===================================== -->
 
         <section class="case-card">
 
             <div class="case-image">
                 🚘
             </div>
+
 
             <div class="case-info">
 
@@ -106,16 +118,36 @@
 
 
             <div class="case-price">
+
                 Стоимость:
-                <b>500 🪙</b>
+
+                <b>
+                    500 🪙
+                </b>
+
             </div>
 
         </section>
 
+
+        <!-- =====================================
+             КНОПКА ВСЕХ КЕЙСОВ
+             ===================================== -->
+
+        <button
+            id="casesButton"
+            class="secondary-button"
+            type="button"
+        >
+            🎁 КЕЙСЫ
+        </button>
+
     </main>
 
 
-    <!-- ===== ЗАТЕМНЕНИЕ ===== -->
+    <!-- =========================================
+         ЗАТЕМНЕНИЕ МЕНЮ
+         ========================================= -->
 
     <div
         id="menuOverlay"
@@ -123,7 +155,9 @@
     ></div>
 
 
-    <!-- ===== БОКОВОЕ МЕНЮ ===== -->
+    <!-- =========================================
+         БОКОВОЕ МЕНЮ
+         ========================================= -->
 
     <aside
         id="sideMenu"
@@ -136,6 +170,7 @@
             <strong>
                 RANDOM CAR
             </strong>
+
 
             <button
                 id="closeMenuButton"
@@ -151,57 +186,129 @@
 
         <div class="side-menu-list">
 
+            <!-- КОЛЛЕКЦИЯ -->
+
             <button
                 class="side-menu-item"
                 type="button"
             >
-                <span>🚗</span>
-                <strong>Коллекция</strong>
+
+                <span>
+                    🚗
+                </span>
+
+                <strong>
+                    Коллекция
+                </strong>
+
             </button>
 
 
+            <!-- РЕЙТИНГ -->
+
             <button
                 class="side-menu-item"
                 type="button"
             >
-                <span>🏆</span>
-                <strong>Рейтинг</strong>
+
+                <span>
+                    🏆
+                </span>
+
+                <strong>
+                    Рейтинг
+                </strong>
+
             </button>
 
 
+            <!-- ЗАДАНИЯ -->
+
             <button
                 class="side-menu-item"
                 type="button"
             >
-                <span>🎯</span>
-                <strong>Задания</strong>
+
+                <span>
+                    🎯
+                </span>
+
+                <strong>
+                    Задания
+                </strong>
+
             </button>
 
 
+            <!-- ПРОФИЛЬ -->
+
             <button
                 class="side-menu-item"
                 type="button"
             >
-                <span>👤</span>
-                <strong>Профиль</strong>
+
+                <span>
+                    👤
+                </span>
+
+                <strong>
+                    Профиль
+                </strong>
+
             </button>
 
 
+            <!-- КЕЙСЫ -->
+
             <button
                 class="side-menu-item"
                 type="button"
             >
-                <span>🎁</span>
-                <strong>Кейсы</strong>
+
+                <span>
+                    🎁
+                </span>
+
+                <strong>
+                    Кейсы
+                </strong>
+
             </button>
 
 
+            <!-- АПГРЕЙД -->
+
             <button
                 class="side-menu-item"
                 type="button"
             >
-                <span>⚙️</span>
-                <strong>Настройки</strong>
+
+                <span>
+                    ⬆️
+                </span>
+
+                <strong>
+                    Апгрейд
+                </strong>
+
+            </button>
+
+
+            <!-- НАСТРОЙКИ -->
+
+            <button
+                class="side-menu-item"
+                type="button"
+            >
+
+                <span>
+                    ⚙️
+                </span>
+
+                <strong>
+                    Настройки
+                </strong>
+
             </button>
 
         </div>
@@ -211,10 +318,12 @@
 </div>
 
 
-<!-- ===== JAVASCRIPT ===== -->
+<!-- =========================================
+     JAVASCRIPT
+     ========================================= -->
 
-<script src="js/cars.js?v=4"></script>
-<script src="js/app.js?v=4"></script>
+<script src="js/cars.js?v=5"></script>
+<script src="js/app.js?v=5"></script>
 
 </body>
 </html>
