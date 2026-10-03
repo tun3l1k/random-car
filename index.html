@@ -1,71 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
-        content="width=device-width,
-        initial-scale=1.0,
-        maximum-scale=1.0,
-        user-scalable=no,
-        viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     >
-
     <title>Random Car</title>
-
-    <!-- Telegram Mini App -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <!-- Стили -->
-    <link rel="stylesheet" href="css/style.css?v=7">
+    <link rel="stylesheet" href="css/style.css?v=10">
 </head>
-
 <body>
-
 <div class="app">
-
-    <!-- =========================
+    <!-- =========================================
          ВЕРХНЯЯ ПАНЕЛЬ
-         ========================= -->
-
+         ========================================= -->
     <header class="topbar">
-
         <div class="topbar-left">
-
-            <div class="game-title">
-                RANDOM CAR
-            </div>
-
-            <div
-                id="playerName"
-                class="player-name"
-            >
-                Игрок
-            </div>
-
-        </div>
-
-
-        <div class="topbar-right">
-
-            <!-- Сезон -->
             <button
                 id="seasonButton"
                 class="season-button"
                 type="button"
             >
-                🏆 СЕЗОН 1
+                СЕЗОН 1 · JDM
             </button>
-
-            <!-- Баланс -->
+        </div>
+        <div class="topbar-right">
             <div class="balance">
                 🪙
-                <span id="balance">10000</span>
+                <span id="balance">
+                    10000
+                </span>
             </div>
-
-            <!-- Бургер -->
             <button
                 id="menuButton"
                 class="menu-toggle"
@@ -74,60 +40,41 @@
             >
                 ☰
             </button>
-
         </div>
-
     </header>
-
-
-    <!-- =========================
-         ОСНОВНОЙ ЭКРАН
-         ========================= -->
-
+    <!-- =========================================
+         ГЛАВНЫЙ ЭКРАН
+         ========================================= -->
     <main
         id="homeScreen"
         class="main"
     >
-
         <section class="welcome">
-
             <div class="welcome-small">
-                ТВОЯ КОЛЛЕКЦИЯ
+                RANDOM CAR
             </div>
-
             <h1>
                 Собери их всех
             </h1>
-
             <p>
-                Открывай кейсы и получай
-                редкие автомобили.
+                Открывай кейсы и получай редкие автомобили.
             </p>
-
         </section>
-
-
-        <!-- КЕЙС -->
-
+        <!-- =====================================
+             ТЕКУЩИЙ КЕЙС
+             ===================================== -->
         <section class="case-card">
-
             <div class="case-image">
                 🚘
             </div>
-
             <div class="case-info">
-
-                <h2>
+                <h2 id="currentCaseName">
                     Random Case
                 </h2>
-
-                <p>
+                <p id="currentCaseDescription">
                     Случайный автомобиль
                 </p>
-
             </div>
-
-
             <button
                 id="openCaseButton"
                 class="main-button"
@@ -135,111 +82,46 @@
             >
                 🎁 ОТКРЫТЬ КЕЙС
             </button>
-
-
             <div class="case-price">
                 Стоимость:
-                <b>500 🪙</b>
+                <b id="currentCasePrice">
+                    500 🪙
+                </b>
             </div>
-
         </section>
-
-
-        <!-- =========================
-             НИЖНЕЕ МЕНЮ
-             ========================= -->
-
-        <section class="menu">
-
+        <!-- =====================================
+             ВЫБОР КЕЙСА
+             ===================================== -->
+        <div class="case-selector">
             <button
-                class="menu-button"
+                id="casesButton"
+                class="cases-button"
                 type="button"
             >
-
-                <span>🚗</span>
-
-                <strong>
-                    Коллекция
-                </strong>
-
-                <small>
-                    Твои автомобили
-                </small>
-
+                <span>
+                    🎁 КЕЙСЫ
+                </span>
+                <span class="cases-arrow">
+                    ▼
+                </span>
             </button>
-
-
-            <button
-                class="menu-button"
-                type="button"
+            <div
+                id="casesList"
+                class="cases-list"
+                style="display:none;"
             >
-
-                <span>🏆</span>
-
-                <strong>
-                    Рейтинг
-                </strong>
-
-                <small>
-                    Лучшие игроки
-                </small>
-
-            </button>
-
-
-            <button
-                class="menu-button"
-                type="button"
-            >
-
-                <span>🎯</span>
-
-                <strong>
-                    Задания
-                </strong>
-
-                <small>
-                    Получи награды
-                </small>
-
-            </button>
-
-
-            <button
-                id="profileMenuButton"
-                class="menu-button side-menu-item"
-                type="button"
-            >
-
-                <span>👤</span>
-
-                <strong>
-                    Профиль
-                </strong>
-
-                <small>
-                    Твоя статистика
-                </small>
-
-            </button>
-
-        </section>
-
+            </div>
+        </div>
     </main>
-
-
-    <!-- =========================
-         ПРОФИЛЬ
-         ========================= -->
-
-    <main
+    <!-- =========================================
+         ЭКРАН ПРОФИЛЯ
+         ========================================= -->
+    <section
         id="profileScreen"
         class="profile-screen"
-        style="display: none;"
+        style="display:none;"
     >
-
         <div class="profile-header">
-
             <button
                 id="profileBackButton"
                 class="profile-back-button"
@@ -247,959 +129,589 @@
             >
                 ←
             </button>
-
             <div>
-
                 <div class="profile-title">
                     ПРОФИЛЬ
                 </div>
-
                 <div class="profile-subtitle">
-                    RANDOM CAR
+                    ТВОЯ СТАТИСТИКА
                 </div>
-
             </div>
-
         </div>
-
-
-        <!-- Игрок -->
-
-        <section class="profile-user-card">
-
+        <!-- ПОЛЬЗОВАТЕЛЬ -->
+        <div class="profile-user-card">
             <div class="profile-avatar">
                 👤
             </div>
-
             <div>
-
                 <div
                     id="profilePlayerName"
                     class="profile-player-name"
                 >
                     Игрок
                 </div>
-
                 <div
                     id="profileUsername"
                     class="profile-username"
                 >
                     RANDOM CAR
                 </div>
-
             </div>
-
-        </section>
-
-
-        <!-- Уровень -->
-
-        <section class="profile-level-card">
-
+        </div>
+        <!-- УРОВЕНЬ -->
+        <div class="profile-level-card">
             <div class="profile-level-row">
-
-                <strong
-                    id="profileLevel"
-                    class="profile-level"
-                >
-                    1
-                </strong>
-
+                <div>
+                    <div class="profile-label">
+                        УРОВЕНЬ
+                    </div>
+                    <div
+                        id="profileLevel"
+                        class="profile-level"
+                    >
+                        1
+                    </div>
+                </div>
                 <div class="profile-xp-text">
-
                     <span id="profileXP">
                         0
                     </span>
-
                     /
-
                     <span id="profileNextXP">
                         100
                     </span>
-
                     XP
-
                 </div>
-
             </div>
-
-
             <div class="profile-xp-bar">
-
                 <div
                     id="profileXPProgress"
                     class="profile-xp-progress"
-                    style="width: 0%;"
+                    style="width:0%;"
                 ></div>
-
             </div>
-
-        </section>
-
-
-        <!-- Баланс -->
-
-        <section class="profile-balance-card">
-
+        </div>
+        <!-- БАЛАНС -->
+        <div class="profile-balance-card">
+            🪙
             <div>
-                🪙
-            </div>
-
-            <div>
-
                 <div class="profile-label">
                     БАЛАНС
                 </div>
-
                 <strong id="profileBalance">
                     10000
                 </strong>
-
             </div>
-
-        </section>
-
-
-        <!-- Статистика -->
-
-        <section class="profile-stats-grid">
-
+        </div>
+        <!-- СТАТИСТИКА -->
+        <div class="profile-stats-grid">
             <div class="profile-stat-card">
-
                 <div class="profile-stat-icon">
                     🎁
                 </div>
-
                 <div
                     id="profileOpenedCases"
                     class="profile-stat-value"
                 >
                     0
                 </div>
-
                 <div class="profile-stat-label">
                     КЕЙСОВ
                 </div>
-
             </div>
-
-
             <div class="profile-stat-card">
-
                 <div class="profile-stat-icon">
                     🚗
                 </div>
-
                 <div
                     id="profileCarsCount"
                     class="profile-stat-value"
                 >
                     0
                 </div>
-
                 <div class="profile-stat-label">
                     МАШИН
                 </div>
-
             </div>
-
-
             <div class="profile-stat-card">
-
                 <div class="profile-stat-icon">
                     💰
                 </div>
-
                 <div
                     id="profileCollectionValue"
                     class="profile-stat-value"
                 >
                     0
                 </div>
-
                 <div class="profile-stat-label">
                     СТОИМОСТЬ
                 </div>
-
             </div>
-
-        </section>
-
-
-        <!-- Лучшая машина -->
-
-        <section class="profile-best-card">
-
+        </div>
+        <!-- ЛУЧШАЯ МАШИНА -->
+        <div class="profile-best-card">
             <div class="profile-best-title">
-                🏆 ЛУЧШАЯ МАШИНА
+                🏆 ЛУЧШЕЕ ВЫБИТОЕ АВТО
             </div>
-
-
             <div
                 id="profileBestCar"
                 class="profile-best-car"
             >
-
                 <div class="profile-best-car-emoji">
                     🚘
                 </div>
-
                 <div class="profile-best-car-info">
-
                     <div class="profile-best-car-name">
                         Пока нет машин
                     </div>
-
                     <div class="profile-best-car-rarity">
                         Открой первый кейс
                     </div>
-
                     <div class="profile-best-car-price">
                         —
                     </div>
-
                 </div>
-
             </div>
-
-        </section>
-
-
-        <!-- Домой -->
-
+        </div>
         <button
             id="profileHomeButton"
             class="profile-home-button"
             type="button"
         >
-            🏠 НА ГЛАВНУЮ
+            ← НА ГЛАВНУЮ
         </button>
-
-    </main>
-
-
-    <!-- =========================
-         БУРГЕР-МЕНЮ
-         ========================= -->
-
+    </section>
+    <!-- =========================================
+         ЗАТЕМНЕНИЕ
+         ========================================= -->
     <div
         id="menuOverlay"
         class="menu-overlay"
         aria-hidden="true"
     ></div>
-
-
+    <!-- =========================================
+         БУРГЕР-МЕНЮ
+         ========================================= -->
     <aside
         id="sideMenu"
         class="side-menu"
         aria-hidden="true"
     >
-
         <div class="side-menu-header">
-
-            <div class="side-menu-title">
+            <strong class="side-menu-title">
                 RANDOM CAR
-            </div>
-
+            </strong>
             <button
                 id="closeMenuButton"
                 class="close-menu-button"
                 type="button"
+                aria-label="Закрыть меню"
             >
-                ×
+                ✕
             </button>
-
         </div>
-
-
         <button
             id="profileMenuButtonSide"
             class="side-menu-item"
             type="button"
         >
-
-            <span>👤</span>
-
+            <span>
+                👤
+            </span>
             <strong>
                 Профиль
             </strong>
-
         </button>
-
-
         <button
             class="side-menu-item"
             type="button"
         >
-
-            <span>🚗</span>
-
+            <span>
+                🚗
+            </span>
             <strong>
                 Коллекция
             </strong>
-
         </button>
-
-
         <button
             class="side-menu-item"
             type="button"
         >
-
-            <span>🏆</span>
-
+            <span>
+                🏆
+            </span>
             <strong>
                 Рейтинг
             </strong>
-
         </button>
-
-
         <button
             class="side-menu-item"
             type="button"
         >
-
-            <span>🎯</span>
-
+            <span>
+                🎯
+            </span>
             <strong>
                 Задания
             </strong>
-
         </button>
-
+        <button
+            class="side-menu-item"
+            type="button"
+        >
+            <span>
+                🛒
+            </span>
+            <strong>
+                Маркет
+            </strong>
+        </button>
+        <button
+            class="side-menu-item"
+            type="button"
+        >
+            <span>
+                ⬆️
+            </span>
+            <strong>
+                Апгрейд
+            </strong>
+        </button>
+        <button
+            id="menuCasesButton"
+            class="side-menu-item"
+            type="button"
+        >
+            <span>
+                🎁
+            </span>
+            <strong>
+                Кейсы
+            </strong>
+        </button>
+        <button
+            class="side-menu-item"
+            type="button"
+        >
+            <span>
+                ⚙️
+            </span>
+            <strong>
+                Настройки
+            </strong>
+        </button>
     </aside>
-
-
-    <!-- =========================
-         СЕЗОН
-         ========================= -->
-
-    <div
-        id="seasonOverlay"
-        class="season-overlay"
-        aria-hidden="true"
-    >
-
-        <div class="season-modal">
-
-            <button
-                id="seasonCloseButton"
-                class="season-close-button"
-                type="button"
-            >
-                ×
-            </button>
-
-
-            <div class="season-modal-icon">
-                🏆
-            </div>
-
-
-            <div class="season-modal-title">
-                СЕЗОН 1
-            </div>
-
-
-            <div class="season-modal-name">
-                JDM
-            </div>
-
-
-            <div class="season-modal-text">
-                Японские легенды,
-                культовые автомобили
-                и редкие награды.
-            </div>
-
-
-            <div class="season-timer">
-
-                <div>
-                    <strong id="seasonDays">
-                        14
-                    </strong>
-                    <span>ДНЕЙ</span>
-                </div>
-
-                <div>
-                    <strong id="seasonHours">
-                        00
-                    </strong>
-                    <span>ЧАСОВ</span>
-                </div>
-
-                <div>
-                    <strong id="seasonMinutes">
-                        00
-                    </strong>
-                    <span>МИНУТ</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         НИЖНЯЯ НАВИГАЦИЯ
-         ========================= -->
-
-    <nav class="bottom-nav">
-
-        <button
-            class="nav-button active"
-            type="button"
-        >
-
-            🏠
-
-            <span>
-                Главная
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-button"
-            type="button"
-        >
-
-            🚗
-
-            <span>
-                Коллекция
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-button"
-            type="button"
-        >
-
-            🏆
-
-            <span>
-                Рейтинг
-            </span>
-
-        </button>
-
-
-        <button
-            id="profileNavButton"
-            class="nav-button"
-            type="button"
-        >
-
-            👤
-
-            <span>
-                Профиль
-            </span>
-
-        </button>
-
-    </nav>
-
 </div>
-
-
-<!-- =========================
+<!-- =========================================
      JAVASCRIPT
-     ========================= -->
-
+     ========================================= -->
 <script src="js/season.js?v=1"></script>
 <script src="js/cars.js?v=5"></script>
-<script src="js/cases.js?v=1"></script>
-<script src="js/app.js?v=7"></script>
 <script src="js/profile.js?v=1"></script>
-
-
+<script src="js/cases.js?v=1"></script>
+<script src="js/app.js?v=10"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const tg =
-        window.Telegram &&
-        Telegram.WebApp
-            ? Telegram.WebApp
-            : null;
-
-
-    /*
-     * Telegram
-     */
-
-    if (tg) {
-
-        try {
-            tg.ready();
-            tg.expand();
-        } catch (error) {
-            console.log(
-                "Telegram error:",
-                error
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        /* =====================================
+           ЭЛЕМЕНТЫ
+           ===================================== */
+        const homeScreen =
+            document.getElementById(
+                "homeScreen"
             );
-        }
-    }
-
-
-    /*
-     * Элементы
-     */
-
-    const homeScreen =
-        document.getElementById(
-            "homeScreen"
-        );
-
-    const profileScreen =
-        document.getElementById(
-            "profileScreen"
-        );
-
-    const profileMenuButton =
-        document.getElementById(
-            "profileMenuButton"
-        );
-
-    const profileNavButton =
-        document.getElementById(
-            "profileNavButton"
-        );
-
-    const profileBackButton =
-        document.getElementById(
-            "profileBackButton"
-        );
-
-    const profileHomeButton =
-        document.getElementById(
-            "profileHomeButton"
-        );
-
-    const sideMenu =
-        document.getElementById(
-            "sideMenu"
-        );
-
-    const menuOverlay =
-        document.getElementById(
-            "menuOverlay"
-        );
-
-    const menuButton =
-        document.getElementById(
-            "menuButton"
-        );
-
-    const closeMenuButton =
-        document.getElementById(
-            "closeMenuButton"
-        );
-
-    const profileMenuButtonSide =
-        document.getElementById(
-            "profileMenuButtonSide"
-        );
-
-    const seasonButton =
-        document.getElementById(
-            "seasonButton"
-        );
-
-    const seasonOverlay =
-        document.getElementById(
-            "seasonOverlay"
-        );
-
-    const seasonCloseButton =
-        document.getElementById(
-            "seasonCloseButton"
-        );
-
-
-    /*
-     * БУРГЕР
-     */
-
-    function openMenu() {
-
-        if (sideMenu) {
-
-            sideMenu.classList.add(
-                "open"
+        const profileScreen =
+            document.getElementById(
+                "profileScreen"
             );
-
-            sideMenu.classList.add(
-                "active"
+        const profileMenuButton =
+            document.getElementById(
+                "profileMenuButtonSide"
             );
-
-            sideMenu.setAttribute(
-                "aria-hidden",
-                "false"
+        const profileBackButton =
+            document.getElementById(
+                "profileBackButton"
             );
-        }
-
-        if (menuOverlay) {
-
-            menuOverlay.classList.add(
-                "open"
+        const profileHomeButton =
+            document.getElementById(
+                "profileHomeButton"
             );
-
-            menuOverlay.classList.add(
-                "active"
+        const casesButton =
+            document.getElementById(
+                "casesButton"
             );
-
-            menuOverlay.setAttribute(
-                "aria-hidden",
-                "false"
+        const casesList =
+            document.getElementById(
+                "casesList"
             );
-        }
-    }
-
-
-    function closeMenu() {
-
-        if (sideMenu) {
-
-            sideMenu.classList.remove(
-                "open"
+        const menuCasesButton =
+            document.getElementById(
+                "menuCasesButton"
             );
-
-            sideMenu.classList.remove(
-                "active"
-            );
-
-            sideMenu.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-        }
-
-        if (menuOverlay) {
-
-            menuOverlay.classList.remove(
-                "open"
-            );
-
-            menuOverlay.classList.remove(
-                "active"
-            );
-
-            menuOverlay.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-        }
-    }
-
-
-    /*
-     * ПРОФИЛЬ
-     */
-
-    function openProfile() {
-
-        closeMenu();
-
-        if (tg) {
-
-            try {
-                tg.expand();
-            } catch (error) {
-                console.log(error);
+        /* =====================================
+           ПОКАЗ ГЛАВНОЙ
+           ===================================== */
+        function showHome() {
+            if (homeScreen) {
+                homeScreen.style.display =
+                    "block";
+            }
+            if (profileScreen) {
+                profileScreen.style.display =
+                    "none";
             }
         }
-
-        if (homeScreen) {
-            homeScreen.style.display =
-                "none";
+        /* =====================================
+           ПОКАЗ ПРОФИЛЯ
+           ===================================== */
+        function showProfile() {
+            if (homeScreen) {
+                homeScreen.style.display =
+                    "none";
+            }
+            if (profileScreen) {
+                profileScreen.style.display =
+                    "block";
+            }
+            if (
+                typeof updateProfileScreen ===
+                "function"
+            ) {
+                updateProfileScreen();
+            }
         }
-
-        if (profileScreen) {
-            profileScreen.style.display =
-                "block";
-        }
-
-        if (
-            typeof updateProfileScreen ===
-            "function"
-        ) {
-            updateProfileScreen();
-        }
-
-        if (
-            tg &&
-            tg.HapticFeedback
-        ) {
-            tg.HapticFeedback
-                .impactOccurred("light");
-        }
-    }
-
-
-    function closeProfile() {
-
-        if (profileScreen) {
-            profileScreen.style.display =
-                "none";
-        }
-
-        if (homeScreen) {
-            homeScreen.style.display =
-                "block";
-        }
-    }
-
-
-    /*
-     * Кнопка бургера
-     */
-
-    if (menuButton) {
-
-        menuButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                openMenu();
-            }
-        );
-    }
-
-
-    /*
-     * Закрытие бургера
-     */
-
-    if (closeMenuButton) {
-
-        closeMenuButton.addEventListener(
-            "click",
-            function () {
-
-                closeMenu();
-            }
-        );
-    }
-
-
-    if (menuOverlay) {
-
-        menuOverlay.addEventListener(
-            "click",
-            function () {
-
-                closeMenu();
-            }
-        );
-    }
-
-
-    /*
-     * Профиль из главного меню
-     */
-
-    if (profileMenuButton) {
-
-        profileMenuButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                openProfile();
-            }
-        );
-    }
-
-
-    /*
-     * Профиль из нижней навигации
-     */
-
-    if (profileNavButton) {
-
-        profileNavButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                openProfile();
-            }
-        );
-    }
-
-
-    /*
-     * Профиль из бокового меню
-     */
-
-    if (profileMenuButtonSide) {
-
-        profileMenuButtonSide.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                openProfile();
-            }
-        );
-    }
-
-
-    /*
-     * Назад
-     */
-
-    if (profileBackButton) {
-
-        profileBackButton.addEventListener(
-            "click",
-            function () {
-
-                closeProfile();
-            }
-        );
-    }
-
-
-    /*
-     * На главную
-     */
-
-    if (profileHomeButton) {
-
-        profileHomeButton.addEventListener(
-            "click",
-            function () {
-
-                closeProfile();
-            }
-        );
-    }
-
-
-    /*
-     * СЕЗОН
-     */
-
-    function openSeason() {
-
-        if (!seasonOverlay) {
-            return;
-        }
-
-        seasonOverlay.classList.add(
-            "open"
-        );
-
-        seasonOverlay.classList.add(
-            "active"
-        );
-
-        seasonOverlay.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-    }
-
-
-    function closeSeason() {
-
-        if (!seasonOverlay) {
-            return;
-        }
-
-        seasonOverlay.classList.remove(
-            "open"
-        );
-
-        seasonOverlay.classList.remove(
-            "active"
-        );
-
-        seasonOverlay.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-    }
-
-
-    if (seasonButton) {
-
-        seasonButton.addEventListener(
-            "click",
-            function () {
-
-                openSeason();
-            }
-        );
-    }
-
-
-    if (seasonCloseButton) {
-
-        seasonCloseButton.addEventListener(
-            "click",
-            function () {
-
-                closeSeason();
-            }
-        );
-    }
-
-
-    if (seasonOverlay) {
-
-        seasonOverlay.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target ===
-                    seasonOverlay
-                ) {
-                    closeSeason();
+        /* =====================================
+           ПРОФИЛЬ ИЗ БУРГЕРА
+           ===================================== */
+        if (profileMenuButton) {
+            profileMenuButton.addEventListener(
+                "click",
+                function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (
+                        typeof closeMenu ===
+                        "function"
+                    ) {
+                        closeMenu();
+                    }
+                    showProfile();
                 }
-            }
-        );
-    }
-
-
-    /*
-     * ESC
-     */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key === "Escape") {
-
-                closeMenu();
-                closeSeason();
-                closeProfile();
-            }
+            );
         }
-    );
-
-});
+        /* =====================================
+           НАЗАД
+           ===================================== */
+        if (profileBackButton) {
+            profileBackButton.addEventListener(
+                "click",
+                function () {
+                    showHome();
+                }
+            );
+        }
+        if (profileHomeButton) {
+            profileHomeButton.addEventListener(
+                "click",
+                function () {
+                    showHome();
+                }
+            );
+        }
+        /* =====================================
+           РЕНДЕР КЕЙСОВ
+           ===================================== */
+        function renderCases() {
+            if (!casesList) {
+                return;
+            }
+            if (
+                typeof getAvailableCases !==
+                "function"
+            ) {
+                return;
+            }
+            const availableCases =
+                getAvailableCases();
+            const selectedCase =
+                typeof getSelectedCase ===
+                "function"
+                    ? getSelectedCase()
+                    : null;
+            casesList.innerHTML = "";
+            availableCases.forEach(
+                function (gameCase) {
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+                    button.type =
+                        "button";
+                    button.className =
+                        "case-option";
+                    if (
+                        selectedCase &&
+                        selectedCase.id ===
+                            gameCase.id
+                    ) {
+                        button.classList.add(
+                            "selected"
+                        );
+                    }
+                    button.innerHTML = `
+                        <div class="case-option-icon">
+                            ${gameCase.emoji || "🎁"}
+                        </div>
+                        <div class="case-option-info">
+                            <div class="case-option-name">
+                                ${gameCase.name}
+                            </div>
+                            <div class="case-option-description">
+                                ${gameCase.description}
+                            </div>
+                        </div>
+                        <div class="case-option-price">
+                            ${Number(gameCase.price).toLocaleString("ru-RU")} 🪙
+                        </div>
+                    `;
+                    button.addEventListener(
+                        "click",
+                        function () {
+                            if (
+                                typeof selectCase ===
+                                "function"
+                            ) {
+                                selectCase(
+                                    gameCase.id
+                                );
+                            }
+                            updateCurrentCase();
+                            casesList.style.display =
+                                "none";
+                            casesButton.classList.remove(
+                                "open"
+                            );
+                        }
+                    );
+                    casesList.appendChild(
+                        button
+                    );
+                }
+            );
+        }
+        /* =====================================
+           ОБНОВИТЬ ТЕКУЩИЙ КЕЙС
+           ===================================== */
+        function updateCurrentCase() {
+            if (
+                typeof getSelectedCase !==
+                "function"
+            ) {
+                return;
+            }
+            const selectedCase =
+                getSelectedCase();
+            if (!selectedCase) {
+                return;
+            }
+            const name =
+                document.getElementById(
+                    "currentCaseName"
+                );
+            const description =
+                document.getElementById(
+                    "currentCaseDescription"
+                );
+            const price =
+                document.getElementById(
+                    "currentCasePrice"
+                );
+            if (name) {
+                name.textContent =
+                    selectedCase.name;
+            }
+            if (description) {
+                description.textContent =
+                    selectedCase.description;
+            }
+            if (price) {
+                price.textContent =
+                    Number(
+                        selectedCase.price
+                    ).toLocaleString(
+                        "ru-RU"
+                    ) + " 🪙";
+            }
+            renderCases();
+        }
+        /* =====================================
+           КНОПКА КЕЙСЫ
+           ===================================== */
+        if (casesButton) {
+            casesButton.addEventListener(
+                "click",
+                function () {
+                    const isOpen =
+                        casesList &&
+                        casesList.style.display !==
+                            "none";
+                    if (isOpen) {
+                        casesList.style.display =
+                            "none";
+                        casesButton.classList.remove(
+                            "open"
+                        );
+                    } else {
+                        renderCases();
+                        casesList.style.display =
+                            "flex";
+                        casesButton.classList.add(
+                            "open"
+                        );
+                    }
+                }
+            );
+        }
+        /* =====================================
+           КЕЙСЫ ИЗ БУРГЕРА
+           ===================================== */
+        if (menuCasesButton) {
+            menuCasesButton.addEventListener(
+                "click",
+                function () {
+                    if (
+                        typeof closeMenu ===
+                        "function"
+                    ) {
+                        closeMenu();
+                    }
+                    if (homeScreen) {
+                        homeScreen.style.display =
+                            "block";
+                    }
+                    if (profileScreen) {
+                        profileScreen.style.display =
+                            "none";
+                    }
+                    setTimeout(
+                        function () {
+                            if (casesButton) {
+                                casesButton.click();
+                            }
+                        },
+                        100
+                    );
+                }
+            );
+        }
+        /* =====================================
+           НАЧАЛЬНОЕ СОСТОЯНИЕ
+           ===================================== */
+        updateCurrentCase();
+        showHome();
+    }
+);
 </script>
-
 </body>
 </html>
