@@ -7,15 +7,16 @@
 html,
 body {
 width: 100%;
-min-height: 100%;
+height: 100%;
+overflow: hidden;
 font-family: Arial, sans-serif;
 background: #0b0d12;
 color: #ffffff;
+-webkit-tap-highlight-color: transparent;
 }
 
 body {
-min-height: 100vh;
--webkit-tap-highlight-color: transparent;
+min-height: 100dvh;
 }
 
 button {
@@ -23,83 +24,105 @@ border: none;
 font: inherit;
 color: inherit;
 cursor: pointer;
+-webkit-tap-highlight-color: transparent;
 }
 
 .app {
 width: 100%;
 max-width: 600px;
-min-height: 100vh;
+height: 100dvh;
 margin: 0 auto;
-padding-bottom: 90px;
+display: flex;
+flex-direction: column;
+overflow: hidden;
 }
 
 /* ===== TOPBAR ===== */
 
 .topbar {
+flex-shrink: 0;
+
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 20px 18px;
+padding: 14px 16px;
 background: #11141b;
 border-bottom: 1px solid #20242d;
+
 }
 
 .game-title {
-font-size: 20px;
+font-size: 19px;
 font-weight: 900;
 letter-spacing: 1px;
 }
 
 .player-name {
-margin-top: 4px;
-font-size: 13px;
+margin-top: 3px;
+font-size: 12px;
 color: #8c93a3;
 }
 
 .balance {
-padding: 10px 14px;
+padding: 9px 12px;
+
 background: #1b1f28;
-border-radius: 14px;
-font-weight: 700;
+border: 1px solid #292e39;
+border-radius: 13px;
+font-size: 14px;
+font-weight: 800;
+
 }
 
 /* ===== MAIN ===== */
 
 .main {
-padding: 20px 16px;
+flex: 1;
+
+display: flex;
+flex-direction: column;
+padding: 16px;
+overflow: hidden;
+
 }
 
 .welcome {
-margin-bottom: 20px;
+flex-shrink: 0;
+margin-bottom: 12px;
 }
 
 .welcome-small {
-font-size: 12px;
+font-size: 10px;
 font-weight: 800;
-color: #7d8494;
+color: #777e8e;
 letter-spacing: 1px;
 }
 
 .welcome h1 {
-margin-top: 6px;
-font-size: 30px;
+margin-top: 4px;
+font-size: 25px;
 font-weight: 900;
 }
 
 .welcome p {
-margin-top: 7px;
-color: #8f96a5;
-line-height: 1.4;
+margin-top: 4px;
+
+color: #858c9b;
+font-size: 13px;
+
 }
 
 /* ===== CASE ===== */
 
 .case-card {
-padding: 22px;
+flex-shrink: 0;
+
+padding: 16px;
 background: linear-gradient(145deg, #1a1e27, #11141a);
 border: 1px solid #292e39;
-border-radius: 24px;
+border-radius: 22px;
 text-align: center;
+
 }
 
 .case-image {
@@ -107,35 +130,38 @@ display: flex;
 align-items: center;
 justify-content: center;
 
-width: 150px;
-height: 150px;
-margin: 0 auto 16px;
+width: 105px;
+height: 105px;
+margin: 0 auto 10px;
 background: #0d1016;
-border-radius: 30px;
-font-size: 70px;
+border-radius: 25px;
+font-size: 52px;
 
 }
 
 .case-info h2 {
-font-size: 24px;
+font-size: 20px;
 }
 
 .case-info p {
-margin-top: 5px;
+margin-top: 4px;
+
 color: #8f96a5;
+font-size: 13px;
+
 }
 
 .main-button {
 width: 100%;
-margin-top: 20px;
-padding: 16px;
 
+margin-top: 13px;
+padding: 14px;
 background: #ffffff;
 color: #101218;
-border-radius: 16px;
-font-size: 16px;
+border-radius: 14px;
+font-size: 15px;
 font-weight: 900;
-transition: transform 0.15s;
+transition: transform 0.12s;
 
 }
 
@@ -144,29 +170,34 @@ transform: scale(0.97);
 }
 
 .case-price {
-margin-top: 12px;
+margin-top: 8px;
+
 color: #858c9b;
-font-size: 13px;
+font-size: 11px;
+
 }
 
 /* ===== MENU ===== */
 
 .menu {
+flex: 1;
+
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 12px;
-margin-top: 16px;
+gap: 10px;
+margin-top: 12px;
+
 }
 
 .menu-button {
-min-height: 105px;
-padding: 16px;
+min-height: 0;
 
+padding: 12px;
 background: #151820;
 border: 1px solid #252a34;
-border-radius: 18px;
+border-radius: 16px;
 text-align: left;
-transition: transform 0.15s;
+transition: transform 0.12s;
 
 }
 
@@ -176,37 +207,38 @@ transform: scale(0.97);
 
 .menu-button span {
 display: block;
-font-size: 28px;
-margin-bottom: 10px;
+
+font-size: 24px;
+margin-bottom: 6px;
+
 }
 
 .menu-button strong {
 display: block;
-font-size: 15px;
+
+font-size: 14px;
+
 }
 
 .menu-button small {
 display: block;
-margin-top: 4px;
+
+margin-top: 3px;
 color: #7f8695;
+font-size: 10px;
+
 }
 
 /* ===== BOTTOM NAV ===== */
 
 .bottom-nav {
-position: fixed;
-left: 50%;
-bottom: 0;
+flex-shrink: 0;
 
-width: 100%;
-max-width: 600px;
-transform: translateX(-50%);
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-padding: 10px 8px 12px;
-background: rgba(14, 16, 22, 0.96);
+padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+background: rgba(14, 16, 22, 0.98);
 border-top: 1px solid #252a34;
-backdrop-filter: blur(10px);
 
 }
 
@@ -214,15 +246,15 @@ backdrop-filter: blur(10px);
 display: flex;
 flex-direction: column;
 align-items: center;
-gap: 4px;
 
+gap: 3px;
 background: transparent;
-font-size: 20px;
+font-size: 19px;
 
 }
 
 .nav-button span {
-font-size: 11px;
+font-size: 10px;
 color: #777e8e;
 }
 
@@ -230,20 +262,44 @@ color: #777e8e;
 color: #ffffff;
 }
 
-/* ===== SMALL SCREEN ===== */
+/* ===== VERY SMALL SCREENS ===== */
 
-@media (max-width: 380px) {
+@media (max-height: 650px) {
 
+.topbar {
+    padding: 10px 14px;
+}
+.main {
+    padding: 12px;
+}
+.welcome {
+    margin-bottom: 8px;
+}
 .welcome h1 {
-    font-size: 26px;
+    font-size: 22px;
 }
 .case-card {
-    padding: 18px;
+    padding: 11px;
 }
 .case-image {
-    width: 125px;
-    height: 125px;
-    font-size: 58px;
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+}
+.main-button {
+    margin-top: 9px;
+    padding: 11px;
+}
+.menu {
+    margin-top: 8px;
+    gap: 7px;
+}
+.menu-button {
+    padding: 9px;
+}
+.menu-button span {
+    font-size: 20px;
+    margin-bottom: 3px;
 }
 
 }
