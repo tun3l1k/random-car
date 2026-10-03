@@ -233,14 +233,24 @@ function createResultWindow(car) {
             </div>
 
 
-            <button
-                class="result-close"
-                type="button"
-            >
-                ЗАБРАТЬ
-            </button>
+                        <div class="result-actions">
 
-        </div>
+                <button
+                    class="result-keep"
+                    type="button"
+                >
+                    🚗 ЗАБРАТЬ
+                </button>
+
+
+                <button
+                    class="result-sell"
+                    type="button"
+                >
+                    🪙 ПРОДАТЬ
+                </button>
+
+            </div>
 
     `;
 
@@ -255,41 +265,88 @@ function createResultWindow(car) {
     });
 
 
-    const closeButton =
+        const keepButton =
         result.querySelector(
-            ".result-close"
+            ".result-keep"
         );
 
 
-    closeButton.addEventListener(
+    const sellButton =
+        result.querySelector(
+            ".result-sell"
+        );
+
+
+    function closeResult() {
+
+        result.classList.remove(
+            "show"
+        );
+
+
+        setTimeout(() => {
+
+            result.remove();
+
+        }, 250);
+
+    }
+
+
+    /* ================================
+       ЗАБРАТЬ
+       ================================ */
+
+    keepButton.addEventListener(
         "click",
         () => {
 
-            /*
-             * Только здесь автомобиль
-             * окончательно попадает
-             * в коллекцию.
-             */
-
             addCarToCollection(car);
 
-
-            result.classList.remove(
-                "show"
-            );
-
-
-            setTimeout(() => {
-
-                result.remove();
-
-            }, 250);
+            closeResult();
 
         }
     );
 
-}
 
+    /* ================================
+       ПРОДАТЬ
+       ================================ */
+
+    sellButton.addEventListener(
+        "click",
+        () => {
+
+            /*
+             * Экономику продажи подключим
+             * позже.
+             *
+             * Сейчас автомобиль
+             * НЕ добавляется в коллекцию.
+             */
+
+            if (
+                tg &&
+                typeof tg.showAlert === "function"
+            ) {
+
+                tg.showAlert(
+                    "Система продажи будет добавлена вместе с экономикой 🪙"
+                );
+
+            } else {
+
+                alert(
+                    "Система продажи будет добавлена вместе с экономикой 🪙"
+                );
+
+            }
+
+
+            closeResult();
+
+        }
+    );
 
 /* =====================================================
    ОТКРЫТИЕ КЕЙСА
