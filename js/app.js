@@ -1,4 +1,4 @@
-const tg = window.Telegram?.WebApp;
+onst tg = window.Telegram?.WebApp;
 
 if (tg) {
     tg.ready();
@@ -63,18 +63,18 @@ function createResultWindow(car) {
 
     result.innerHTML = `
         <div class="case-result-card">
-            <div class="result-title">ТЕБЕ ВЫПАЛО</div>
+            <div class="result-title">Ð¢ÐÐÐ ÐÐ«ÐÐÐÐ</div>
             <div class="result-car">${car.emoji}</div>
             <div class="result-name">${car.name}</div>
             <div class="result-rarity rarity-${car.rarity}">
                 ${car.rarityName}
             </div>
             <div class="result-price">
-                Стоимость:
-                <b>${car.price.toLocaleString("ru-RU")} 🪙</b>
+                Ð¡ÑÐ¾Ð¸Ð¼Ð¾ÑÑÑ:
+                <b>${car.price.toLocaleString("ru-RU")} ðª</b>
             </div>
             <button class="result-close" type="button">
-                ЗАБРАТЬ
+                ÐÐÐÐ ÐÐ¢Ð¬
             </button>
         </div>
     `;
@@ -95,7 +95,7 @@ function createResultWindow(car) {
 if (openCaseButton) {
     openCaseButton.addEventListener("click", () => {
         if (balance < CASE_PRICE) {
-            alert("Недостаточно монет!");
+            alert("ÐÐµÐ´Ð¾ÑÑÐ°ÑÐ¾ÑÐ½Ð¾ Ð¼Ð¾Ð½ÐµÑ!");
             return;
         }
 
@@ -104,14 +104,14 @@ if (openCaseButton) {
 
         openCaseButton.disabled = true;
         openCaseButton.classList.add("case-opening");
-        openCaseButton.textContent = "🎁 ОТКРЫВАЕМ...";
+        openCaseButton.textContent = "ð ÐÐ¢ÐÐ Ð«ÐÐÐÐ...";
 
         setTimeout(() => {
             const car = getRandomCar();
 
             openCaseButton.disabled = false;
             openCaseButton.classList.remove("case-opening");
-            openCaseButton.textContent = "🎁 ОТКРЫТЬ КЕЙС";
+            openCaseButton.textContent = "ð ÐÐ¢ÐÐ Ð«Ð¢Ð¬ ÐÐÐÐ¡";
 
             createResultWindow(car);
         }, 1200);
@@ -121,7 +121,7 @@ if (openCaseButton) {
 document.querySelectorAll(".menu-button").forEach(button => {
     button.addEventListener("click", () => {
         const title = button.querySelector("strong").textContent;
-        alert(`Раздел «${title}» пока находится в разработке 🚧`);
+        alert(`Ð Ð°Ð·Ð´ÐµÐ» Â«${title}Â» Ð¿Ð¾ÐºÐ° Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑ Ð² ÑÐ°Ð·ÑÐ°Ð±Ð¾ÑÐºÐµ ð§`);
     });
 });
 
@@ -134,7 +134,7 @@ document.querySelectorAll(".nav-button").forEach(button => {
         button.classList.add("active");
 
         const section = button.querySelector("span").textContent;
-        alert(`Раздел «${section}» пока находится в разработке 🚧`);
+        alert(`Ð Ð°Ð·Ð´ÐµÐ» Â«${section}Â» Ð¿Ð¾ÐºÐ° Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑ Ð² ÑÐ°Ð·ÑÐ°Ð±Ð¾ÑÐºÐµ ð§`);
     });
 });
 
