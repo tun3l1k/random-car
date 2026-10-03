@@ -1,46 +1,36 @@
-/* =====================================================
-   RANDOM CAR
-   ОСНОВНЫЕ СТИЛИ
-   ===================================================== */
-
+/* =========================================
+   RANDOM CAR — MAIN STYLE
+   ========================================= */
 :root {
-    --app-height: 100vh;
-
-    --bg: #080808;
-    --card: #151515;
-    --card-light: #1d1d1d;
-
+    --bg: #08090c;
+    --panel: #111318;
+    --panel-2: #171920;
+    --panel-3: #1d2028;
+    --border: rgba(255,255,255,.08);
     --text: #ffffff;
-    --muted: #8e8e93;
-
-    --border: rgba(255, 255, 255, 0.08);
-
-    --accent: #ffffff;
+    --muted: #8d929d;
+    --yellow: #ffd21c;
+    --yellow-dark: #d9ad00;
+    --green: #36d77b;
+    --red: #ff4f5e;
+    --radius: 18px;
+    --app-height: 100dvh;
 }
-
-
-/* =====================================================
+/* =========================================
    RESET
-   ===================================================== */
-
+   ========================================= */
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
-
 html,
 body {
-    width: 100%;
-    height: 100%;
-
     margin: 0;
     padding: 0;
-
-    overflow: hidden;
-
+    width: 100%;
+    min-height: 100%;
     background: var(--bg);
     color: var(--text);
-
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -48,2101 +38,826 @@ body {
         "SF Pro Text",
         Arial,
         sans-serif;
+    overscroll-behavior: none;
 }
-
 body {
     min-height: var(--app-height);
 }
-
 button {
-    appearance: none;
-    -webkit-appearance: none;
-
     font: inherit;
-    color: inherit;
-
     border: 0;
     outline: none;
-
-    padding: 0;
+    cursor: pointer;
 }
-
-
-/* =====================================================
+button:active {
+    transform: scale(.97);
+}
+/* =========================================
    APP
-   ===================================================== */
-
+   ========================================= */
 .app {
     position: relative;
-
     width: 100%;
-    height: var(--app-height);
-
-    min-height: 100%;
-
-    overflow: hidden;
-
+    min-height: var(--app-height);
     background:
         radial-gradient(
-            circle at 50% 25%,
-            rgba(255, 255, 255, 0.055),
+            circle at 50% -10%,
+            rgba(255,210,28,.07),
             transparent 38%
         ),
         var(--bg);
+    overflow-x: hidden;
 }
-
-
-/* =====================================================
+/* =========================================
    TOPBAR
-   ===================================================== */
-
+   ========================================= */
 .topbar {
-    position: relative;
-    z-index: 10;
-
-    width: 100%;
-
+    position: sticky;
+    top: 0;
+    z-index: 50;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    width: 100%;
+    min-height: 72px;
     padding:
-        max(14px, env(safe-area-inset-top))
-        18px
-        12px;
-
-    min-height: 70px;
+        max(10px, env(safe-area-inset-top))
+        14px
+        10px;
+    background: rgba(8,9,12,.94);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
-
 .topbar-left {
     min-width: 0;
 }
-
 .game-title {
-    font-size: 19px;
-    font-weight: 800;
-
-    letter-spacing: 1.2px;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
 }
-
 .player-name {
-    margin-top: 3px;
-
+    margin-top: 4px;
     color: var(--muted);
-
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
 }
-
 .topbar-right {
     display: flex;
     align-items: center;
-
-    gap: 10px;
-}
-
-.balance {
-    display: flex;
-    align-items: center;
-
-    min-height: 40px;
-
-    padding: 0 12px;
-
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.07);
-
-    border: 1px solid var(--border);
-
-    font-size: 14px;
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-
-/* =====================================================
-   BURGER
-   ===================================================== */
-
-.burger-button {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    border: 1px solid var(--border);
-
-    font-size: 23px;
-    line-height: 1;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-.burger-button:active {
-    transform: scale(0.92);
-
-    background:
-        rgba(255, 255, 255, 0.14);
-}
-
-
-/* =====================================================
-   MAIN
-   ===================================================== */
-
-.main {
-    position: relative;
-    z-index: 1;
-
-    width: 100%;
-
-    height:
-        calc(
-            var(--app-height) - 70px
-        );
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding:
-        20px
-        18px
-        max(24px, env(safe-area-inset-bottom));
-
-    overflow: hidden;
-}
-
-
-/* =====================================================
-   WELCOME
-   ===================================================== */
-
-.welcome {
-    width: 100%;
-    max-width: 430px;
-
-    text-align: center;
-
-    margin-top:
-        clamp(
-            8px,
-            5vh,
-            40px
-        );
-}
-
-.welcome-small {
-    margin-bottom: 7px;
-
-    color: var(--muted);
-
-    font-size: 11px;
-    font-weight: 800;
-
-    letter-spacing: 2px;
-}
-
-.welcome h1 {
-    margin: 0;
-
-    font-size:
-        clamp(
-            27px,
-            7vw,
-            38px
-        );
-
-    line-height: 1.05;
-
-    font-weight: 850;
-
-    letter-spacing: -1px;
-}
-
-.welcome p {
-    max-width: 310px;
-
-    margin:
-        10px auto 0;
-
-    color: var(--muted);
-
-    font-size: 14px;
-    line-height: 1.35;
-}
-
-
-/* =====================================================
-   CASE CARD
-   ===================================================== */
-
-.case-card {
-    width: 100%;
-    max-width: 390px;
-
-    margin-top:
-        clamp(
-            22px,
-            5vh,
-            42px
-        );
-
-    padding:
-        clamp(20px, 5vw, 28px)
-        clamp(18px, 5vw, 28px)
-        20px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.085),
-            rgba(255, 255, 255, 0.035)
-        );
-
-    border:
-        1px solid
-        var(--border);
-
-    box-shadow:
-        0 18px 50px
-        rgba(0, 0, 0, 0.35);
-}
-
-
-/* =====================================================
-   CASE IMAGE
-   ===================================================== */
-
-.case-image {
-    width:
-        clamp(
-            105px,
-            30vw,
-            145px
-        );
-
-    height:
-        clamp(
-            105px,
-            30vw,
-            145px
-        );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.12),
-            rgba(255, 255, 255, 0.025)
-        );
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    font-size:
-        clamp(
-            55px,
-            15vw,
-            82px
-        );
-
-    box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, 0.35);
-}
-
-
-/* =====================================================
-   CASE INFO
-   ===================================================== */
-
-.case-info {
-    margin-top: 17px;
-
-    text-align: center;
-}
-
-.case-info h2 {
-    margin: 0;
-
-    font-size:
-        clamp(
-            21px,
-            5.5vw,
-            27px
-        );
-
-    font-weight: 800;
-
-    letter-spacing: -0.4px;
-}
-
-.case-info p {
-    margin:
-        5px 0 0;
-
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   MAIN BUTTON
-   ===================================================== */
-
-.main-button {
-    width: 100%;
-
-    min-height: 54px;
-
-    margin-top: 22px;
-
-    border-radius: 17px;
-
-    background: var(--accent);
-    color: #080808;
-
-    font-size: 15px;
-    font-weight: 850;
-
-    letter-spacing: 0.3px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 10px 28px
-        rgba(255, 255, 255, 0.08);
-
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
-}
-
-.main-button:active {
-    transform: scale(0.97);
-}
-
-.main-button:disabled {
-    opacity: 0.55;
-
-    cursor: default;
-}
-
-.main-button.case-opening {
-    animation:
-        pulseButton
-        0.8s ease
-        infinite
-        alternate;
-}
-
-@keyframes pulseButton {
-
-    from {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(0.97);
-    }
-}
-
-
-/* =====================================================
-   PRICE
-   ===================================================== */
-
-.case-price {
-    margin-top: 12px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.case-price b {
-    color: var(--text);
-}
-
-
-/* =====================================================
-   КНОПКА КЕЙСОВ
-   ===================================================== */
-
-.secondary-button {
-    width: 100%;
-    max-width: 390px;
-
-    min-height: 50px;
-
-    margin-top: 10px;
-
-    border-radius: 17px;
-
-    background:
-        rgba(255, 255, 255, 0.055);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.09);
-
-    color: #ffffff;
-
-    font-size: 14px;
-    font-weight: 800;
-
-    letter-spacing: 0.2px;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-.secondary-button:active {
-    transform: scale(0.97);
-
-    background:
-        rgba(255, 255, 255, 0.11);
-}
-
-
-/* =====================================================
-   MENU OVERLAY
-   ===================================================== */
-
-.menu-overlay {
-    position: fixed;
-
-    z-index: 90;
-
-    inset: 0;
-
-    background:
-        rgba(0, 0, 0, 0.58);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease;
-
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-.menu-overlay.open {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-/* =====================================================
-   SIDE MENU
-   ===================================================== */
-
-.side-menu {
-    position: fixed;
-
-    z-index: 100;
-
-    top: 0;
-    right: 0;
-
-    width:
-        min(
-            84vw,
-            360px
-        );
-
-    height: 100%;
-
-    padding:
-        max(16px, env(safe-area-inset-top))
-        16px
-        max(20px, env(safe-area-inset-bottom));
-
-    background:
-        linear-gradient(
-            180deg,
-            #171717,
-            #101010
-        );
-
-    border-left:
-        1px solid
-        rgba(255, 255, 255, 0.08);
-
-    box-shadow:
-        -20px 0 60px
-        rgba(0, 0, 0, 0.45);
-
-    transform:
-        translateX(105%);
-
-    transition:
-        transform
-        0.28s
-        cubic-bezier(
-            0.22,
-            1,
-            0.36,
-            1
-        );
-
-    overflow: hidden;
-}
-
-.side-menu.open {
-    transform:
-        translateX(0);
-}
-
-
-/* =====================================================
-   MENU HEADER
-   ===================================================== */
-
-.side-menu-header {
-    min-height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-bottom:
-        1px solid
-        var(--border);
-}
-
-.side-menu-header strong {
-    font-size: 17px;
-    font-weight: 850;
-
-    letter-spacing: 1px;
-}
-
-.close-menu {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-.close-menu:active {
-    transform: scale(0.9);
-
-    background:
-        rgba(255, 255, 255, 0.15);
-}
-
-
-/* =====================================================
-   MENU ITEMS
-   ===================================================== */
-
-.side-menu-list {
-    display: flex;
-    flex-direction: column;
-
     gap: 8px;
-
-    margin-top: 18px;
-}
-
-.side-menu-item {
-    width: 100%;
-
-    min-height: 56px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 15px;
-
-    border-radius: 17px;
-
-    background:
-        rgba(255, 255, 255, 0.045);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.045);
-
-    text-align: left;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-.side-menu-item span {
-    width: 34px;
-
-    margin-right: 10px;
-
-    font-size: 23px;
-
-    text-align: center;
-}
-
-.side-menu-item strong {
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.side-menu-item:active {
-    transform: scale(0.97);
-
-    background:
-        rgba(255, 255, 255, 0.10);
-}
-
-
-/* =====================================================
-   RESULT WINDOW
-   ===================================================== */
-
-.case-result {
-    position: fixed;
-
-    z-index: 200;
-
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    background:
-        rgba(0, 0, 0, 0.72);
-
-    opacity: 0;
-
-    transition:
-        opacity 0.25s ease;
-
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.case-result.show {
-    opacity: 1;
-}
-
-.case-result-card {
-    width:
-        min(
-            90vw,
-            360px
-        );
-
-    max-height:
-        calc(
-            var(--app-height) - 40px
-        );
-
-    padding:
-        28px
-        22px
-        22px;
-
-    text-align: center;
-
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #202020,
-            #111111
-        );
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.10);
-
-    box-shadow:
-        0 30px 80px
-        rgba(0, 0, 0, 0.55);
-
-    transform: scale(0.92);
-
-    transition:
-        transform 0.3s ease;
-}
-
-.case-result.show
-.case-result-card {
-    transform: scale(1);
-}
-
-.result-title {
-    color: var(--muted);
-
-    font-size: 12px;
-    font-weight: 800;
-
-    letter-spacing: 2px;
-}
-
-.result-car {
-    margin-top: 18px;
-
-    font-size: 90px;
-
-    line-height: 1;
-}
-
-.result-name {
-    margin-top: 16px;
-
-    font-size: 24px;
-    font-weight: 850;
-}
-
-.result-price {
-    margin-top: 10px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-.result-price b {
-    color: var(--text);
-}
-
-
-/* =====================================================
-   RESULT ACTIONS
-   ===================================================== */
-
-.result-actions {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 9px;
-
-    margin-top: 22px;
-}
-
-.result-keep,
-.result-sell {
-    width: 100%;
-
-    min-height: 50px;
-
-    border-radius: 16px;
-
-    font-size: 14px;
-    font-weight: 850;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease,
-        background 0.15s ease;
-}
-
-.result-keep {
-    background: #ffffff;
-
-    color: #080808;
-}
-
-.result-sell {
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    color: #ffffff;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.10);
-}
-
-.result-keep:active,
-.result-sell:active {
-    transform: scale(0.97);
-}
-
-.result-sell:hover {
-    background:
-        rgba(255, 255, 255, 0.12);
-}
-
-
-/* =====================================================
-   RARITY
-   ===================================================== */
-
-.result-rarity {
-    margin-top: 7px;
-
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.rarity-common {
-    color: #aaaaaa;
-}
-
-.rarity-uncommon {
-    color: #4da3ff;
-}
-
-.rarity-rare {
-    color: #a56cff;
-}
-
-.rarity-epic {
-    color: #ff66c4;
-}
-
-.rarity-legendary {
-    color: #ffb84d;
-}
-
-.rarity-mythic {
-    color: #ff4d4d;
-
-    text-shadow:
-        0 0 12px
-        rgba(255, 77, 77, 0.35);
-}
-
-
-/* =====================================================
-   COLLECTION
-   ===================================================== */
-
-.collection-screen {
-    position: fixed;
-
-    z-index: 180;
-
-    inset: 0;
-
-    padding:
-        max(18px, env(safe-area-inset-top))
-        18px
-        max(18px, env(safe-area-inset-bottom));
-
-    background:
-        #080808;
-
-    opacity: 0;
-
-    transform:
-        translateY(15px);
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
-
-    overflow: hidden;
-}
-
-.collection-screen.show {
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-.collection-panel {
-    width: 100%;
-    max-width: 430px;
-
-    height: 100%;
-
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.collection-header {
-    min-height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    flex-shrink: 0;
-}
-
-.collection-header small {
-    color: var(--muted);
-
-    font-size: 10px;
-    font-weight: 800;
-
-    letter-spacing: 1.7px;
-}
-
-.collection-header h2 {
-    margin:
-        3px 0 0;
-
-    font-size: 24px;
-}
-
-.collection-close {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    font-size: 20px;
-
-    cursor: pointer;
-}
-
-.collection-close:active {
-    transform: scale(0.92);
-}
-
-.collection-progress {
-    margin-top: 14px;
-
-    padding: 14px 16px;
-
-    border-radius: 16px;
-
-    background:
-        rgba(255, 255, 255, 0.05);
-
-    border:
-        1px solid
-        var(--border);
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    flex-shrink: 0;
-}
-
-.collection-progress b {
-    color: #ffffff;
-}
-
-.collection-list {
-    display: flex;
-    flex-direction: column;
-
-    gap: 8px;
-
-    margin-top: 12px;
-
-    overflow-y: auto;
-
-    padding-bottom: 10px;
-
-    scrollbar-width: none;
-}
-
-.collection-list::-webkit-scrollbar {
-    display: none;
-}
-
-.collection-car {
-    width: 100%;
-
-    min-height: 68px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 8px 12px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255, 255, 255, 0.045);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.05);
-}
-
-.collection-car.locked {
-    opacity: 0.48;
-}
-
-.collection-car-icon {
-    width: 52px;
-    height: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 15px;
-
-    background:
-        rgba(255, 255, 255, 0.06);
-
-    font-size: 29px;
-}
-
-.collection-car-info {
-    min-width: 0;
-
-    margin-left: 12px;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-.collection-car-info strong {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    font-size: 14px;
-}
-
-.collection-car-info span {
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.collection-count {
-    margin-left: auto;
-
-    padding-left: 10px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   SMALL IPHONES
-   ===================================================== */
-
-@media (max-height: 700px) {
-
-    .topbar {
-        min-height: 62px;
-    }
-
-    .main {
-        height:
-            calc(
-                var(--app-height) - 62px
-            );
-
-        padding-top: 10px;
-    }
-
-    .welcome {
-        margin-top: 2px;
-    }
-
-    .welcome p {
-        margin-top: 6px;
-    }
-
-    .case-card {
-        margin-top: 16px;
-
-        padding-top: 16px;
-        padding-bottom: 13px;
-    }
-
-    .case-image {
-        width: 95px;
-        height: 95px;
-
-        font-size: 52px;
-    }
-
-    .case-info {
-        margin-top: 11px;
-    }
-
-    .main-button {
-        margin-top: 15px;
-
-        min-height: 48px;
-    }
-
-    .case-price {
-        margin-top: 8px;
-    }
-
-    .secondary-button {
-        min-height: 46px;
-
-        margin-top: 8px;
-    }
-}
-
-
-/* =====================================================
-   VERY SMALL SCREENS
-   ===================================================== */
-
-@media (max-height: 600px) {
-
-    .welcome h1 {
-        font-size: 25px;
-    }
-
-    .welcome p {
-        font-size: 12px;
-    }
-
-    .case-card {
-        margin-top: 10px;
-    }
-
-    .case-image {
-        width: 80px;
-        height: 80px;
-
-        font-size: 44px;
-    }
-
-    .case-info h2 {
-        font-size: 20px;
-    }
-
-    .case-info p {
-        font-size: 12px;
-    }
-
-    .main-button {
-        min-height: 44px;
-
-        margin-top: 12px;
-
-        font-size: 13px;
-    }
-
-    .secondary-button {
-        min-height: 42px;
-
-        font-size: 12px;
-    }
-}
-
-
-/* =====================================================
-   TOUCH DEVICES
-   ===================================================== */
-
-@media (hover: none) {
-
-    .result-sell:hover {
-        background:
-            rgba(255, 255, 255, 0.08);
-    }
 }
 /* =========================================
-   RANDOM CAR — СЕЗОН
+   SEASON BUTTON
    ========================================= */
-
 .season-button {
     min-height: 38px;
     padding: 0 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 0;
-    border-radius: 12px;
-
-    background: #f2c94c;
-    color: #080808;
-
-    font-size: 12px;
+    color: #171717;
+    background: var(--yellow);
+    border-radius: 11px;
+    font-size: 11px;
     font-weight: 900;
-    letter-spacing: 0.5px;
-
-    white-space: nowrap;
-
+    letter-spacing: .4px;
     box-shadow:
-        0 6px 18px rgba(242, 201, 76, 0.18);
-
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-
-    transition:
-        transform 0.15s ease,
-        filter 0.15s ease;
+        0 6px 18px rgba(255,210,28,.14);
 }
-
 .season-button:active {
-    transform: scale(0.94);
-    filter: brightness(0.9);
+    background: #e9bd08;
 }
-
-
 /* =========================================
-   ОКНО СЕЗОНА
+   BALANCE
    ========================================= */
-
-.season-overlay {
-    position: fixed;
-    inset: 0;
-
-    z-index: 100;
-
-    display: none;
+.balance {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 38px;
+    padding: 0 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    color: var(--yellow);
+    font-size: 13px;
+    font-weight: 800;
+}
+.balance span {
+    color: var(--text);
+}
+/* =========================================
+   BURGER
+   ========================================= */
+.menu-toggle {
+    display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 42px;
+    height: 42px;
+    color: var(--text);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 22px;
+}
+/* =========================================
+   MAIN
+   ========================================= */
+.main {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
     padding:
-        calc(20px + env(safe-area-inset-top))
+        24px
         16px
-        calc(20px + env(safe-area-inset-bottom));
-
-    background: rgba(0, 0, 0, 0.72);
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+        calc(105px + env(safe-area-inset-bottom));
 }
-
-.season-overlay.active {
-    display: flex;
+.welcome {
+    padding: 10px 2px 20px;
 }
-
-
-/* =========================================
-   КАРТОЧКА СЕЗОНА
-   ========================================= */
-
-.season-modal {
-    position: relative;
-
-    width: min(100%, 390px);
-    max-height: calc(100vh - 40px);
-
-    overflow-y: auto;
-
-    padding: 26px 20px 22px;
-
-    border: 1px solid rgba(242, 201, 76, 0.2);
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #171717 0%,
-            #0c0c0c 100%
-        );
-
-    box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.65);
-
-    animation: seasonModalIn 0.22s ease-out;
-}
-
-@keyframes seasonModalIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-}
-
-
-/* =========================================
-   КНОПКА ЗАКРЫТИЯ
-   ========================================= */
-
-.season-close {
-    position: absolute;
-
-    top: 12px;
-    right: 12px;
-
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.07);
-    color: #ffffff;
-
-    font-size: 17px;
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-
-/* =========================================
-   ЗАГОЛОВОК
-   ========================================= */
-
-.season-modal-badge {
-    display: inline-flex;
-    align-items: center;
-
-    padding: 7px 11px;
-
-    border-radius: 9px;
-
-    background: #f2c94c;
-    color: #080808;
-
-    font-size: 10px;
+.welcome-small {
+    margin-bottom: 8px;
+    color: var(--yellow);
+    font-size: 11px;
     font-weight: 900;
-    letter-spacing: 0.8px;
+    letter-spacing: 1.5px;
 }
-
-.season-modal h2 {
-    margin: 14px 0 4px;
-
-    color: #ffffff;
-
-    font-size: 32px;
+.welcome h1 {
+    margin: 0;
+    font-size: clamp(29px, 8vw, 42px);
     line-height: 1;
-
     font-weight: 950;
     letter-spacing: -1px;
 }
-
-.season-description {
-    margin: 0 0 20px;
-
-    color: rgba(255, 255, 255, 0.55);
-
-    font-size: 13px;
-    line-height: 1.4;
+.welcome p {
+    max-width: 330px;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
 }
-
-
 /* =========================================
-   ИНФОРМАЦИЯ О СЕЗОНЕ
+   CASE CARD
    ========================================= */
-
-.season-info-card {
+.case-card {
+    position: relative;
+    padding: 18px;
+    background:
+        linear-gradient(
+            145deg,
+            #191c23,
+            #0f1116
+        );
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.3);
+}
+.case-image {
     display: flex;
-    flex-direction: column;
-
-    margin-bottom: 22px;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 16px;
-
-    background: rgba(255, 255, 255, 0.035);
-}
-
-.season-info-row {
-    min-height: 48px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 14px;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    color: rgba(255, 255, 255, 0.58);
-
-    font-size: 13px;
-}
-
-.season-info-row:last-child {
-    border-bottom: 0;
-}
-
-.season-info-row strong {
-    color: #ffffff;
-
-    font-size: 13px;
-}
-
-
-/* =========================================
-   МАШИНЫ СЕЗОНА
-   ========================================= */
-
-.season-section-title {
-    margin-bottom: 10px;
-
-    color: rgba(255, 255, 255, 0.42);
-
-    font-size: 10px;
-    font-weight: 900;
-
-    letter-spacing: 1px;
-}
-
-.season-cars {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    gap: 10px;
-}
-
-.season-car {
-    min-height: 76px;
-
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    gap: 5px;
-
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 15px;
-
-    background: rgba(255, 255, 255, 0.035);
-
-    color: #ffffff;
-
+    width: 100%;
+    min-height: 190px;
+    margin-bottom: 18px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,210,28,.10),
+            transparent 65%
+        ),
+        #0b0d11;
+    border-radius: 17px;
+    font-size: 90px;
+}
+.case-info h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 900;
+}
+.case-info p {
+    margin: 5px 0 18px;
+    color: var(--muted);
+    font-size: 13px;
+}
+/* =========================================
+   MAIN BUTTON
+   ========================================= */
+.main-button {
+    width: 100%;
+    min-height: 54px;
+    color: #151515;
+    background: var(--yellow);
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 950;
+    letter-spacing: .5px;
+    box-shadow:
+        0 10px 25px rgba(255,210,28,.12);
+}
+.main-button:disabled {
+    opacity: .6;
+}
+.main-button.case-opening {
+    opacity: .65;
+}
+.case-price {
+    margin-top: 12px;
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+}
+.case-price b {
+    color: var(--yellow);
+}
+/* =========================================
+   OLD HOME MENU
+   ========================================= */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+}
+.menu-button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 105px;
+    padding: 15px;
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-align: left;
+}
+.menu-button span {
+    margin-bottom: 10px;
     font-size: 25px;
 }
-
-.season-car span {
-    color: rgba(255, 255, 255, 0.72);
-
+.menu-button strong {
+    font-size: 14px;
+}
+.menu-button small {
+    margin-top: 4px;
+    color: var(--muted);
     font-size: 11px;
-    font-weight: 700;
-
-    text-align: center;
-}
-
-
-/* =========================================
-   МАЛЕНЬКИЕ IPHONE
-   ========================================= */
-
-@media (max-width: 380px) {
-
-    .season-button {
-        padding: 0 9px;
-        font-size: 10px;
-    }
-
-    .season-modal {
-        padding: 22px 16px 18px;
-        border-radius: 21px;
-    }
-
-    .season-modal h2 {
-        font-size: 28px;
-    }
-
-    .season-cars {
-        gap: 8px;
-    }
-
-}
-body.modal-open {
-    overflow: hidden;
 }
 /* =========================================
-   RANDOM CAR — ПРОФИЛЬ
+   PROFILE
    ========================================= */
-
 .profile-screen {
-    min-height: calc(100vh - 70px);
-    padding: 16px 14px 30px;
-    animation: profileFadeIn 0.22s ease-out;
+    width: 100%;
+    max-width: 620px;
+    min-height: var(--app-height);
+    margin: 0 auto;
+    padding:
+        20px
+        16px
+        calc(105px + env(safe-area-inset-bottom));
 }
-
-@keyframes profileFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* =========================================
-   ШАПКА ПРОФИЛЯ
-   ========================================= */
-
 .profile-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 18px;
 }
-
 .profile-back-button {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-
-    background: #171717;
-    color: #ffffff;
-
-    font-size: 25px;
-    font-weight: 700;
-
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-.profile-back-button:active {
-    transform: scale(0.91);
-    background: #222222;
-}
-
-.profile-header-text {
-    min-width: 0;
-}
-
-.profile-header-title {
-    margin: 0;
-
-    color: #ffffff;
-    font-size: 21px;
-    font-weight: 900;
-    letter-spacing: -0.4px;
-}
-
-.profile-header-subtitle {
-    margin-top: 3px;
-
-    color: #777777;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-/* =========================================
-   КАРТОЧКА ПОЛЬЗОВАТЕЛЯ
-   ========================================= */
-
-.profile-user-card {
-    position: relative;
-    overflow: hidden;
-
-    padding: 22px 18px;
-
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 22px;
-
-    background:
-        radial-gradient(
-            circle at 90% 0%,
-            rgba(242,201,76,0.18),
-            transparent 38%
-        ),
-        linear-gradient(
-            145deg,
-            #1b1b1b,
-            #0e0e0e
-        );
-
-    box-shadow:
-        0 16px 45px rgba(0,0,0,0.35);
-
-    margin-bottom: 12px;
-}
-
-.profile-user-card::after {
-    content: "";
-
-    position: absolute;
-    right: -45px;
-    bottom: -55px;
-
-    width: 140px;
-    height: 140px;
-
-    border-radius: 50%;
-
-    background: rgba(242,201,76,0.06);
-}
-
-.profile-avatar {
-    width: 58px;
-    height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 13px;
-
-    border-radius: 18px;
-
-    background: linear-gradient(
-        145deg,
-        #f2c94c,
-        #c99c22
-    );
-
-    color: #111111;
-
-    font-size: 25px;
-    font-weight: 900;
-
-    box-shadow:
-        0 10px 25px rgba(242,201,76,0.2);
-}
-
-.profile-player-name {
-    position: relative;
-    z-index: 2;
-
-    color: #ffffff;
+    width: 42px;
+    height: 42px;
+    color: var(--text);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     font-size: 23px;
+}
+.profile-title {
+    font-size: 20px;
+    font-weight: 950;
+    letter-spacing: 1px;
+}
+.profile-subtitle {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.profile-user-card,
+.profile-level-card,
+.profile-balance-card,
+.profile-best-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+}
+.profile-user-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+.profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: var(--panel-3);
+    border-radius: 15px;
+    font-size: 25px;
+}
+.profile-player-name {
+    font-size: 18px;
     font-weight: 900;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
-
 .profile-username {
-    position: relative;
-    z-index: 2;
-
-    margin-top: 4px;
-
-    color: #777777;
-    font-size: 13px;
-    font-weight: 600;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12px;
 }
-
-
-/* =========================================
-   LEVEL
-   ========================================= */
-
 .profile-level-card {
-    padding: 18px;
-
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-
-    background: #141414;
-
-    margin-bottom: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
 }
-
-.profile-level-top {
+.profile-level-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 13px;
 }
-
 .profile-level {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 48px;
-    height: 48px;
-
-    padding: 0 12px;
-
-    border-radius: 15px;
-
-    background: rgba(242,201,76,0.12);
-    border: 1px solid rgba(242,201,76,0.18);
-
-    color: #f2c94c;
-
-    font-size: 21px;
-    font-weight: 900;
+    color: var(--yellow);
+    font-size: 28px;
+    font-weight: 950;
 }
-
 .profile-xp-text {
-    color: #8a8a8a;
-    font-size: 13px;
+    color: var(--muted);
+    font-size: 12px;
     font-weight: 700;
 }
-
 .profile-xp-bar {
     width: 100%;
-    height: 9px;
-
+    height: 8px;
+    margin-top: 12px;
     overflow: hidden;
-
-    border-radius: 20px;
-
-    background: #242424;
+    background: #08090c;
+    border-radius: 999px;
 }
-
 .profile-xp-progress {
     height: 100%;
-
+    background: var(--yellow);
     border-radius: inherit;
-
-    background: linear-gradient(
-        90deg,
-        #c99c22,
-        #f2c94c
-    );
-
-    box-shadow:
-        0 0 15px rgba(242,201,76,0.25);
-
-    transition: width 0.35s ease;
+    transition: width .3s ease;
 }
-
-
-/* =========================================
-   БАЛАНС
-   ========================================= */
-
 .profile-balance-card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    padding: 17px 18px;
-
-    border: 1px solid rgba(242,201,76,0.12);
-    border-radius: 19px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(242,201,76,0.10),
-            rgba(242,201,76,0.025)
-        );
-
-    margin-bottom: 12px;
+    gap: 13px;
+    padding: 16px;
+    margin-bottom: 10px;
+    color: var(--yellow);
+    font-size: 26px;
 }
-
-.profile-balance-label {
-    color: #858585;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.profile-balance-value {
-    color: #f2c94c;
-    font-size: 22px;
+.profile-label {
+    margin-bottom: 3px;
+    color: var(--muted);
+    font-size: 10px;
     font-weight: 900;
+    letter-spacing: 1px;
 }
-
-
-/* =========================================
-   СТАТИСТИКА
-   ========================================= */
-
+.profile-balance-card strong {
+    color: var(--text);
+    font-size: 22px;
+}
 .profile-stats-grid {
     display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 10px;
-
-    margin-bottom: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
 }
-
 .profile-stat-card {
-    min-height: 100px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    padding: 16px;
-
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 19px;
-
-    background: #141414;
+    padding: 13px 8px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    text-align: center;
 }
-
 .profile-stat-icon {
+    margin-bottom: 7px;
     font-size: 20px;
 }
-
 .profile-stat-value {
-    color: #ffffff;
-
-    font-size: 21px;
-    font-weight: 900;
+    font-size: 17px;
+    font-weight: 950;
 }
-
 .profile-stat-label {
-    color: #777777;
-
-    font-size: 11px;
-    font-weight: 700;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .5px;
 }
-
-
-/* =========================================
-   ЛУЧШАЯ МАШИНА
-   ========================================= */
-
 .profile-best-card {
-    position: relative;
-    overflow: hidden;
-
-    padding: 18px;
-
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #191919,
-            #101010
-        );
-
-    margin-bottom: 14px;
-}
-
-.profile-best-title {
-    color: #777777;
-
-    font-size: 11px;
-    font-weight: 800;
-
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-
+    padding: 16px;
     margin-bottom: 12px;
 }
-
+.profile-best-title {
+    margin-bottom: 14px;
+    color: var(--yellow);
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 1px;
+}
 .profile-best-car {
-    min-height: 72px;
-
     display: flex;
     align-items: center;
     gap: 13px;
+    padding: 12px;
+    background: var(--panel-2);
+    border-radius: 14px;
 }
-
 .profile-best-car-emoji {
-    width: 58px;
-    height: 58px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 17px;
-
-    background: #202020;
-
-    font-size: 30px;
+    width: 64px;
+    height: 64px;
+    background: #0b0d11;
+    border-radius: 13px;
+    font-size: 35px;
 }
-
-.profile-best-car-info {
-    min-width: 0;
-}
-
 .profile-best-car-name {
-    color: #ffffff;
-
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 900;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
-
 .profile-best-car-rarity {
-    margin-top: 4px;
-
-    color: #f2c94c;
-
+    margin-top: 3px;
+    color: var(--yellow);
     font-size: 11px;
     font-weight: 800;
 }
-
 .profile-best-car-price {
-    margin-top: 3px;
-
-    color: #8b8b8b;
-
-    font-size: 12px;
-    font-weight: 700;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
 }
-
-
-/* =========================================
-   НЕТ ЛУЧШЕЙ МАШИНЫ
-   ========================================= */
-
-.profile-empty-best {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    color: #777777;
-
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.profile-empty-best-icon {
-    font-size: 28px;
-    opacity: 0.6;
-}
-
-
-/* =========================================
-   КНОПКА НА ГЛАВНУЮ
-   ========================================= */
-
 .profile-home-button {
     width: 100%;
-    min-height: 52px;
-
-    border: 0;
-    border-radius: 17px;
-
-    background: #f2c94c;
-    color: #101010;
-
+    min-height: 50px;
+    color: #151515;
+    background: var(--yellow);
+    border-radius: 14px;
     font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.3px;
-
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-
-    box-shadow:
-        0 10px 28px rgba(242,201,76,0.14);
-
-    transition:
-        transform 0.15s ease,
-        filter 0.15s ease;
+    font-weight: 950;
 }
-
-.profile-home-button:active {
-    transform: scale(0.97);
-    filter: brightness(0.9);
-}
-
-
 /* =========================================
-   МАЛЕНЬКИЕ ЭКРАНЫ
+   BURGER OVERLAY
    ========================================= */
-
-@media (max-width: 380px) {
-
-    .profile-screen {
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(0,0,0,.65);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity .2s ease,
+        visibility .2s ease;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+.menu-overlay.active,
+.menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+/* =========================================
+   SIDE MENU
+   ========================================= */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    width: min(86vw, 360px);
+    padding:
+        max(18px, env(safe-area-inset-top))
+        14px
+        calc(18px + env(safe-area-inset-bottom));
+    background: #0e1015;
+    border-left: 1px solid var(--border);
+    box-shadow:
+        -20px 0 60px rgba(0,0,0,.45);
+    transform: translateX(105%);
+    transition:
+        transform .25s ease;
+    overflow-y: auto;
+}
+.side-menu.active,
+.side-menu.open {
+    transform: translateX(0);
+}
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px 20px;
+}
+.side-menu-title {
+    font-size: 18px;
+    font-weight: 950;
+    letter-spacing: 1px;
+}
+.close-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: var(--text);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 27px;
+}
+.side-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    min-height: 56px;
+    margin-bottom: 8px;
+    padding: 0 15px;
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    text-align: left;
+}
+.side-menu-item span {
+    width: 27px;
+    font-size: 22px;
+    text-align: center;
+}
+.side-menu-item strong {
+    font-size: 14px;
+}
+/* =========================================
+   SEASON
+   ========================================= */
+.season-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,.72);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity .2s ease,
+        visibility .2s ease;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+.season-overlay.active,
+.season-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+.season-modal {
+    position: relative;
+    width: min(100%, 360px);
+    padding: 28px 22px;
+    background:
+        linear-gradient(
+            145deg,
+            #1a1d24,
+            #0e1015
+        );
+    border: 1px solid rgba(255,210,28,.2);
+    border-radius: 23px;
+    text-align: center;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55);
+}
+.season-close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    color: var(--text);
+    background: var(--panel-2);
+    border-radius: 11px;
+    font-size: 24px;
+}
+.season-modal-icon {
+    font-size: 50px;
+}
+.season-modal-title {
+    margin-top: 10px;
+    color: var(--yellow);
+    font-size: 24px;
+    font-weight: 950;
+}
+.season-modal-name {
+    margin-top: 4px;
+    font-size: 17px;
+    font-weight: 900;
+}
+.season-modal-text {
+    margin: 14px auto 20px;
+    max-width: 270px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+.season-timer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.season-timer > div {
+    padding: 12px 5px;
+    background: var(--panel-2);
+    border-radius: 13px;
+}
+.season-timer strong {
+    display: block;
+    color: var(--yellow);
+    font-size: 20px;
+    font-weight: 950;
+}
+.season-timer span {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 900;
+}
+/* =========================================
+   RESULT
+   ========================================= */
+.case-result {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,.75);
+    opacity: 0;
+    transition: opacity .2s ease;
+    backdrop-filter: blur(6px);
+}
+.case-result.show {
+    opacity: 1;
+}
+.case-result-card {
+    width: min(100%, 350px);
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    text-align: center;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55);
+}
+.result-title {
+    color: var(--yellow);
+    font-size: 12px;
+    font-weight: 950;
+    letter-spacing: 1px;
+}
+.result-car {
+    margin: 22px 0 12px;
+    font-size: 90px;
+}
+.result-name {
+    font-size: 22px;
+    font-weight: 950;
+}
+.result-rarity {
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 900;
+}
+.result-price {
+    margin: 14px 0 20px;
+    color: var(--muted);
+    font-size: 12px;
+}
+.result-price b {
+    color: var(--yellow);
+}
+.result-close {
+    width: 100%;
+    min-height: 52px;
+    color: #151515;
+    background: var(--yellow);
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 950;
+}
+/* =========================================
+   BOTTOM NAV
+   ========================================= */
+.bottom-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 70;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: min(100%, 620px);
+    padding:
+        8px
+        8px
+        calc(8px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    background: rgba(14,16,21,.96);
+    border-top: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 54px;
+    color: var(--muted);
+    background: transparent;
+    border-radius: 12px;
+    font-size: 19px;
+}
+.nav-button span {
+    font-size: 9px;
+    font-weight: 800;
+}
+.nav-button.active {
+    color: var(--yellow);
+}
+/* =========================================
+   MOBILE
+   ========================================= */
+@media (max-width: 430px) {
+    .topbar {
         padding-left: 11px;
         padding-right: 11px;
     }
-
-    .profile-user-card {
-        padding: 18px 15px;
+    .game-title {
+        font-size: 16px;
     }
-
-    .profile-player-name {
-        font-size: 21px;
+    .season-button {
+        padding: 0 8px;
+        font-size: 9px;
     }
-
-    .profile-stat-card {
-        padding: 14px;
+    .balance {
+        padding: 0 7px;
+        font-size: 11px;
     }
-
-    .profile-stat-value {
-        font-size: 19px;
+    .menu-toggle {
+        width: 39px;
+        height: 39px;
+    }
+    .main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .case-image {
+        min-height: 165px;
+        font-size: 76px;
+    }
+    .profile-screen {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .profile-stats-grid {
+        gap: 6px;
+    }
+}
+/* =========================================
+   REDUCE MOTION
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
     }
 }
