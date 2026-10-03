@@ -1621,3 +1621,528 @@ button {
 body.modal-open {
     overflow: hidden;
 }
+/* =========================================
+   RANDOM CAR — ПРОФИЛЬ
+   ========================================= */
+
+.profile-screen {
+    min-height: calc(100vh - 70px);
+    padding: 16px 14px 30px;
+    animation: profileFadeIn 0.22s ease-out;
+}
+
+@keyframes profileFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   ШАПКА ПРОФИЛЯ
+   ========================================= */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.profile-back-button {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+
+    background: #171717;
+    color: #ffffff;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.profile-back-button:active {
+    transform: scale(0.91);
+    background: #222222;
+}
+
+.profile-header-text {
+    min-width: 0;
+}
+
+.profile-header-title {
+    margin: 0;
+
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+}
+
+.profile-header-subtitle {
+    margin-top: 3px;
+
+    color: #777777;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   КАРТОЧКА ПОЛЬЗОВАТЕЛЯ
+   ========================================= */
+
+.profile-user-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 22px 18px;
+
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 22px;
+
+    background:
+        radial-gradient(
+            circle at 90% 0%,
+            rgba(242,201,76,0.18),
+            transparent 38%
+        ),
+        linear-gradient(
+            145deg,
+            #1b1b1b,
+            #0e0e0e
+        );
+
+    box-shadow:
+        0 16px 45px rgba(0,0,0,0.35);
+
+    margin-bottom: 12px;
+}
+
+.profile-user-card::after {
+    content: "";
+
+    position: absolute;
+    right: -45px;
+    bottom: -55px;
+
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    background: rgba(242,201,76,0.06);
+}
+
+.profile-avatar {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 13px;
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        145deg,
+        #f2c94c,
+        #c99c22
+    );
+
+    color: #111111;
+
+    font-size: 25px;
+    font-weight: 900;
+
+    box-shadow:
+        0 10px 25px rgba(242,201,76,0.2);
+}
+
+.profile-player-name {
+    position: relative;
+    z-index: 2;
+
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 900;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-username {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 4px;
+
+    color: #777777;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   LEVEL
+   ========================================= */
+
+.profile-level-card {
+    padding: 18px;
+
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+
+    background: #141414;
+
+    margin-bottom: 12px;
+}
+
+.profile-level-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 13px;
+}
+
+.profile-level {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 48px;
+    height: 48px;
+
+    padding: 0 12px;
+
+    border-radius: 15px;
+
+    background: rgba(242,201,76,0.12);
+    border: 1px solid rgba(242,201,76,0.18);
+
+    color: #f2c94c;
+
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.profile-xp-text {
+    color: #8a8a8a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.profile-xp-bar {
+    width: 100%;
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #242424;
+}
+
+.profile-xp-progress {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: linear-gradient(
+        90deg,
+        #c99c22,
+        #f2c94c
+    );
+
+    box-shadow:
+        0 0 15px rgba(242,201,76,0.25);
+
+    transition: width 0.35s ease;
+}
+
+
+/* =========================================
+   БАЛАНС
+   ========================================= */
+
+.profile-balance-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 17px 18px;
+
+    border: 1px solid rgba(242,201,76,0.12);
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(242,201,76,0.10),
+            rgba(242,201,76,0.025)
+        );
+
+    margin-bottom: 12px;
+}
+
+.profile-balance-label {
+    color: #858585;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-balance-value {
+    color: #f2c94c;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+
+/* =========================================
+   СТАТИСТИКА
+   ========================================= */
+
+.profile-stats-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+.profile-stat-card {
+    min-height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 16px;
+
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 19px;
+
+    background: #141414;
+}
+
+.profile-stat-icon {
+    font-size: 20px;
+}
+
+.profile-stat-value {
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.profile-stat-label {
+    color: #777777;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   ЛУЧШАЯ МАШИНА
+   ========================================= */
+
+.profile-best-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 18px;
+
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #101010
+        );
+
+    margin-bottom: 14px;
+}
+
+.profile-best-title {
+    color: #777777;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+
+    margin-bottom: 12px;
+}
+
+.profile-best-car {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.profile-best-car-emoji {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: #202020;
+
+    font-size: 30px;
+}
+
+.profile-best-car-info {
+    min-width: 0;
+}
+
+.profile-best-car-name {
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-best-car-rarity {
+    margin-top: 4px;
+
+    color: #f2c94c;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.profile-best-car-price {
+    margin-top: 3px;
+
+    color: #8b8b8b;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   НЕТ ЛУЧШЕЙ МАШИНЫ
+   ========================================= */
+
+.profile-empty-best {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #777777;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.profile-empty-best-icon {
+    font-size: 28px;
+    opacity: 0.6;
+}
+
+
+/* =========================================
+   КНОПКА НА ГЛАВНУЮ
+   ========================================= */
+
+.profile-home-button {
+    width: 100%;
+    min-height: 52px;
+
+    border: 0;
+    border-radius: 17px;
+
+    background: #f2c94c;
+    color: #101010;
+
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    box-shadow:
+        0 10px 28px rgba(242,201,76,0.14);
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+
+.profile-home-button:active {
+    transform: scale(0.97);
+    filter: brightness(0.9);
+}
+
+
+/* =========================================
+   МАЛЕНЬКИЕ ЭКРАНЫ
+   ========================================= */
+
+@media (max-width: 380px) {
+
+    .profile-screen {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .profile-user-card {
+        padding: 18px 15px;
+    }
+
+    .profile-player-name {
+        font-size: 21px;
+    }
+
+    .profile-stat-card {
+        padding: 14px;
+    }
+
+    .profile-stat-value {
+        font-size: 19px;
+    }
+}
