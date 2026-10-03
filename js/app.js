@@ -5,9 +5,9 @@ TELEGRAM
 ========================= */
 
 if (tg) {
-
 tg.ready();
 tg.expand();
+
 if (typeof tg.disableVerticalSwipes === "function") {
     tg.disableVerticalSwipes();
 }
@@ -19,8 +19,8 @@ VIEWPORT
 ========================= */
 
 function updateViewport() {
-
 if (!tg) return;
+
 const height =
     tg.viewportStableHeight ||
     tg.viewportHeight;
@@ -44,7 +44,6 @@ PLAYER
 ========================= */
 
 let balance = 10000;
-
 const CASE_PRICE = 500;
 
 const balanceElement =
@@ -54,10 +53,8 @@ const openCaseButton =
 document.getElementById(“openCaseButton”);
 
 function updateBalance() {
-
 balanceElement.textContent =
-    balance.toLocaleString("ru-RU");
-
+balance.toLocaleString(“ru-RU”);
 }
 
 /* =========================
@@ -65,10 +62,9 @@ RANDOM CAR
 ========================= */
 
 function getRandomCar() {
-
-const random =
-    Math.random() * 100;
+const random = Math.random() * 100;
 let current = 0;
+
 for (const car of cars) {
     current += car.chance;
     if (random <= current) {
@@ -108,7 +104,7 @@ result.innerHTML = `
             ${car.rarityName}
         </div>
         <div class="result-price">
-            Стоимость: 
+            Стоимость:
             <b>${car.price.toLocaleString("ru-RU")} 🪙</b>
         </div>
         <button
@@ -141,36 +137,37 @@ closeButton.addEventListener(
 OPEN CASE
 ========================= */
 
-openCaseButton.addEventListener(
-“click”,
-function () {
+if (openCaseButton) {
 
-    if (balance < CASE_PRICE) {
-        alert("Недостаточно монет!");
-        return;
-    }
-    balance -= CASE_PRICE;
-    updateBalance();
-    openCaseButton.disabled = true;
-    openCaseButton.classList.add(
-        "case-opening"
-    );
-    openCaseButton.textContent =
-        "🎁 ОТКРЫВАЕМ...";
-    setTimeout(() => {
-        const car =
-            getRandomCar();
-        openCaseButton.disabled = false;
-        openCaseButton.classList.remove(
+openCaseButton.addEventListener(
+    "click",
+    function () {
+        if (balance < CASE_PRICE) {
+            alert("Недостаточно монет!");
+            return;
+        }
+        balance -= CASE_PRICE;
+        updateBalance();
+        openCaseButton.disabled = true;
+        openCaseButton.classList.add(
             "case-opening"
         );
         openCaseButton.textContent =
-            "🎁 ОТКРЫТЬ КЕЙС";
-        createResultWindow(car);
-    }, 1200);
-}
-
+            "🎁 ОТКРЫВАЕМ...";
+        setTimeout(() => {
+            const car = getRandomCar();
+            openCaseButton.disabled = false;
+            openCaseButton.classList.remove(
+                "case-opening"
+            );
+            openCaseButton.textContent =
+                "🎁 ОТКРЫТЬ КЕЙС";
+            createResultWindow(car);
+        }, 1200);
+    }
 );
+
+}
 
 /* =========================
 MENU
@@ -209,13 +206,9 @@ button.addEventListener(
     "click",
     function () {
         navButtons.forEach(item => {
-            item.classList.remove(
-                "active"
-            );
+            item.classList.remove("active");
         });
-        button.classList.add(
-            "active"
-        );
+        button.classList.add("active");
         const section =
             button.querySelector(
                 "span"
@@ -227,5 +220,9 @@ button.addEventListener(
 );
 
 });
+
+/* =========================
+START
+========================= */
 
 updateBalance();
