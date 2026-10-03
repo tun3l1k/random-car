@@ -1308,3 +1308,313 @@ button {
             rgba(255, 255, 255, 0.08);
     }
 }
+/* =========================================
+   RANDOM CAR — СЕЗОН
+   ========================================= */
+
+.season-button {
+    min-height: 38px;
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: #f2c94c;
+    color: #080808;
+
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 6px 18px rgba(242, 201, 76, 0.18);
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+
+.season-button:active {
+    transform: scale(0.94);
+    filter: brightness(0.9);
+}
+
+
+/* =========================================
+   ОКНО СЕЗОНА
+   ========================================= */
+
+.season-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        calc(20px + env(safe-area-inset-top))
+        16px
+        calc(20px + env(safe-area-inset-bottom));
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.season-overlay.active {
+    display: flex;
+}
+
+
+/* =========================================
+   КАРТОЧКА СЕЗОНА
+   ========================================= */
+
+.season-modal {
+    position: relative;
+
+    width: min(100%, 390px);
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    padding: 26px 20px 22px;
+
+    border: 1px solid rgba(242, 201, 76, 0.2);
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #171717 0%,
+            #0c0c0c 100%
+        );
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.65);
+
+    animation: seasonModalIn 0.22s ease-out;
+}
+
+@keyframes seasonModalIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================
+   КНОПКА ЗАКРЫТИЯ
+   ========================================= */
+
+.season-close {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   ЗАГОЛОВОК
+   ========================================= */
+
+.season-modal-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    background: #f2c94c;
+    color: #080808;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+}
+
+.season-modal h2 {
+    margin: 14px 0 4px;
+
+    color: #ffffff;
+
+    font-size: 32px;
+    line-height: 1;
+
+    font-weight: 950;
+    letter-spacing: -1px;
+}
+
+.season-description {
+    margin: 0 0 20px;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   ИНФОРМАЦИЯ О СЕЗОНЕ
+   ========================================= */
+
+.season-info-card {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.season-info-row {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 14px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 13px;
+}
+
+.season-info-row:last-child {
+    border-bottom: 0;
+}
+
+.season-info-row strong {
+    color: #ffffff;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   МАШИНЫ СЕЗОНА
+   ========================================= */
+
+.season-section-title {
+    margin-bottom: 10px;
+
+    color: rgba(255, 255, 255, 0.42);
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.season-cars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.season-car {
+    min-height: 76px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: #ffffff;
+
+    font-size: 25px;
+}
+
+.season-car span {
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   МАЛЕНЬКИЕ IPHONE
+   ========================================= */
+
+@media (max-width: 380px) {
+
+    .season-button {
+        padding: 0 9px;
+        font-size: 10px;
+    }
+
+    .season-modal {
+        padding: 22px 16px 18px;
+        border-radius: 21px;
+    }
+
+    .season-modal h2 {
+        font-size: 28px;
+    }
+
+    .season-cars {
+        gap: 8px;
+    }
+
+}
