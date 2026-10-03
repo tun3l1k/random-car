@@ -417,3 +417,48 @@
 
 </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const seasonButton = document.getElementById("seasonButton");
+    const seasonOverlay = document.getElementById("seasonOverlay");
+    const closeSeasonButton = document.getElementById("closeSeasonButton");
+
+    if (!seasonButton || !seasonOverlay) {
+        return;
+    }
+
+    function openSeason() {
+        seasonOverlay.classList.add("active");
+
+        if (window.Telegram && Telegram.WebApp) {
+            Telegram.WebApp.HapticFeedback?.impactOccurred("light");
+        }
+    }
+
+    function closeSeason() {
+        seasonOverlay.classList.remove("active");
+    }
+
+    seasonButton.onclick = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        openSeason();
+    };
+
+    if (closeSeasonButton) {
+        closeSeasonButton.onclick = function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeSeason();
+        };
+    }
+
+    seasonOverlay.onclick = function (event) {
+        if (event.target === seasonOverlay) {
+            closeSeason();
+        }
+    };
+
+});
+</script>
