@@ -867,3 +867,62 @@ document.addEventListener(
 
 updateBalance();
 saveGame();
+// =========================================
+// ОКНО СЕЗОНА
+// =========================================
+
+const seasonButton = document.getElementById("seasonButton");
+const seasonOverlay = document.getElementById("seasonOverlay");
+const closeSeasonButton = document.getElementById("closeSeasonButton");
+
+if (seasonButton && seasonOverlay) {
+
+    seasonButton.addEventListener("click", () => {
+
+        seasonOverlay.classList.add("active");
+
+        document.body.classList.add("modal-open");
+
+        if (
+            window.Telegram &&
+            Telegram.WebApp &&
+            Telegram.WebApp.HapticFeedback
+        ) {
+            Telegram.WebApp.HapticFeedback.impactOccurred("light");
+        }
+
+    });
+
+}
+
+
+if (closeSeasonButton && seasonOverlay) {
+
+    closeSeasonButton.addEventListener("click", () => {
+
+        seasonOverlay.classList.remove("active");
+
+        document.body.classList.remove("modal-open");
+
+    });
+
+}
+
+
+// Закрытие по нажатию на затемнение
+
+if (seasonOverlay) {
+
+    seasonOverlay.addEventListener("click", (event) => {
+
+        if (event.target === seasonOverlay) {
+
+            seasonOverlay.classList.remove("active");
+
+            document.body.classList.remove("modal-open");
+
+        }
+
+    });
+
+}
