@@ -2,6 +2,7 @@
 <html lang="ru">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -13,16 +14,19 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=6">
+
 </head>
+
 
 <body>
 
 <div class="app">
 
-    <!-- =========================================
+
+    <!-- =========================
          ВЕРХНЯЯ ПАНЕЛЬ
-         ========================================= -->
+    ========================== -->
 
     <header class="topbar">
 
@@ -41,9 +45,23 @@
 
         <div class="topbar-right">
 
+            <button
+                id="seasonButton"
+                class="season-button"
+                type="button"
+            >
+                СЕЗОН 1
+            </button>
+
+
             <div class="balance">
+
                 🪙
-                <span id="balance">10000</span>
+
+                <span id="balance">
+                    10000
+                </span>
+
             </div>
 
 
@@ -61,11 +79,15 @@
     </header>
 
 
-    <!-- =========================================
-         ГЛАВНЫЙ ЭКРАН
-         ========================================= -->
 
-    <main class="main">
+    <!-- =========================
+         ГЛАВНЫЙ ЭКРАН
+    ========================== -->
+
+    <main
+        id="homeScreen"
+        class="main"
+    >
 
         <section class="welcome">
 
@@ -84,9 +106,6 @@
         </section>
 
 
-        <!-- =====================================
-             ТЕКУЩИЙ КЕЙС
-             ===================================== -->
 
         <section class="case-card">
 
@@ -130,9 +149,6 @@
         </section>
 
 
-        <!-- =====================================
-             КНОПКА ВСЕХ КЕЙСОВ
-             ===================================== -->
 
         <button
             id="casesButton"
@@ -145,9 +161,275 @@
     </main>
 
 
-    <!-- =========================================
+
+    <!-- =========================
+         ЭКРАН ПРОФИЛЯ
+    ========================== -->
+
+    <main
+        id="profileScreen"
+        class="profile-screen"
+        style="display: none;"
+    >
+
+        <div class="profile-header">
+
+            <button
+                id="profileBackButton"
+                class="profile-back-button"
+                type="button"
+            >
+                ←
+            </button>
+
+
+            <div>
+
+                <div class="profile-title">
+                    ПРОФИЛЬ
+                </div>
+
+                <div class="profile-subtitle">
+                    Твоя статистика
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- КАРТОЧКА ИГРОКА -->
+
+        <section class="profile-user-card">
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+
+            <div class="profile-user-info">
+
+                <div
+                    id="profilePlayerName"
+                    class="profile-player-name"
+                >
+                    Игрок
+                </div>
+
+                <div
+                    id="profileUsername"
+                    class="profile-username"
+                >
+                    RANDOM CAR
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- УРОВЕНЬ -->
+
+        <section class="profile-level-card">
+
+            <div class="profile-level-top">
+
+                <div>
+
+                    <span class="profile-label">
+                        УРОВЕНЬ
+                    </span>
+
+                    <strong
+                        id="profileLevel"
+                        class="profile-level"
+                    >
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-xp-text">
+
+                    <span id="profileXP">
+                        0
+                    </span>
+
+                    /
+
+                    <span id="profileNextXP">
+                        100
+                    </span>
+
+                    XP
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-xp-bar">
+
+                <div
+                    id="profileXPProgress"
+                    class="profile-xp-progress"
+                    style="width: 0%;"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ОСНОВНАЯ СТАТИСТИКА -->
+
+        <section class="profile-stats-grid">
+
+
+            <div class="profile-stat-card">
+
+                <div class="profile-stat-icon">
+                    🪙
+                </div>
+
+                <div class="profile-stat-value">
+                    <span id="profileBalance">
+                        10000
+                    </span>
+                </div>
+
+                <div class="profile-stat-name">
+                    Баланс
+                </div>
+
+            </div>
+
+
+
+            <div class="profile-stat-card">
+
+                <div class="profile-stat-icon">
+                    🎁
+                </div>
+
+                <div
+                    id="profileOpenedCases"
+                    class="profile-stat-value"
+                >
+                    0
+                </div>
+
+                <div class="profile-stat-name">
+                    Открыто кейсов
+                </div>
+
+            </div>
+
+
+
+            <div class="profile-stat-card">
+
+                <div class="profile-stat-icon">
+                    🚗
+                </div>
+
+                <div
+                    id="profileCarsCount"
+                    class="profile-stat-value"
+                >
+                    0
+                </div>
+
+                <div class="profile-stat-name">
+                    Автомобилей
+                </div>
+
+            </div>
+
+
+
+            <div class="profile-stat-card">
+
+                <div class="profile-stat-icon">
+                    💰
+                </div>
+
+                <div
+                    id="profileCollectionValue"
+                    class="profile-stat-value"
+                >
+                    0
+                </div>
+
+                <div class="profile-stat-name">
+                    Коллекция
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ЛУЧШЕЕ АВТО -->
+
+        <section class="profile-best-card">
+
+            <div class="profile-section-title">
+                🏆 ЛУЧШЕЕ АВТО
+            </div>
+
+
+            <div
+                id="profileBestCar"
+                class="profile-best-car"
+            >
+
+                <div class="profile-best-car-icon">
+                    🚘
+                </div>
+
+
+                <div class="profile-best-car-info">
+
+                    <strong>
+                        Пока нет автомобиля
+                    </strong>
+
+                    <span>
+                        Открой первый кейс
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- НАЗАД -->
+
+        <button
+            id="profileHomeButton"
+            class="profile-home-button"
+            type="button"
+        >
+            🏠 НА ГЛАВНУЮ
+        </button>
+
+    </main>
+
+
+
+    <!-- =========================
          ЗАТЕМНЕНИЕ МЕНЮ
-         ========================================= -->
+    ========================== -->
 
     <div
         id="menuOverlay"
@@ -155,9 +437,10 @@
     ></div>
 
 
-    <!-- =========================================
+
+    <!-- =========================
          БОКОВОЕ МЕНЮ
-         ========================================= -->
+    ========================== -->
 
     <aside
         id="sideMenu"
@@ -184,9 +467,27 @@
         </div>
 
 
+
         <div class="side-menu-list">
 
-            <!-- КОЛЛЕКЦИЯ -->
+
+            <button
+                id="profileMenuButton"
+                class="side-menu-item"
+                type="button"
+            >
+
+                <span>
+                    👤
+                </span>
+
+                <strong>
+                    Профиль
+                </strong>
+
+            </button>
+
+
 
             <button
                 class="side-menu-item"
@@ -204,7 +505,6 @@
             </button>
 
 
-            <!-- РЕЙТИНГ -->
 
             <button
                 class="side-menu-item"
@@ -222,7 +522,6 @@
             </button>
 
 
-            <!-- ЗАДАНИЯ -->
 
             <button
                 class="side-menu-item"
@@ -240,25 +539,6 @@
             </button>
 
 
-            <!-- ПРОФИЛЬ -->
-
-            <button
-                class="side-menu-item"
-                type="button"
-            >
-
-                <span>
-                    👤
-                </span>
-
-                <strong>
-                    Профиль
-                </strong>
-
-            </button>
-
-
-            <!-- КЕЙСЫ -->
 
             <button
                 class="side-menu-item"
@@ -276,7 +556,6 @@
             </button>
 
 
-            <!-- АПГРЕЙД -->
 
             <button
                 class="side-menu-item"
@@ -294,7 +573,6 @@
             </button>
 
 
-            <!-- НАСТРОЙКИ -->
 
             <button
                 class="side-menu-item"
@@ -315,15 +593,580 @@
 
     </aside>
 
+
+
+    <!-- =========================
+         ОКНО СЕЗОНА
+    ========================== -->
+
+    <div
+        id="seasonOverlay"
+        class="season-overlay"
+    >
+
+        <div
+            class="season-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="seasonTitle"
+        >
+
+
+            <button
+                id="closeSeasonButton"
+                class="season-close"
+                type="button"
+                aria-label="Закрыть сезон"
+            >
+                ✕
+            </button>
+
+
+
+            <div class="season-modal-badge">
+                СЕЗОН 1
+            </div>
+
+
+            <h2 id="seasonTitle">
+                JDM
+            </h2>
+
+
+            <p class="season-description">
+                Японская легенда начинается здесь.
+            </p>
+
+
+
+            <div class="season-info-card">
+
+
+                <div class="season-info-row">
+
+                    <span>
+                        🏁 Сезон
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+
+
+                <div class="season-info-row">
+
+                    <span>
+                        🚗 Тематика
+                    </span>
+
+                    <strong>
+                        JDM
+                    </strong>
+
+                </div>
+
+
+
+                <div class="season-info-row">
+
+                    <span>
+                        ⏳ Длительность
+                    </span>
+
+                    <strong>
+                        14 дней
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="season-section-title">
+                АВТОМОБИЛИ СЕЗОНА
+            </div>
+
+
+
+            <div class="season-cars">
+
+
+                <div class="season-car">
+
+                    🏎️
+
+                    <span>
+                        Skyline R34
+                    </span>
+
+                </div>
+
+
+
+                <div class="season-car">
+
+                    🏎️
+
+                    <span>
+                        Supra A80
+                    </span>
+
+                </div>
+
+
+
+                <div class="season-car">
+
+                    🏎️
+
+                    <span>
+                        RX-7 FD
+                    </span>
+
+                </div>
+
+
+
+                <div class="season-car">
+
+                    🏎️
+
+                    <span>
+                        NSX
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
 </div>
 
 
-<!-- =========================================
+
+<!-- =========================
      JAVASCRIPT
-     ========================================= -->
+========================== -->
+
+<script src="js/season.js?v=1"></script>
 
 <script src="js/cars.js?v=5"></script>
-<script src="js/app.js?v=5"></script>
+
+<script src="js/app.js?v=6"></script>
+
+<script src="js/profile.js?v=1"></script>
+
+
+
+<!-- =========================
+     ПРОФИЛЬ — TELEGRAM FIX
+========================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const profileButton =
+        document.getElementById("profileMenuButton");
+
+    const profileScreen =
+        document.getElementById("profileScreen");
+
+    const homeScreen =
+        document.getElementById("homeScreen");
+
+    const sideMenu =
+        document.getElementById("sideMenu");
+
+    const menuOverlay =
+        document.getElementById("menuOverlay");
+
+    const profileBackButton =
+        document.getElementById("profileBackButton");
+
+    const profileHomeButton =
+        document.getElementById("profileHomeButton");
+
+
+    function getSavedProfile() {
+
+        const saved =
+            localStorage.getItem(
+                "random_car_profile"
+            );
+
+        if (!saved) {
+
+            return {
+                level: 1,
+                xp: 0,
+                openedCases: 0,
+                carsCount: 0,
+                bestCar: null,
+                collectionValue: 0
+            };
+
+        }
+
+
+        try {
+
+            return JSON.parse(saved);
+
+        } catch (error) {
+
+            return {
+                level: 1,
+                xp: 0,
+                openedCases: 0,
+                carsCount: 0,
+                bestCar: null,
+                collectionValue: 0
+            };
+
+        }
+
+    }
+
+
+    function formatNumber(number) {
+
+        return Number(number || 0)
+            .toLocaleString("ru-RU");
+
+    }
+
+
+    function updateProfileScreen() {
+
+        const profile =
+            getSavedProfile();
+
+
+        const telegramUser =
+            window.Telegram &&
+            Telegram.WebApp &&
+            Telegram.WebApp.initDataUnsafe &&
+            Telegram.WebApp.initDataUnsafe.user;
+
+
+        const playerName =
+            telegramUser &&
+            telegramUser.first_name
+                ? telegramUser.first_name
+                : "Игрок";
+
+
+        const username =
+            telegramUser &&
+            telegramUser.username
+                ? "@" + telegramUser.username
+                : "RANDOM CAR";
+
+
+        const profilePlayerName =
+            document.getElementById(
+                "profilePlayerName"
+            );
+
+
+        const profileUsername =
+            document.getElementById(
+                "profileUsername"
+            );
+
+
+        if (profilePlayerName) {
+
+            profilePlayerName.textContent =
+                playerName;
+
+        }
+
+
+        if (profileUsername) {
+
+            profileUsername.textContent =
+                username;
+
+        }
+
+
+        const level =
+            Number(profile.level || 1);
+
+
+        const xp =
+            Number(profile.xp || 0);
+
+
+        const nextXP =
+            level * 100;
+
+
+        document.getElementById(
+            "profileLevel"
+        ).textContent = level;
+
+
+        document.getElementById(
+            "profileXP"
+        ).textContent = xp;
+
+
+        document.getElementById(
+            "profileNextXP"
+        ).textContent = nextXP;
+
+
+        const progress =
+            Math.min(
+                100,
+                (xp / nextXP) * 100
+            );
+
+
+        document.getElementById(
+            "profileXPProgress"
+        ).style.width =
+            progress + "%";
+
+
+        document.getElementById(
+            "profileOpenedCases"
+        ).textContent =
+            formatNumber(
+                profile.openedCases
+            );
+
+
+        document.getElementById(
+            "profileCarsCount"
+        ).textContent =
+            formatNumber(
+                profile.carsCount
+            );
+
+
+        document.getElementById(
+            "profileCollectionValue"
+        ).textContent =
+            formatNumber(
+                profile.collectionValue
+            ) + " 🪙";
+
+
+        const balanceElement =
+            document.getElementById(
+                "balance"
+            );
+
+
+        const profileBalance =
+            document.getElementById(
+                "profileBalance"
+            );
+
+
+        if (balanceElement && profileBalance) {
+
+            profileBalance.textContent =
+                formatNumber(
+                    balanceElement.textContent
+                        .replace(/\s/g, "")
+                );
+
+        }
+
+
+        const bestCarElement =
+            document.getElementById(
+                "profileBestCar"
+            );
+
+
+        if (
+            bestCarElement &&
+            profile.bestCar
+        ) {
+
+            bestCarElement.innerHTML = `
+
+                <div class="profile-best-car-icon">
+                    ${profile.bestCar.emoji || "🚘"}
+                </div>
+
+                <div class="profile-best-car-info">
+
+                    <strong>
+                        ${profile.bestCar.name}
+                    </strong>
+
+                    <span>
+                        ${profile.bestCar.rarityName || ""}
+                        ·
+                        ${formatNumber(profile.bestCar.price)} 🪙
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    function closeSideMenu() {
+
+        if (sideMenu) {
+
+            sideMenu.classList.remove(
+                "active"
+            );
+
+            sideMenu.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        }
+
+
+        if (menuOverlay) {
+
+            menuOverlay.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    function openProfile() {
+
+        closeSideMenu();
+
+
+        if (homeScreen) {
+
+            homeScreen.style.display =
+                "none";
+
+        }
+
+
+        if (profileScreen) {
+
+            profileScreen.style.display =
+                "block";
+
+        }
+
+
+        updateProfileScreen();
+
+
+        if (
+            window.Telegram &&
+            Telegram.WebApp &&
+            Telegram.WebApp.HapticFeedback
+        ) {
+
+            Telegram.WebApp.HapticFeedback
+                .impactOccurred("light");
+
+        }
+
+    }
+
+
+    function closeProfile() {
+
+        if (profileScreen) {
+
+            profileScreen.style.display =
+                "none";
+
+        }
+
+
+        if (homeScreen) {
+
+            homeScreen.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    if (profileButton) {
+
+        profileButton.onclick =
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                openProfile();
+
+            };
+
+    }
+
+
+    if (profileBackButton) {
+
+        profileBackButton.onclick =
+            function () {
+
+                closeProfile();
+
+            };
+
+    }
+
+
+    if (profileHomeButton) {
+
+        profileHomeButton.onclick =
+            function () {
+
+                closeProfile();
+
+            };
+
+    }
+
+
+    if (menuOverlay) {
+
+        menuOverlay.addEventListener(
+            "click",
+            function () {
+
+                closeSideMenu();
+
+            }
+        );
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
