@@ -1,13 +1,8 @@
-/* =====================================================
-   RANDOM CAR — APP
-   ===================================================== */
-
-
-/* =====================================================
-   TELEGRAM
-   ===================================================== */
-
 const tg = window.Telegram?.WebApp;
+
+/* =========================
+   TELEGRAM
+========================= */
 
 if (tg) {
     tg.ready();
@@ -19,21 +14,20 @@ if (tg) {
 }
 
 
-/* =====================================================
+/* =========================
    VIEWPORT
-   ===================================================== */
+========================= */
 
 function updateViewport() {
 
-    if (!tg) {
-        return;
-    }
+    if (!tg) return;
 
     const height =
         tg.viewportStableHeight ||
         tg.viewportHeight;
 
     if (height) {
+
         document.documentElement.style.setProperty(
             "--app-height",
             `${height}px`
@@ -43,7 +37,8 @@ function updateViewport() {
 
 updateViewport();
 
-if (tg && typeof tg.onEvent === "function") {
+if (tg) {
+
     tg.onEvent(
         "viewportChanged",
         updateViewport
@@ -51,67 +46,13 @@ if (tg && typeof tg.onEvent === "function") {
 }
 
 
-/* =====================================================
-   ИГРОК
-   ===================================================== */
+/* =========================
+   PLAYER
+========================= */
+
+let balance = 10000;
 
 const CASE_PRICE = 500;
-
-let balance = Number(
-    localStorage.getItem("randomCarBalance")
-);
-
-if (!Number.isFinite(balance)) {
-    balance = 10000;
-}
-
-
-/* =====================================================
-   КОЛЛЕКЦИЯ
-   ===================================================== */
-
-let collection = [];
-
-try {
-
-    collection = JSON.parse(
-        localStorage.getItem(
-            "randomCarCollection"
-        ) || "[]"
-    );
-
-    if (!Array.isArray(collection)) {
-        collection = [];
-    }
-
-} catch (error) {
-
-    collection = [];
-
-}
-
-
-/* =====================================================
-   СОХРАНЕНИЕ
-   ===================================================== */
-
-function saveGame() {
-
-    localStorage.setItem(
-        "randomCarBalance",
-        String(balance)
-    );
-
-    localStorage.setItem(
-        "randomCarCollection",
-        JSON.stringify(collection)
-    );
-}
-
-
-/* =====================================================
-   ЭЛЕМЕНТЫ
-   ===================================================== */
 
 const balanceElement =
     document.getElementById("balance");
@@ -119,90 +60,43 @@ const balanceElement =
 const openCaseButton =
     document.getElementById("openCaseButton");
 
-const casesButton =
-    document.getElementById("casesButton");
-
-
-/* =====================================================
-   БАЛАНС
-   ===================================================== */
 
 function updateBalance() {
 
-    if (!balanceElement) {
-        return;
-    }
+    if (!balanceElement) return;
 
     balanceElement.textContent =
         balance.toLocaleString("ru-RU");
 }
 
 
-/* =====================================================
+/* =========================
    RANDOM CAR
-   ===================================================== */
+========================= */
 
 function getRandomCar() {
 
     const random =
         Math.random() * 100;
 
-    let currentChance = 0;
+    let current = 0;
 
     for (const car of cars) {
 
-        currentChance += car.chance;
+        current += car.chance;
 
-        if (random <= currentChance) {
+        if (random <= current) {
             return car;
         }
     }
 
-    return cars[cars.length - 1];
+    return cars[0];
 }
 
 
-/* =====================================================
-   КОЛЛЕКЦИЯ
-   ===================================================== */
-
-function isDuplicate(car) {
-
-    return collection.includes(car.id);
-}
-
-
-function addCarToCollection(car) {
-
-    collection.push(car.id);
-
-    saveGame();
-}
-
-
-/* =====================================================
-   УВЕДОМЛЕНИЕ
-   ===================================================== */
-
-function showMessage(message) {
-
-    if (
-        tg &&
-        typeof tg.showAlert === "function"
-    ) {
-
-        tg.showAlert(message);
-
-    } else {
-
-        alert(message);
-    }
-}
-
-
-/* =====================================================
-   ОКНО РЕЗУЛЬТАТА
-   ===================================================== */
+/* =========================
+   RESULT WINDOW
+========================= */
 
 function createResultWindow(car) {
 
@@ -212,10 +106,6 @@ function createResultWindow(car) {
     if (oldWindow) {
         oldWindow.remove();
     }
-
-
-    const duplicate =
-        isDuplicate(car);
 
 
     const result =
@@ -230,61 +120,39 @@ function createResultWindow(car) {
         <div class="case-result-card">
 
             <div class="result-title">
-                ${
-                    duplicate
-                        ? "ДУБЛИКАТ"
-                        : "ТЕБЕ ВЫПАЛО"
-                }
+                ТЕБЕ ВЫПАЛО
             </div>
-
 
             <div class="result-car">
                 ${car.emoji}
             </div>
 
-
             <div class="result-name">
                 ${car.name}
             </div>
 
-
-            <div class="
-                result-rarity
-                rarity-${car.rarity}
-            ">
+            <div class="result-rarity rarity-${car.rarity}">
                 ${car.rarityName}
             </div>
 
-
             <div class="result-price">
+
                 Стоимость:
+
                 <b>
                     ${car.price.toLocaleString("ru-RU")} 🪙
                 </b>
-            </div>
-
-
-            <div class="result-actions">
-
-                <button
-                    class="result-keep"
-                    type="button"
-                >
-                    🚗 ЗАБРАТЬ
-                </button>
-
-
-                <button
-                    class="result-sell"
-                    type="button"
-                >
-                    🪙 ПРОДАТЬ
-                </button>
 
             </div>
+
+            <button
+                class="result-close"
+                type="button"
+            >
+                ЗАБРАТЬ
+            </button>
 
         </div>
-
     `;
 
 
@@ -298,91 +166,45 @@ function createResultWindow(car) {
     });
 
 
-    const keepButton =
-        result.querySelector(
-            ".result-keep"
+    const closeButton =
+        result.querySelector(".result-close");
+
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            "click",
+            () => {
+
+                result.classList.remove(
+                    "show"
+                );
+
+                setTimeout(() => {
+
+                    result.remove();
+
+                }, 250);
+
+            }
         );
-
-    const sellButton =
-        result.querySelector(
-            ".result-sell"
-        );
-
-
-    /* =================================================
-       ЗАКРЫТЬ ОКНО
-       ================================================= */
-
-    function closeResult() {
-
-        result.classList.remove(
-            "show"
-        );
-
-        setTimeout(() => {
-
-            result.remove();
-
-        }, 250);
     }
-
-
-    /* =================================================
-       ЗАБРАТЬ
-       ================================================= */
-
-    keepButton.addEventListener(
-        "click",
-        () => {
-
-            addCarToCollection(car);
-
-            closeResult();
-
-        }
-    );
-
-
-    /* =================================================
-       ПРОДАТЬ
-       ================================================= */
-
-    sellButton.addEventListener(
-        "click",
-        () => {
-
-            /*
-             * Пока экономика продажи
-             * не подключена.
-             *
-             * Поэтому автомобиль
-             * просто закрывает окно.
-             */
-
-            showMessage(
-                "Система продажи будет добавлена позже 🪙"
-            );
-
-            closeResult();
-
-        }
-    );
 }
 
 
-/* =====================================================
-   ОТКРЫТИЕ КЕЙСА
-   ===================================================== */
+/* =========================
+   OPEN CASE
+========================= */
 
 if (openCaseButton) {
 
     openCaseButton.addEventListener(
         "click",
-        () => {
+        function () {
 
             if (balance < CASE_PRICE) {
 
-                showMessage(
+                alert(
                     "Недостаточно монет!"
                 );
 
@@ -390,20 +212,10 @@ if (openCaseButton) {
             }
 
 
-            /*
-             * Снимаем стоимость кейса.
-             */
-
             balance -= CASE_PRICE;
 
-            saveGame();
             updateBalance();
 
-
-            /*
-             * Блокируем кнопку
-             * на время открытия.
-             */
 
             openCaseButton.disabled = true;
 
@@ -413,6 +225,16 @@ if (openCaseButton) {
 
             openCaseButton.textContent =
                 "🎁 ОТКРЫВАЕМ...";
+
+
+            if (
+                tg &&
+                tg.HapticFeedback
+            ) {
+
+                tg.HapticFeedback
+                    .impactOccurred("medium");
+            }
 
 
             setTimeout(() => {
@@ -434,6 +256,32 @@ if (openCaseButton) {
 
                 createResultWindow(car);
 
+
+                if (
+                    tg &&
+                    tg.HapticFeedback
+                ) {
+
+                    tg.HapticFeedback
+                        .notificationOccurred(
+                            "success"
+                        );
+                }
+
+
+                /*
+                 * Обновляем профиль,
+                 * если profile.js подключен
+                 */
+
+                if (
+                    typeof registerCaseOpening ===
+                    "function"
+                ) {
+
+                    registerCaseOpening(car);
+                }
+
             }, 1200);
 
         }
@@ -441,70 +289,74 @@ if (openCaseButton) {
 }
 
 
-/* =====================================================
-   БУРГЕР-МЕНЮ
-   ===================================================== */
+/* =========================
+   SIDE MENU
+========================= */
 
 const sideMenu =
-    document.getElementById(
-        "sideMenu"
-    );
+    document.getElementById("sideMenu");
 
 const menuOverlay =
-    document.getElementById(
-        "menuOverlay"
-    );
+    document.getElementById("menuOverlay");
 
 const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
+    document.getElementById("menuButton");
 
 const closeMenuButton =
-    document.getElementById(
-        "closeMenuButton"
-    );
+    document.getElementById("closeMenuButton");
 
 
 function openMenu() {
 
-    if (!sideMenu || !menuOverlay) {
-        return;
+    if (sideMenu) {
+
+        sideMenu.classList.add("open");
+        sideMenu.classList.add("active");
+
+        sideMenu.setAttribute(
+            "aria-hidden",
+            "false"
+        );
     }
 
-    sideMenu.classList.add(
-        "open"
-    );
 
-    menuOverlay.classList.add(
-        "open"
-    );
+    if (menuOverlay) {
 
-    sideMenu.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+        menuOverlay.classList.add("open");
+        menuOverlay.classList.add("active");
+
+        menuOverlay.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+    }
 }
 
 
 function closeMenu() {
 
-    if (!sideMenu || !menuOverlay) {
-        return;
+    if (sideMenu) {
+
+        sideMenu.classList.remove("open");
+        sideMenu.classList.remove("active");
+
+        sideMenu.setAttribute(
+            "aria-hidden",
+            "true"
+        );
     }
 
-    sideMenu.classList.remove(
-        "open"
-    );
 
-    menuOverlay.classList.remove(
-        "open"
-    );
+    if (menuOverlay) {
 
-    sideMenu.setAttribute(
-        "aria-hidden",
-        "true"
-    );
+        menuOverlay.classList.remove("open");
+        menuOverlay.classList.remove("active");
+
+        menuOverlay.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+    }
 }
 
 
@@ -512,7 +364,14 @@ if (menuButton) {
 
     menuButton.addEventListener(
         "click",
-        openMenu
+        function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            openMenu();
+
+        }
     );
 }
 
@@ -521,7 +380,11 @@ if (closeMenuButton) {
 
     closeMenuButton.addEventListener(
         "click",
-        closeMenu
+        function () {
+
+            closeMenu();
+
+        }
     );
 }
 
@@ -530,399 +393,154 @@ if (menuOverlay) {
 
     menuOverlay.addEventListener(
         "click",
-        closeMenu
+        function () {
+
+            closeMenu();
+
+        }
     );
 }
 
 
-/* =====================================================
-   МЕНЮ
-   ===================================================== */
+/* =========================
+   MENU BUTTONS
+========================= */
 
-document.addEventListener(
-    "click",
-    (event) => {
-
-        const target =
-            event.target;
-
-        if (!(target instanceof Element)) {
-            return;
-        }
+const menuButtons =
+    document.querySelectorAll(
+        ".side-menu-item"
+    );
 
 
-        const item =
-            target.closest(
-                ".side-menu-item"
-            );
+menuButtons.forEach(button => {
 
-        if (!item) {
-            return;
-        }
-
-
-        const title =
-            item
-                .querySelector("strong")
-                ?.textContent
-                ?.trim();
-
-
-        closeMenu();
-
-
-        if (title === "Коллекция") {
-
-            showCollection();
-
-            return;
-        }
-
-
-        if (title === "Кейсы") {
-
-            showMessage(
-                "Раздел кейсов скоро будет здесь 🎁"
-            );
-
-            return;
-        }
-
-
-        if (title === "Апгрейд") {
-
-            showMessage(
-                "Апгрейд скоро будет доступен ⬆️"
-            );
-
-            return;
-        }
-
-
-        showMessage(
-            `Раздел «${title}» пока находится в разработке 🚧`
-        );
-
-    }
-);
-
-
-/* =====================================================
-   КНОПКА КЕЙСОВ
-   ===================================================== */
-
-if (casesButton) {
-
-    casesButton.addEventListener(
+    button.addEventListener(
         "click",
-        () => {
+        function (event) {
 
-            showMessage(
-                "Раздел кейсов скоро будет здесь 🎁"
-            );
+            event.preventDefault();
+            event.stopPropagation();
 
-        }
-    );
-}
+            /*
+             * Профиль обрабатывается
+             * отдельным обработчиком
+             */
 
+            if (
+                button.id ===
+                "profileMenuButtonSide"
+            ) {
 
-/* =====================================================
-   КОЛЛЕКЦИЯ
-   ===================================================== */
+                closeMenu();
 
-function showCollection() {
+                return;
+            }
 
-    const oldScreen =
-        document.querySelector(
-            ".collection-screen"
-        );
 
-    if (oldScreen) {
-        oldScreen.remove();
-    }
+            if (
+                button.id ===
+                "profileMenuButton"
+            ) {
 
+                closeMenu();
 
-    const owned =
-        new Map();
+                return;
+            }
 
 
-    for (const id of collection) {
-
-        owned.set(
-            id,
-            (owned.get(id) || 0) + 1
-        );
-    }
-
-
-    const uniqueCount =
-        new Set(collection).size;
-
-
-    const screen =
-        document.createElement("div");
-
-    screen.className =
-        "collection-screen";
-
-
-    const cards =
-        cars
-            .map((car) => {
-
-                const count =
-                    owned.get(car.id) || 0;
-
-
-                return `
-
-                    <div
-                        class="
-                            collection-car
-                            ${
-                                count
-                                    ? "owned"
-                                    : "locked"
-                            }
-                        "
-                    >
-
-                        <div
-                            class="
-                                collection-car-icon
-                            "
-                        >
-                            ${
-                                count
-                                    ? car.emoji
-                                    : "❓"
-                            }
-                        </div>
-
-
-                        <div
-                            class="
-                                collection-car-info
-                            "
-                        >
-
-                            <strong>
-                                ${
-                                    count
-                                        ? car.name
-                                        : "Неизвестный автомобиль"
-                                }
-                            </strong>
-
-
-                            <span
-                                class="
-                                    rarity-${car.rarity}
-                                "
-                            >
-                                ${
-                                    count
-                                        ? car.rarityName
-                                        : "Не получено"
-                                }
-                            </span>
-
-                        </div>
-
-
-                        ${
-                            count
-                                ? `
-                                    <b
-                                        class="
-                                            collection-count
-                                        "
-                                    >
-                                        ×${count}
-                                    </b>
-                                `
-                                : ""
-                        }
-
-                    </div>
-
-                `;
-
-            })
-            .join("");
-
-
-    screen.innerHTML = `
-
-        <div class="collection-panel">
-
-            <div class="collection-header">
-
-                <div>
-
-                    <small>
-                        RANDOM CAR
-                    </small>
-
-                    <h2>
-                        🚗 Коллекция
-                    </h2>
-
-                </div>
-
-
-                <button
-                    class="collection-close"
-                    type="button"
-                >
-                    ✕
-                </button>
-
-            </div>
-
-
-            <div class="collection-progress">
-
-                Собрано:
-
-                <b>
-                    ${uniqueCount}/${cars.length}
-                </b>
-
-            </div>
-
-
-            <div class="collection-list">
-
-                ${cards}
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    document.body.appendChild(
-        screen
-    );
-
-
-    requestAnimationFrame(() => {
-
-        screen.classList.add(
-            "show"
-        );
-
-    });
-
-
-    const closeButton =
-        screen.querySelector(
-            ".collection-close"
-        );
-
-
-    if (closeButton) {
-
-        closeButton.addEventListener(
-            "click",
-            () => {
-
-                screen.classList.remove(
-                    "show"
+            const strong =
+                button.querySelector(
+                    "strong"
                 );
 
-                setTimeout(() => {
 
-                    screen.remove();
-
-                }, 200);
-
-            }
-        );
-    }
-}
+            const title =
+                strong
+                    ? strong.textContent.trim()
+                    : "Раздел";
 
 
-/* =====================================================
-   ESCAPE
-   ===================================================== */
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (event.key === "Escape") {
             closeMenu();
+
+
+            alert(
+                `Раздел «${title}» пока находится в разработке 🚧`
+            );
+
         }
+    );
 
-    }
-);
+});
 
 
-/* =====================================================
-   ЗАПУСК
-   ===================================================== */
+/* =========================
+   NAVIGATION
+========================= */
+
+const navButtons =
+    document.querySelectorAll(
+        ".nav-button"
+    );
+
+
+navButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            navButtons.forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            /*
+             * Профиль открывается
+             * отдельным обработчиком
+             */
+
+            if (
+                button.id ===
+                "profileNavButton"
+            ) {
+
+                return;
+            }
+
+
+            const span =
+                button.querySelector(
+                    "span"
+                );
+
+
+            const section =
+                span
+                    ? span.textContent.trim()
+                    : "Раздел";
+
+
+            alert(
+                `Раздел «${section}» пока находится в разработке 🚧`
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================
+   INITIALIZATION
+========================= */
 
 updateBalance();
-saveGame();
-// =========================================
-// ОКНО СЕЗОНА
-// =========================================
-
-const seasonButton = document.getElementById("seasonButton");
-const seasonOverlay = document.getElementById("seasonOverlay");
-const closeSeasonButton = document.getElementById("closeSeasonButton");
-
-if (seasonButton && seasonOverlay) {
-
-    seasonButton.addEventListener("click", () => {
-
-        seasonOverlay.classList.add("active");
-
-        document.body.classList.add("modal-open");
-
-        if (
-            window.Telegram &&
-            Telegram.WebApp &&
-            Telegram.WebApp.HapticFeedback
-        ) {
-            Telegram.WebApp.HapticFeedback.impactOccurred("light");
-        }
-
-    });
-
-}
-
-
-if (closeSeasonButton && seasonOverlay) {
-
-    closeSeasonButton.addEventListener("click", () => {
-
-        seasonOverlay.classList.remove("active");
-
-        document.body.classList.remove("modal-open");
-
-    });
-
-}
-
-
-// Закрытие по нажатию на затемнение
-
-if (seasonOverlay) {
-
-    seasonOverlay.addEventListener("click", (event) => {
-
-        if (event.target === seasonOverlay) {
-
-            seasonOverlay.classList.remove("active");
-
-            document.body.classList.remove("modal-open");
-
-        }
-
-    });
-
-}
