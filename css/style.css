@@ -829,3 +829,77 @@ button {
         font-size: 13px;
     }
 }
+/* =====================================================
+   КНОПКИ РЕЗУЛЬТАТА
+   ===================================================== */
+
+.result-actions {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-top: 22px;
+}
+
+
+.result-keep,
+.result-sell {
+
+    width: 100%;
+
+    min-height: 50px;
+
+    border-radius: 16px;
+
+    font-size: 14px;
+
+    font-weight: 850;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.result-keep {
+
+    background: #ffffff;
+
+    color: #080808;
+}
+
+
+.result-sell {
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.10);
+}
+
+
+.result-keep:active,
+.result-sell:active {
+
+    transform: scale(0.97);
+
+}
+
+
+.result-sell:hover {
+
+    background:
+        rgba(255, 255, 255, 0.12);
+}
