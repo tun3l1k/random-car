@@ -1,4 +1,4 @@
-onst tg = window.Telegram?.WebApp;
+const tg = window.Telegram?.WebApp;
 
 if (tg) {
     tg.ready();
@@ -56,26 +56,45 @@ function getRandomCar() {
 function createResultWindow(car) {
     const oldWindow = document.querySelector(".case-result");
 
-    if (oldWindow) oldWindow.remove();
+    if (oldWindow) {
+        oldWindow.remove();
+    }
 
     const result = document.createElement("div");
+
     result.className = "case-result";
 
     result.innerHTML = `
         <div class="case-result-card">
-            <div class="result-title">Ð¢ÐÐÐ ÐÐ«ÐÐÐÐ</div>
-            <div class="result-car">${car.emoji}</div>
-            <div class="result-name">${car.name}</div>
+
+            <div class="result-title">
+                ТЕБЕ ВЫПАЛО
+            </div>
+
+            <div class="result-car">
+                ${car.emoji}
+            </div>
+
+            <div class="result-name">
+                ${car.name}
+            </div>
+
             <div class="result-rarity rarity-${car.rarity}">
                 ${car.rarityName}
             </div>
+
             <div class="result-price">
-                Ð¡ÑÐ¾Ð¸Ð¼Ð¾ÑÑÑ:
-                <b>${car.price.toLocaleString("ru-RU")} ðª</b>
+                Стоимость:
+                <b>${car.price.toLocaleString("ru-RU")} 🪙</b>
             </div>
-            <button class="result-close" type="button">
-                ÐÐÐÐ ÐÐ¢Ð¬
+
+            <button
+                class="result-close"
+                type="button"
+            >
+                ЗАБРАТЬ
             </button>
+
         </div>
     `;
 
@@ -85,17 +104,22 @@ function createResultWindow(car) {
         result.classList.add("show");
     });
 
-    result.querySelector(".result-close").addEventListener("click", () => {
+    const closeButton = result.querySelector(".result-close");
+
+    closeButton.addEventListener("click", () => {
         result.classList.remove("show");
 
-        setTimeout(() => result.remove(), 250);
+        setTimeout(() => {
+            result.remove();
+        }, 250);
     });
 }
 
 if (openCaseButton) {
     openCaseButton.addEventListener("click", () => {
+
         if (balance < CASE_PRICE) {
-            alert("ÐÐµÐ´Ð¾ÑÑÐ°ÑÐ¾ÑÐ½Ð¾ Ð¼Ð¾Ð½ÐµÑ!");
+            alert("Недостаточно монет!");
             return;
         }
 
@@ -104,37 +128,53 @@ if (openCaseButton) {
 
         openCaseButton.disabled = true;
         openCaseButton.classList.add("case-opening");
-        openCaseButton.textContent = "ð ÐÐ¢ÐÐ Ð«ÐÐÐÐ...";
+        openCaseButton.textContent = "🎁 ОТКРЫВАЕМ...";
 
         setTimeout(() => {
+
             const car = getRandomCar();
 
             openCaseButton.disabled = false;
             openCaseButton.classList.remove("case-opening");
-            openCaseButton.textContent = "ð ÐÐ¢ÐÐ Ð«Ð¢Ð¬ ÐÐÐÐ¡";
+            openCaseButton.textContent = "🎁 ОТКРЫТЬ КЕЙС";
 
             createResultWindow(car);
+
         }, 1200);
     });
 }
 
-document.querySelectorAll(".menu-button").forEach(button => {
+const menuButtons = document.querySelectorAll(".menu-button");
+
+menuButtons.forEach(button => {
+
     button.addEventListener("click", () => {
+
         const title = button.querySelector("strong").textContent;
-        alert(`Ð Ð°Ð·Ð´ÐµÐ» Â«${title}Â» Ð¿Ð¾ÐºÐ° Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑ Ð² ÑÐ°Ð·ÑÐ°Ð±Ð¾ÑÐºÐµ ð§`);
+
+        alert(
+            `Раздел «${title}» пока находится в разработке 🚧`
+        );
     });
 });
 
-document.querySelectorAll(".nav-button").forEach(button => {
+const navButtons = document.querySelectorAll(".nav-button");
+
+navButtons.forEach(button => {
+
     button.addEventListener("click", () => {
-        document.querySelectorAll(".nav-button").forEach(item => {
+
+        navButtons.forEach(item => {
             item.classList.remove("active");
         });
 
         button.classList.add("active");
 
         const section = button.querySelector("span").textContent;
-        alert(`Ð Ð°Ð·Ð´ÐµÐ» Â«${section}Â» Ð¿Ð¾ÐºÐ° Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑ Ð² ÑÐ°Ð·ÑÐ°Ð±Ð¾ÑÐºÐµ ð§`);
+
+        alert(
+            `Раздел «${section}» пока находится в разработке 🚧`
+        );
     });
 });
 
