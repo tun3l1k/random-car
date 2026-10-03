@@ -1,1 +1,249 @@
-1
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    }
+
+html,
+body {
+width: 100%;
+min-height: 100%;
+font-family: Arial, sans-serif;
+background: #0b0d12;
+color: #ffffff;
+}
+
+body {
+min-height: 100vh;
+-webkit-tap-highlight-color: transparent;
+}
+
+button {
+border: none;
+font: inherit;
+color: inherit;
+cursor: pointer;
+}
+
+.app {
+width: 100%;
+max-width: 600px;
+min-height: 100vh;
+margin: 0 auto;
+padding-bottom: 90px;
+}
+
+/* ===== TOPBAR ===== */
+
+.topbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 18px;
+background: #11141b;
+border-bottom: 1px solid #20242d;
+}
+
+.game-title {
+font-size: 20px;
+font-weight: 900;
+letter-spacing: 1px;
+}
+
+.player-name {
+margin-top: 4px;
+font-size: 13px;
+color: #8c93a3;
+}
+
+.balance {
+padding: 10px 14px;
+background: #1b1f28;
+border-radius: 14px;
+font-weight: 700;
+}
+
+/* ===== MAIN ===== */
+
+.main {
+padding: 20px 16px;
+}
+
+.welcome {
+margin-bottom: 20px;
+}
+
+.welcome-small {
+font-size: 12px;
+font-weight: 800;
+color: #7d8494;
+letter-spacing: 1px;
+}
+
+.welcome h1 {
+margin-top: 6px;
+font-size: 30px;
+font-weight: 900;
+}
+
+.welcome p {
+margin-top: 7px;
+color: #8f96a5;
+line-height: 1.4;
+}
+
+/* ===== CASE ===== */
+
+.case-card {
+padding: 22px;
+background: linear-gradient(145deg, #1a1e27, #11141a);
+border: 1px solid #292e39;
+border-radius: 24px;
+text-align: center;
+}
+
+.case-image {
+display: flex;
+align-items: center;
+justify-content: center;
+
+width: 150px;
+height: 150px;
+margin: 0 auto 16px;
+background: #0d1016;
+border-radius: 30px;
+font-size: 70px;
+
+}
+
+.case-info h2 {
+font-size: 24px;
+}
+
+.case-info p {
+margin-top: 5px;
+color: #8f96a5;
+}
+
+.main-button {
+width: 100%;
+margin-top: 20px;
+padding: 16px;
+
+background: #ffffff;
+color: #101218;
+border-radius: 16px;
+font-size: 16px;
+font-weight: 900;
+transition: transform 0.15s;
+
+}
+
+.main-button:active {
+transform: scale(0.97);
+}
+
+.case-price {
+margin-top: 12px;
+color: #858c9b;
+font-size: 13px;
+}
+
+/* ===== MENU ===== */
+
+.menu {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-top: 16px;
+}
+
+.menu-button {
+min-height: 105px;
+padding: 16px;
+
+background: #151820;
+border: 1px solid #252a34;
+border-radius: 18px;
+text-align: left;
+transition: transform 0.15s;
+
+}
+
+.menu-button:active {
+transform: scale(0.97);
+}
+
+.menu-button span {
+display: block;
+font-size: 28px;
+margin-bottom: 10px;
+}
+
+.menu-button strong {
+display: block;
+font-size: 15px;
+}
+
+.menu-button small {
+display: block;
+margin-top: 4px;
+color: #7f8695;
+}
+
+/* ===== BOTTOM NAV ===== */
+
+.bottom-nav {
+position: fixed;
+left: 50%;
+bottom: 0;
+
+width: 100%;
+max-width: 600px;
+transform: translateX(-50%);
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+padding: 10px 8px 12px;
+background: rgba(14, 16, 22, 0.96);
+border-top: 1px solid #252a34;
+backdrop-filter: blur(10px);
+
+}
+
+.nav-button {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 4px;
+
+background: transparent;
+font-size: 20px;
+
+}
+
+.nav-button span {
+font-size: 11px;
+color: #777e8e;
+}
+
+.nav-button.active span {
+color: #ffffff;
+}
+
+/* ===== SMALL SCREEN ===== */
+
+@media (max-width: 380px) {
+
+.welcome h1 {
+    font-size: 26px;
+}
+.case-card {
+    padding: 18px;
+}
+.case-image {
+    width: 125px;
+    height: 125px;
+    font-size: 58px;
+}
+
+}
