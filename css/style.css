@@ -1618,3 +1618,6 @@ button {
     }
 
 }
+body.modal-open {
+    overflow: hidden;
+}
