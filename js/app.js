@@ -1,5 +1,10 @@
 const tg = window.Telegram?.WebApp;
 
+
+/* =====================================================
+   TELEGRAM
+   ===================================================== */
+
 if (tg) {
     tg.ready();
     tg.expand();
@@ -9,40 +14,80 @@ if (tg) {
     }
 }
 
-function updateViewport() {
-    if (!tg) return;
 
-    const height = tg.viewportStableHeight || tg.viewportHeight;
+/* =====================================================
+   VIEWPORT
+   ===================================================== */
+
+function updateViewport() {
+
+    if (!tg) {
+        return;
+    }
+
+    const height =
+        tg.viewportStableHeight ||
+        tg.viewportHeight;
 
     if (height) {
+
         document.documentElement.style.setProperty(
             "--app-height",
             `${height}px`
         );
+
     }
 }
 
 updateViewport();
 
 if (tg) {
-    tg.onEvent("viewportChanged", updateViewport);
+    tg.onEvent(
+        "viewportChanged",
+        updateViewport
+    );
 }
+
+
+/* =====================================================
+   BALANCE
+   ===================================================== */
 
 let balance = 10000;
+
 const CASE_PRICE = 500;
 
-const balanceElement = document.getElementById("balance");
-const openCaseButton = document.getElementById("openCaseButton");
+const balanceElement =
+    document.getElementById("balance");
+
+const openCaseButton =
+    document.getElementById("openCaseButton");
+
 
 function updateBalance() {
-    balanceElement.textContent = balance.toLocaleString("ru-RU");
+
+    if (!balanceElement) {
+        return;
+    }
+
+    balanceElement.textContent =
+        balance.toLocaleString("ru-RU");
 }
 
+
+/* =====================================================
+   RANDOM CAR
+   ===================================================== */
+
 function getRandomCar() {
-    const random = Math.random() * 100;
+
+    const random =
+        Math.random() * 100;
+
     let current = 0;
 
     for (const car of cars) {
+
         current += car.chance;
 
         if (random <= current) {
@@ -53,18 +98,30 @@ function getRandomCar() {
     return cars[0];
 }
 
+
+/* =====================================================
+   RESULT WINDOW
+   ===================================================== */
+
 function createResultWindow(car) {
-    const oldWindow = document.querySelector(".case-result");
+
+    const oldWindow =
+        document.querySelector(".case-result");
 
     if (oldWindow) {
         oldWindow.remove();
     }
 
-    const result = document.createElement("div");
 
-    result.className = "case-result";
+    const result =
+        document.createElement("div");
+
+    result.className =
+        "case-result";
+
 
     result.innerHTML = `
+
         <div class="case-result-card">
 
             <div class="result-title">
@@ -85,7 +142,9 @@ function createResultWindow(car) {
 
             <div class="result-price">
                 Стоимость:
-                <b>${car.price.toLocaleString("ru-RU")} 🪙</b>
+                <b>
+                    ${car.price.toLocaleString("ru-RU")} 🪙
+                </b>
             </div>
 
             <button
@@ -96,86 +155,242 @@ function createResultWindow(car) {
             </button>
 
         </div>
+
     `;
+
 
     document.body.appendChild(result);
 
+
     requestAnimationFrame(() => {
+
         result.classList.add("show");
+
     });
 
-    const closeButton = result.querySelector(".result-close");
 
-    closeButton.addEventListener("click", () => {
-        result.classList.remove("show");
+    const closeButton =
+        result.querySelector(".result-close");
 
-        setTimeout(() => {
-            result.remove();
-        }, 250);
-    });
+
+    closeButton.addEventListener(
+        "click",
+        () => {
+
+            result.classList.remove("show");
+
+            setTimeout(() => {
+
+                result.remove();
+
+            }, 250);
+
+        }
+    );
 }
+
+
+/* =====================================================
+   OPEN CASE
+   ===================================================== */
 
 if (openCaseButton) {
-    openCaseButton.addEventListener("click", () => {
 
-        if (balance < CASE_PRICE) {
-            alert("Недостаточно монет!");
-            return;
+    openCaseButton.addEventListener(
+        "click",
+        () => {
+
+            if (balance < CASE_PRICE) {
+
+                alert(
+                    "Недостаточно монет!"
+                );
+
+                return;
+            }
+
+
+            balance -= CASE_PRICE;
+
+            updateBalance();
+
+
+            openCaseButton.disabled = true;
+
+            openCaseButton.classList.add(
+                "case-opening"
+            );
+
+            openCaseButton.textContent =
+                "🎁 ОТКРЫВАЕМ...";
+
+
+            setTimeout(
+                () => {
+
+                    const car =
+                        getRandomCar();
+
+
+                    openCaseButton.disabled =
+                        false;
+
+                    openCaseButton.classList.remove(
+                        "case-opening"
+                    );
+
+                    openCaseButton.textContent =
+                        "🎁 ОТКРЫТЬ КЕЙС";
+
+
+                    createResultWindow(car);
+
+                },
+                1200
+            );
+
         }
-
-        balance -= CASE_PRICE;
-        updateBalance();
-
-        openCaseButton.disabled = true;
-        openCaseButton.classList.add("case-opening");
-        openCaseButton.textContent = "🎁 ОТКРЫВАЕМ...";
-
-        setTimeout(() => {
-
-            const car = getRandomCar();
-
-            openCaseButton.disabled = false;
-            openCaseButton.classList.remove("case-opening");
-            openCaseButton.textContent = "🎁 ОТКРЫТЬ КЕЙС";
-
-            createResultWindow(car);
-
-        }, 1200);
-    });
+    );
 }
 
-const menuButtons = document.querySelectorAll(".menu-button");
 
-menuButtons.forEach(button => {
+/* =====================================================
+   BURGER MENU
+   ===================================================== */
 
-    button.addEventListener("click", () => {
+const menuButton =
+    document.getElementById("menuButton");
 
-        const title = button.querySelector("strong").textContent;
+const closeMenuButton =
+    document.getElementById("closeMenuButton");
 
-        alert(
-            `Раздел «${title}» пока находится в разработке 🚧`
+const sideMenu =
+    document.getElementById("sideMenu");
+
+const menuOverlay =
+    document.getElementById("menuOverlay");
+
+
+function openMenu() {
+
+    if (!sideMenu || !menuOverlay) {
+        return;
+    }
+
+    sideMenu.classList.add("open");
+
+    menuOverlay.classList.add("open");
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+}
+
+
+function closeMenu() {
+
+    if (!sideMenu || !menuOverlay) {
+        return;
+    }
+
+    sideMenu.classList.remove("open");
+
+    menuOverlay.classList.remove("open");
+
+    sideMenu.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+}
+
+
+if (menuButton) {
+
+    menuButton.addEventListener(
+        "click",
+        openMenu
+    );
+
+}
+
+
+if (closeMenuButton) {
+
+    closeMenuButton.addEventListener(
+        "click",
+        closeMenu
+    );
+
+}
+
+
+if (menuOverlay) {
+
+    menuOverlay.addEventListener(
+        "click",
+        closeMenu
+    );
+
+}
+
+
+/* =====================================================
+   MENU ITEMS
+   ===================================================== */
+
+const sideMenuItems =
+    document.querySelectorAll(
+        ".side-menu-item"
+    );
+
+
+sideMenuItems.forEach(
+    (button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const title =
+                    button.querySelector(
+                        "strong"
+                    )?.textContent ||
+                    "Раздел";
+
+
+                closeMenu();
+
+
+                alert(
+                    `Раздел «${title}» пока находится в разработке 🚧`
+                );
+
+            }
         );
-    });
-});
 
-const navButtons = document.querySelectorAll(".nav-button");
+    }
+);
 
-navButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+/* =====================================================
+   ESCAPE
+   ===================================================== */
 
-        navButtons.forEach(item => {
-            item.classList.remove("active");
-        });
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-        button.classList.add("active");
+        if (event.key === "Escape") {
+            closeMenu();
+        }
 
-        const section = button.querySelector("span").textContent;
+    }
+);
 
-        alert(
-            `Раздел «${section}» пока находится в разработке 🚧`
-        );
-    });
-});
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
 
 updateBalance();
