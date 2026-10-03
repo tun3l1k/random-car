@@ -13,7 +13,7 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 
 <body>
@@ -28,21 +28,27 @@
 
         <div class="topbar-left">
 
-            <div class="season-info">
+            <div class="game-title">
+                RANDOM CAR
+            </div>
 
-    <div class="season-badge">
-        <span>СЕЗОН</span>
-        <strong id="seasonNumber">1</strong>
-    </div>
+            <div class="player-name">
+                Игрок
+            </div>
 
-    <div class="season-name" id="seasonName">
-        JDM
-    </div>
-
-</div>
+        </div>
 
 
         <div class="topbar-right">
+
+            <button
+                id="seasonButton"
+                class="season-button"
+                type="button"
+            >
+                СЕЗОН 1
+            </button>
+
 
             <div class="balance">
                 🪙
@@ -318,6 +324,125 @@
 
     </aside>
 
+
+    <!-- =========================================
+         ОКНО СЕЗОНА
+         ========================================= -->
+
+    <div
+        id="seasonOverlay"
+        class="season-overlay"
+    >
+
+        <div
+            class="season-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="seasonTitle"
+        >
+
+            <button
+                id="closeSeasonButton"
+                class="season-close"
+                type="button"
+                aria-label="Закрыть сезон"
+            >
+                ✕
+            </button>
+
+
+            <div class="season-modal-badge">
+                СЕЗОН 1
+            </div>
+
+
+            <h2 id="seasonTitle">
+                JDM
+            </h2>
+
+
+            <p class="season-description">
+                Японская легенда начинается здесь.
+            </p>
+
+
+            <div class="season-info-card">
+
+                <div class="season-info-row">
+
+                    <span>
+                        🏁 Сезон
+                    </span>
+
+                    <strong>
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="season-info-row">
+
+                    <span>
+                        🚗 Тематика
+                    </span>
+
+                    <strong>
+                        JDM
+                    </strong>
+
+                </div>
+
+
+                <div class="season-info-row">
+
+                    <span>
+                        ⏳ Длительность
+                    </span>
+
+                    <strong>
+                        14 дней
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="season-section-title">
+                АВТОМОБИЛИ СЕЗОНА
+            </div>
+
+
+            <div class="season-cars">
+
+                <div class="season-car">
+                    🏎️
+                    <span>Skyline R34</span>
+                </div>
+
+                <div class="season-car">
+                    🏎️
+                    <span>Supra A80</span>
+                </div>
+
+                <div class="season-car">
+                    🏎️
+                    <span>RX-7 FD</span>
+                </div>
+
+                <div class="season-car">
+                    🏎️
+                    <span>NSX</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
 </div>
 
 
@@ -328,5 +453,6 @@
 <script src="js/season.js?v=1"></script>
 <script src="js/cars.js?v=5"></script>
 <script src="js/app.js?v=6"></script>
+
 </body>
 </html>
