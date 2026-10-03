@@ -1,63 +1,101 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-<meta
-    name="viewport"
-    content="width=device-width,
-    initial-scale=1.0,
-    maximum-scale=1.0,
-    user-scalable=no,
-    viewport-fit=cover"
->
-<title>Random Car</title>
-<!-- Telegram Mini App -->
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<!-- Наши стили -->
-<link rel="stylesheet" href="css/style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    >
+
+    <title>Random Car</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link rel="stylesheet" href="css/style.css?v=3">
 </head>
+
 <body>
+
 <div class="app">
+
     <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
+
     <header class="topbar">
+
         <div>
             <div class="game-title">
                 RANDOM CAR
             </div>
+
             <div class="player-name">
                 Игрок
             </div>
         </div>
-        <div class="balance">
-            🪙 <span id="balance">10000</span>
-        </div>
-    </header>
-    <!-- ===== ОСНОВНОЙ ЭКРАН ===== -->
-    <main class="main">
-        <section class="welcome">
-            <div class="welcome-small">
-                ТВОЯ КОЛЛЕКЦИЯ
+
+        <div class="topbar-right">
+
+            <div class="balance">
+                🪙 <span id="balance">10000</span>
             </div>
+
+            <button
+                id="menuButton"
+                class="burger-button"
+                type="button"
+                aria-label="Открыть меню"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+
+    <main class="main">
+
+        <section class="welcome">
+
+            <div class="welcome-small">
+                RANDOM CAR
+            </div>
+
             <h1>
                 Собери их всех
             </h1>
+
             <p>
                 Открывай кейсы и получай редкие автомобили.
             </p>
+
         </section>
+
+
         <!-- ===== КЕЙС ===== -->
+
         <section class="case-card">
+
             <div class="case-image">
                 🚘
             </div>
+
             <div class="case-info">
+
                 <h2>
                     Random Case
                 </h2>
+
                 <p>
                     Случайный автомобиль
                 </p>
+
             </div>
+
+
             <button
                 id="openCaseButton"
                 class="main-button"
@@ -65,104 +103,118 @@
             >
                 🎁 ОТКРЫТЬ КЕЙС
             </button>
+
+
             <div class="case-price">
-                Стоимость: <b>500 🪙</b>
+                Стоимость:
+                <b>500 🪙</b>
             </div>
+
         </section>
-        <!-- ===== МЕНЮ ===== -->
-        <section class="menu">
+
+    </main>
+
+
+    <!-- ===== ЗАТЕМНЕНИЕ ===== -->
+
+    <div
+        id="menuOverlay"
+        class="menu-overlay"
+    ></div>
+
+
+    <!-- ===== БОКОВОЕ МЕНЮ ===== -->
+
+    <aside
+        id="sideMenu"
+        class="side-menu"
+        aria-hidden="true"
+    >
+
+        <div class="side-menu-header">
+
+            <strong>
+                RANDOM CAR
+            </strong>
+
             <button
-                class="menu-button"
+                id="closeMenuButton"
+                class="close-menu"
+                type="button"
+                aria-label="Закрыть меню"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div class="side-menu-list">
+
+            <button
+                class="side-menu-item"
                 type="button"
             >
                 <span>🚗</span>
-                <strong>
-                    Коллекция
-                </strong>
-                <small>
-                    Твои автомобили
-                </small>
+                <strong>Коллекция</strong>
             </button>
+
+
             <button
-                class="menu-button"
+                class="side-menu-item"
                 type="button"
             >
                 <span>🏆</span>
-                <strong>
-                    Рейтинг
-                </strong>
-                <small>
-                    Лучшие игроки
-                </small>
+                <strong>Рейтинг</strong>
             </button>
+
+
             <button
-                class="menu-button"
+                class="side-menu-item"
                 type="button"
             >
                 <span>🎯</span>
-                <strong>
-                    Задания
-                </strong>
-                <small>
-                    Получи награды
-                </small>
+                <strong>Задания</strong>
             </button>
+
+
             <button
-                class="menu-button"
+                class="side-menu-item"
                 type="button"
             >
                 <span>👤</span>
-                <strong>
-                    Профиль
-                </strong>
-                <small>
-                    Твоя статистика
-                </small>
+                <strong>Профиль</strong>
             </button>
-        </section>
-    </main>
-    <!-- ===== НИЖНЯЯ НАВИГАЦИЯ ===== -->
-    <nav class="bottom-nav">
-        <button
-            class="nav-button active"
-            type="button"
-        >
-            🏠
-            <span>
-                Главная
-            </span>
-        </button>
-        <button
-            class="nav-button"
-            type="button"
-        >
-            🚗
-            <span>
-                Коллекция
-            </span>
-        </button>
-        <button
-            class="nav-button"
-            type="button"
-        >
-            🏆
-            <span>
-                Рейтинг
-            </span>
-        </button>
-        <button
-            class="nav-button"
-            type="button"
-        >
-            👤
-            <span>
-                Профиль
-            </span>
-        </button>
-    </nav>
+
+
+            <button
+                class="side-menu-item"
+                type="button"
+            >
+                <span>🎁</span>
+                <strong>Кейсы</strong>
+            </button>
+
+
+            <button
+                class="side-menu-item"
+                type="button"
+            >
+                <span>⚙️</span>
+                <strong>Настройки</strong>
+            </button>
+
+        </div>
+
+    </aside>
+
 </div>
-<!-- Наш JavaScript -->
-<script src="js/cars.js?v=2"></script>
-<script src="js/app.js?v=2"></script>
+
+
+<!-- ===== JAVASCRIPT ===== -->
+
+<script src="js/cars.js?v=3"></script>
+<script src="js/app.js?v=3"></script>
+
 </body>
 </html>
