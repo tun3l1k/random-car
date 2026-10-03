@@ -1,9 +1,13 @@
-const tg = window.Telegram?.WebApp;
+/* =====================================================
+   RANDOM CAR — APP
+   ===================================================== */
 
 
 /* =====================================================
    TELEGRAM
    ===================================================== */
+
+const tg = window.Telegram?.WebApp;
 
 if (tg) {
     tg.ready();
@@ -39,7 +43,7 @@ function updateViewport() {
 
 updateViewport();
 
-if (tg) {
+if (tg && typeof tg.onEvent === "function") {
     tg.onEvent(
         "viewportChanged",
         updateViewport
@@ -53,8 +57,9 @@ if (tg) {
 
 const CASE_PRICE = 500;
 
-let balance =
-    Number(localStorage.getItem("randomCarBalance"));
+let balance = Number(
+    localStorage.getItem("randomCarBalance")
+);
 
 if (!Number.isFinite(balance)) {
     balance = 10000;
@@ -75,12 +80,20 @@ try {
         ) || "[]"
     );
 
-} catch {
+    if (!Array.isArray(collection)) {
+        collection = [];
+    }
+
+} catch (error) {
 
     collection = [];
 
 }
 
+
+/* =====================================================
+   СОХРАНЕНИЕ
+   ===================================================== */
 
 function saveGame() {
 
@@ -106,6 +119,13 @@ const balanceElement =
 const openCaseButton =
     document.getElementById("openCaseButton");
 
+const casesButton =
+    document.getElementById("casesButton");
+
+
+/* =====================================================
+   БАЛАНС
+   ===================================================== */
 
 function updateBalance() {
 
@@ -127,16 +147,15 @@ function getRandomCar() {
     const random =
         Math.random() * 100;
 
-    let current = 0;
+    let currentChance = 0;
 
     for (const car of cars) {
 
-        current += car.chance;
+        currentChance += car.chance;
 
-        if (random <= current) {
+        if (random <= currentChance) {
             return car;
         }
-
     }
 
     return cars[cars.length - 1];
@@ -144,38 +163,55 @@ function getRandomCar() {
 
 
 /* =====================================================
-   КОЛЛЕКЦИЯ — ПРОВЕРКА
+   КОЛЛЕКЦИЯ
    ===================================================== */
 
 function isDuplicate(car) {
 
     return collection.includes(car.id);
-
 }
 
-
-/* =====================================================
-   ДОБАВИТЬ АВТО
-   ===================================================== */
 
 function addCarToCollection(car) {
 
     collection.push(car.id);
 
     saveGame();
-
 }
 
 
 /* =====================================================
-   ОКНО ВЫПАВШЕЙ МАШИНЫ
+   УВЕДОМЛЕНИЕ
+   ===================================================== */
+
+function showMessage(message) {
+
+    if (
+        tg &&
+        typeof tg.showAlert === "function"
+    ) {
+
+        tg.showAlert(message);
+
+    } else {
+
+        alert(message);
+    }
+}
+
+
+/* =====================================================
+   ОКНО РЕЗУЛЬТАТА
    ===================================================== */
 
 function createResultWindow(car) {
 
-    document
-        .querySelector(".case-result")
-        ?.remove();
+    const oldWindow =
+        document.querySelector(".case-result");
+
+    if (oldWindow) {
+        oldWindow.remove();
+    }
 
 
     const duplicate =
@@ -194,13 +230,11 @@ function createResultWindow(car) {
         <div class="case-result-card">
 
             <div class="result-title">
-
                 ${
                     duplicate
                         ? "ДУБЛИКАТ"
                         : "ТЕБЕ ВЫПАЛО"
                 }
-
             </div>
 
 
@@ -214,26 +248,23 @@ function createResultWindow(car) {
             </div>
 
 
-            <div
-                class="result-rarity rarity-${car.rarity}"
-            >
+            <div class="
+                result-rarity
+                rarity-${car.rarity}
+            ">
                 ${car.rarityName}
             </div>
 
 
             <div class="result-price">
-
                 Стоимость:
-
                 <b>
-                    ${car.price.toLocaleString("ru-RU")}
-                    🪙
+                    ${car.price.toLocaleString("ru-RU")} 🪙
                 </b>
-
             </div>
 
 
-                        <div class="result-actions">
+            <div class="result-actions">
 
                 <button
                     class="result-keep"
@@ -252,6 +283,8 @@ function createResultWindow(car) {
 
             </div>
 
+        </div>
+
     `;
 
 
@@ -265,11 +298,10 @@ function createResultWindow(car) {
     });
 
 
-        const keepButton =
+    const keepButton =
         result.querySelector(
             ".result-keep"
         );
-
 
     const sellButton =
         result.querySelector(
@@ -277,25 +309,27 @@ function createResultWindow(car) {
         );
 
 
+    /* =================================================
+       ЗАКРЫТЬ ОКНО
+       ================================================= */
+
     function closeResult() {
 
         result.classList.remove(
             "show"
         );
 
-
         setTimeout(() => {
 
             result.remove();
 
         }, 250);
-
     }
 
 
-    /* ================================
+    /* =================================================
        ЗАБРАТЬ
-       ================================ */
+       ================================================= */
 
     keepButton.addEventListener(
         "click",
@@ -309,44 +343,32 @@ function createResultWindow(car) {
     );
 
 
-    /* ================================
+    /* =================================================
        ПРОДАТЬ
-       ================================ */
+       ================================================= */
 
     sellButton.addEventListener(
         "click",
         () => {
 
             /*
-             * Экономику продажи подключим
-             * позже.
+             * Пока экономика продажи
+             * не подключена.
              *
-             * Сейчас автомобиль
-             * НЕ добавляется в коллекцию.
+             * Поэтому автомобиль
+             * просто закрывает окно.
              */
 
-            if (
-                tg &&
-                typeof tg.showAlert === "function"
-            ) {
-
-                tg.showAlert(
-                    "Система продажи будет добавлена вместе с экономикой 🪙"
-                );
-
-            } else {
-
-                alert(
-                    "Система продажи будет добавлена вместе с экономикой 🪙"
-                );
-
-            }
-
+            showMessage(
+                "Система продажи будет добавлена позже 🪙"
+            );
 
             closeResult();
 
         }
     );
+}
+
 
 /* =====================================================
    ОТКРЫТИЕ КЕЙСА
@@ -360,7 +382,7 @@ if (openCaseButton) {
 
             if (balance < CASE_PRICE) {
 
-                alert(
+                showMessage(
                     "Недостаточно монет!"
                 );
 
@@ -375,12 +397,15 @@ if (openCaseButton) {
             balance -= CASE_PRICE;
 
             saveGame();
-
             updateBalance();
 
 
-            openCaseButton.disabled =
-                true;
+            /*
+             * Блокируем кнопку
+             * на время открытия.
+             */
+
+            openCaseButton.disabled = true;
 
             openCaseButton.classList.add(
                 "case-opening"
@@ -413,12 +438,11 @@ if (openCaseButton) {
 
         }
     );
-
 }
 
 
 /* =====================================================
-   BURGER MENU
+   БУРГЕР-МЕНЮ
    ===================================================== */
 
 const sideMenu =
@@ -431,13 +455,22 @@ const menuOverlay =
         "menuOverlay"
     );
 
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const closeMenuButton =
+    document.getElementById(
+        "closeMenuButton"
+    );
+
 
 function openMenu() {
 
     if (!sideMenu || !menuOverlay) {
         return;
     }
-
 
     sideMenu.classList.add(
         "open"
@@ -447,12 +480,10 @@ function openMenu() {
         "open"
     );
 
-
     sideMenu.setAttribute(
         "aria-hidden",
         "false"
     );
-
 }
 
 
@@ -462,7 +493,6 @@ function closeMenu() {
         return;
     }
 
-
     sideMenu.classList.remove(
         "open"
     );
@@ -471,22 +501,43 @@ function closeMenu() {
         "open"
     );
 
-
     sideMenu.setAttribute(
         "aria-hidden",
         "true"
     );
-
 }
 
 
-/*
- * Используем один обработчик
- * на весь документ.
- *
- * Это надёжнее работает
- * внутри Telegram Mini App.
- */
+if (menuButton) {
+
+    menuButton.addEventListener(
+        "click",
+        openMenu
+    );
+}
+
+
+if (closeMenuButton) {
+
+    closeMenuButton.addEventListener(
+        "click",
+        closeMenu
+    );
+}
+
+
+if (menuOverlay) {
+
+    menuOverlay.addEventListener(
+        "click",
+        closeMenu
+    );
+}
+
+
+/* =====================================================
+   МЕНЮ
+   ===================================================== */
 
 document.addEventListener(
     "click",
@@ -495,84 +546,101 @@ document.addEventListener(
         const target =
             event.target;
 
-
         if (!(target instanceof Element)) {
             return;
         }
 
 
-        /*
-         * БУРГЕР
-         */
-
-        if (
+        const item =
             target.closest(
-                "#menuButton"
-            )
-        ) {
+                ".side-menu-item"
+            );
 
-            event.preventDefault();
+        if (!item) {
+            return;
+        }
 
-            openMenu();
+
+        const title =
+            item
+                .querySelector("strong")
+                ?.textContent
+                ?.trim();
+
+
+        closeMenu();
+
+
+        if (title === "Коллекция") {
+
+            showCollection();
 
             return;
         }
 
 
-        /*
-         * КРЕСТИК
-         */
+        if (title === "Кейсы") {
 
-        if (
-            target.closest(
-                "#closeMenuButton"
-            )
-        ) {
-
-            event.preventDefault();
-
-            closeMenu();
+            showMessage(
+                "Раздел кейсов скоро будет здесь 🎁"
+            );
 
             return;
         }
 
 
-        /*
-         * ЗАТЕМНЕНИЕ
-         */
+        if (title === "Апгрейд") {
 
-        if (
-            target.closest(
-                "#menuOverlay"
-            )
-        ) {
-
-            closeMenu();
+            showMessage(
+                "Апгрейд скоро будет доступен ⬆️"
+            );
 
             return;
         }
+
+
+        showMessage(
+            `Раздел «${title}» пока находится в разработке 🚧`
+        );
 
     }
 );
 
 
 /* =====================================================
-   ЭКРАН КОЛЛЕКЦИИ
+   КНОПКА КЕЙСОВ
+   ===================================================== */
+
+if (casesButton) {
+
+    casesButton.addEventListener(
+        "click",
+        () => {
+
+            showMessage(
+                "Раздел кейсов скоро будет здесь 🎁"
+            );
+
+        }
+    );
+}
+
+
+/* =====================================================
+   КОЛЛЕКЦИЯ
    ===================================================== */
 
 function showCollection() {
 
-    document
-        .querySelector(
+    const oldScreen =
+        document.querySelector(
             ".collection-screen"
-        )
-        ?.remove();
+        );
 
+    if (oldScreen) {
+        oldScreen.remove();
+    }
 
-    /*
-     * Считаем количество
-     * каждой машины.
-     */
 
     const owned =
         new Map();
@@ -584,7 +652,6 @@ function showCollection() {
             id,
             (owned.get(id) || 0) + 1
         );
-
     }
 
 
@@ -600,8 +667,8 @@ function showCollection() {
 
 
     const cards =
-        cars.map(
-            (car) => {
+        cars
+            .map((car) => {
 
                 const count =
                     owned.get(car.id) || 0;
@@ -640,13 +707,11 @@ function showCollection() {
                         >
 
                             <strong>
-
                                 ${
                                     count
                                         ? car.name
                                         : "Неизвестный автомобиль"
                                 }
-
                             </strong>
 
 
@@ -655,13 +720,11 @@ function showCollection() {
                                     rarity-${car.rarity}
                                 "
                             >
-
                                 ${
                                     count
                                         ? car.rarityName
                                         : "Не получено"
                                 }
-
                             </span>
 
                         </div>
@@ -685,8 +748,8 @@ function showCollection() {
 
                 `;
 
-            }
-        ).join("");
+            })
+            .join("");
 
 
     screen.innerHTML = `
@@ -745,15 +808,13 @@ function showCollection() {
     );
 
 
-    requestAnimationFrame(
-        () => {
+    requestAnimationFrame(() => {
 
-            screen.classList.add(
-                "show"
-            );
+        screen.classList.add(
+            "show"
+        );
 
-        }
-    );
+    });
 
 
     const closeButton =
@@ -762,351 +823,26 @@ function showCollection() {
         );
 
 
-    closeButton.addEventListener(
-        "click",
-        () => {
+    if (closeButton) {
 
-            screen.classList.remove(
-                "show"
-            );
+        closeButton.addEventListener(
+            "click",
+            () => {
 
+                screen.classList.remove(
+                    "show"
+                );
 
-            setTimeout(() => {
+                setTimeout(() => {
 
-                screen.remove();
+                    screen.remove();
 
-            }, 200);
+                }, 200);
 
-        }
-    );
-
-}
-
-
-/* =====================================================
-   ПУНКТЫ МЕНЮ
-   ===================================================== */
-
-document.addEventListener(
-    "click",
-    (event) => {
-
-        const target =
-            event.target;
-
-
-        if (!(target instanceof Element)) {
-            return;
-        }
-
-
-        const item =
-            target.closest(
-                ".side-menu-item"
-            );
-
-
-        if (!item) {
-            return;
-        }
-
-
-        const title =
-            item
-                .querySelector(
-                    "strong"
-                )
-                ?.textContent
-                ?.trim();
-
-
-        closeMenu();
-
-
-        if (
-            title === "Коллекция"
-        ) {
-
-            showCollection();
-
-            return;
-        }
-
-
-        alert(
-            `Раздел «${title}» пока находится в разработке 🚧`
+            }
         );
-
     }
-);
-
-
-/* =====================================================
-   СТИЛИ КОЛЛЕКЦИИ
-   ===================================================== */
-
-const collectionStyle =
-    document.createElement(
-        "style"
-    );
-
-
-collectionStyle.textContent = `
-
-.collection-screen {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 150;
-
-    padding:
-        max(18px, env(safe-area-inset-top))
-        18px
-        max(18px, env(safe-area-inset-bottom));
-
-    background: #080808;
-
-    opacity: 0;
-
-    transform:
-        translateY(12px);
-
-    transition:
-        opacity .2s ease,
-        transform .2s ease;
-
-    overflow: hidden;
 }
-
-
-.collection-screen.show {
-
-    opacity: 1;
-
-    transform:
-        translateY(0);
-
-}
-
-
-.collection-panel {
-
-    width: 100%;
-
-    max-width: 500px;
-
-    height: 100%;
-
-    margin: 0 auto;
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-.collection-header {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    min-height: 58px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.08);
-
-}
-
-
-.collection-header small {
-
-    color: #8e8e93;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    font-weight: 800;
-
-}
-
-
-.collection-header h2 {
-
-    margin: 3px 0 0;
-
-    font-size: 24px;
-
-}
-
-
-.collection-close {
-
-    width: 42px;
-
-    height: 42px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.08);
-
-    font-size: 20px;
-
-    color: white;
-
-}
-
-
-.collection-progress {
-
-    margin: 14px 0 10px;
-
-    color: #8e8e93;
-
-    font-size: 13px;
-
-}
-
-
-.collection-progress b {
-
-    color: #fff;
-
-}
-
-
-.collection-list {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-
-    overflow: auto;
-
-    padding-bottom: 20px;
-
-    scrollbar-width: none;
-
-}
-
-
-.collection-list::-webkit-scrollbar {
-
-    display: none;
-
-}
-
-
-.collection-car {
-
-    min-height: 68px;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 8px 12px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-
-}
-
-
-.collection-car.locked {
-
-    opacity: .48;
-
-}
-
-
-.collection-car-icon {
-
-    width: 52px;
-
-    height: 52px;
-
-    flex: 0 0 52px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    font-size: 30px;
-
-}
-
-
-.collection-car-info {
-
-    min-width: 0;
-
-    margin-left: 12px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-
-}
-
-
-.collection-car-info strong {
-
-    font-size: 14px;
-
-}
-
-
-.collection-car-info span {
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-}
-
-
-.collection-count {
-
-    margin-left: auto;
-
-    color: #fff;
-
-    font-size: 14px;
-
-}
-
-`;
-
-
-document.head.appendChild(
-    collectionStyle
-);
 
 
 /* =====================================================
@@ -1117,12 +853,8 @@ document.addEventListener(
     "keydown",
     (event) => {
 
-        if (
-            event.key === "Escape"
-        ) {
-
+        if (event.key === "Escape") {
             closeMenu();
-
         }
 
     }
@@ -1134,5 +866,4 @@ document.addEventListener(
    ===================================================== */
 
 updateBalance();
-
 saveGame();
