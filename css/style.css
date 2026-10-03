@@ -1,18 +1,27 @@
 /* =====================================================
    RANDOM CAR
-   Основные стили
+   ОСНОВНЫЕ СТИЛИ
    ===================================================== */
 
 :root {
     --app-height: 100vh;
+
     --bg: #080808;
     --card: #151515;
     --card-light: #1d1d1d;
+
     --text: #ffffff;
     --muted: #8e8e93;
+
     --border: rgba(255, 255, 255, 0.08);
+
     --accent: #ffffff;
 }
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
 
 * {
     box-sizing: border-box;
@@ -23,11 +32,15 @@ html,
 body {
     width: 100%;
     height: 100%;
+
     margin: 0;
     padding: 0;
+
     overflow: hidden;
+
     background: var(--bg);
     color: var(--text);
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -42,10 +55,16 @@ body {
 }
 
 button {
+    appearance: none;
+    -webkit-appearance: none;
+
     font: inherit;
     color: inherit;
+
     border: 0;
     outline: none;
+
+    padding: 0;
 }
 
 
@@ -58,6 +77,7 @@ button {
 
     width: 100%;
     height: var(--app-height);
+
     min-height: 100%;
 
     overflow: hidden;
@@ -94,9 +114,14 @@ button {
     min-height: 70px;
 }
 
+.topbar-left {
+    min-width: 0;
+}
+
 .game-title {
     font-size: 19px;
     font-weight: 800;
+
     letter-spacing: 1.2px;
 }
 
@@ -112,6 +137,7 @@ button {
 .topbar-right {
     display: flex;
     align-items: center;
+
     gap: 10px;
 }
 
@@ -126,6 +152,7 @@ button {
     border-radius: 14px;
 
     background: rgba(255, 255, 255, 0.07);
+
     border: 1px solid var(--border);
 
     font-size: 14px;
@@ -150,6 +177,7 @@ button {
     border-radius: 14px;
 
     background: rgba(255, 255, 255, 0.08);
+
     border: 1px solid var(--border);
 
     font-size: 23px;
@@ -164,7 +192,9 @@ button {
 
 .burger-button:active {
     transform: scale(0.92);
-    background: rgba(255, 255, 255, 0.14);
+
+    background:
+        rgba(255, 255, 255, 0.14);
 }
 
 
@@ -178,9 +208,10 @@ button {
 
     width: 100%;
 
-    height: calc(
-        var(--app-height) - 70px
-    );
+    height:
+        calc(
+            var(--app-height) - 70px
+        );
 
     display: flex;
     flex-direction: column;
@@ -205,7 +236,12 @@ button {
 
     text-align: center;
 
-    margin-top: clamp(8px, 5vh, 40px);
+    margin-top:
+        clamp(
+            8px,
+            5vh,
+            40px
+        );
 }
 
 .welcome-small {
@@ -222,17 +258,25 @@ button {
 .welcome h1 {
     margin: 0;
 
-    font-size: clamp(27px, 7vw, 38px);
+    font-size:
+        clamp(
+            27px,
+            7vw,
+            38px
+        );
+
     line-height: 1.05;
 
     font-weight: 850;
+
     letter-spacing: -1px;
 }
 
 .welcome p {
     max-width: 310px;
 
-    margin: 10px auto 0;
+    margin:
+        10px auto 0;
 
     color: var(--muted);
 
@@ -249,7 +293,12 @@ button {
     width: 100%;
     max-width: 390px;
 
-    margin-top: clamp(22px, 5vh, 42px);
+    margin-top:
+        clamp(
+            22px,
+            5vh,
+            42px
+        );
 
     padding:
         clamp(20px, 5vw, 28px)
@@ -269,20 +318,34 @@ button {
             rgba(255, 255, 255, 0.035)
         );
 
-    border: 1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
 
     box-shadow:
-        0 18px 50px rgba(0, 0, 0, 0.35);
+        0 18px 50px
+        rgba(0, 0, 0, 0.35);
 }
 
 
 /* =====================================================
-   CAR IMAGE
+   CASE IMAGE
    ===================================================== */
 
 .case-image {
-    width: clamp(105px, 30vw, 145px);
-    height: clamp(105px, 30vw, 145px);
+    width:
+        clamp(
+            105px,
+            30vw,
+            145px
+        );
+
+    height:
+        clamp(
+            105px,
+            30vw,
+            145px
+        );
 
     display: flex;
     align-items: center;
@@ -297,12 +360,20 @@ button {
             rgba(255, 255, 255, 0.025)
         );
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
 
-    font-size: clamp(55px, 15vw, 82px);
+    font-size:
+        clamp(
+            55px,
+            15vw,
+            82px
+        );
 
     box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.35);
+        0 20px 50px
+        rgba(0, 0, 0, 0.35);
 }
 
 
@@ -319,14 +390,21 @@ button {
 .case-info h2 {
     margin: 0;
 
-    font-size: clamp(21px, 5.5vw, 27px);
+    font-size:
+        clamp(
+            21px,
+            5.5vw,
+            27px
+        );
+
     font-weight: 800;
 
     letter-spacing: -0.4px;
 }
 
 .case-info p {
-    margin: 5px 0 0;
+    margin:
+        5px 0 0;
 
     color: var(--muted);
 
@@ -340,6 +418,7 @@ button {
 
 .main-button {
     width: 100%;
+
     min-height: 54px;
 
     margin-top: 22px;
@@ -357,7 +436,8 @@ button {
     cursor: pointer;
 
     box-shadow:
-        0 10px 28px rgba(255, 255, 255, 0.08);
+        0 10px 28px
+        rgba(255, 255, 255, 0.08);
 
     transition:
         transform 0.15s ease,
@@ -370,14 +450,20 @@ button {
 
 .main-button:disabled {
     opacity: 0.55;
+
     cursor: default;
 }
 
 .main-button.case-opening {
-    animation: pulseButton 0.8s ease infinite alternate;
+    animation:
+        pulseButton
+        0.8s ease
+        infinite
+        alternate;
 }
 
 @keyframes pulseButton {
+
     from {
         transform: scale(1);
     }
@@ -406,18 +492,64 @@ button {
 
 
 /* =====================================================
+   КНОПКА КЕЙСОВ
+   ===================================================== */
+
+.secondary-button {
+    width: 100%;
+    max-width: 390px;
+
+    min-height: 50px;
+
+    margin-top: 10px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.09);
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.secondary-button:active {
+    transform: scale(0.97);
+
+    background:
+        rgba(255, 255, 255, 0.11);
+}
+
+
+/* =====================================================
    MENU OVERLAY
    ===================================================== */
 
 .menu-overlay {
     position: fixed;
+
     z-index: 90;
 
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.58);
+    background:
+        rgba(0, 0, 0, 0.58);
 
     opacity: 0;
+
     visibility: hidden;
 
     transition:
@@ -430,6 +562,7 @@ button {
 
 .menu-overlay.open {
     opacity: 1;
+
     visibility: visible;
 }
 
@@ -440,12 +573,18 @@ button {
 
 .side-menu {
     position: fixed;
+
     z-index: 100;
 
     top: 0;
     right: 0;
 
-    width: min(84vw, 360px);
+    width:
+        min(
+            84vw,
+            360px
+        );
+
     height: 100%;
 
     padding:
@@ -460,21 +599,33 @@ button {
             #101010
         );
 
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-left:
+        1px solid
+        rgba(255, 255, 255, 0.08);
 
     box-shadow:
-        -20px 0 60px rgba(0, 0, 0, 0.45);
+        -20px 0 60px
+        rgba(0, 0, 0, 0.45);
 
-    transform: translateX(105%);
+    transform:
+        translateX(105%);
 
     transition:
-        transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        transform
+        0.28s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
 
     overflow: hidden;
 }
 
 .side-menu.open {
-    transform: translateX(0);
+    transform:
+        translateX(0);
 }
 
 
@@ -489,7 +640,9 @@ button {
     align-items: center;
     justify-content: space-between;
 
-    border-bottom: 1px solid var(--border);
+    border-bottom:
+        1px solid
+        var(--border);
 }
 
 .side-menu-header strong {
@@ -509,7 +662,8 @@ button {
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.08);
+    background:
+        rgba(255, 255, 255, 0.08);
 
     font-size: 22px;
 
@@ -522,7 +676,9 @@ button {
 
 .close-menu:active {
     transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.15);
+
+    background:
+        rgba(255, 255, 255, 0.15);
 }
 
 
@@ -541,6 +697,7 @@ button {
 
 .side-menu-item {
     width: 100%;
+
     min-height: 56px;
 
     display: flex;
@@ -550,9 +707,12 @@ button {
 
     border-radius: 17px;
 
-    background: rgba(255, 255, 255, 0.045);
+    background:
+        rgba(255, 255, 255, 0.045);
 
-    border: 1px solid rgba(255, 255, 255, 0.045);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.045);
 
     text-align: left;
 
@@ -581,7 +741,8 @@ button {
 .side-menu-item:active {
     transform: scale(0.97);
 
-    background: rgba(255, 255, 255, 0.10);
+    background:
+        rgba(255, 255, 255, 0.10);
 }
 
 
@@ -591,6 +752,7 @@ button {
 
 .case-result {
     position: fixed;
+
     z-index: 200;
 
     inset: 0;
@@ -601,11 +763,13 @@ button {
 
     padding: 20px;
 
-    background: rgba(0, 0, 0, 0.72);
+    background:
+        rgba(0, 0, 0, 0.72);
 
     opacity: 0;
 
-    transition: opacity 0.25s ease;
+    transition:
+        opacity 0.25s ease;
 
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -616,9 +780,21 @@ button {
 }
 
 .case-result-card {
-    width: min(90vw, 360px);
+    width:
+        min(
+            90vw,
+            360px
+        );
 
-    padding: 28px 22px 22px;
+    max-height:
+        calc(
+            var(--app-height) - 40px
+        );
+
+    padding:
+        28px
+        22px
+        22px;
 
     text-align: center;
 
@@ -631,17 +807,22 @@ button {
             #111111
         );
 
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.10);
 
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.55);
+        0 30px 80px
+        rgba(0, 0, 0, 0.55);
 
     transform: scale(0.92);
 
-    transition: transform 0.3s ease;
+    transition:
+        transform 0.3s ease;
 }
 
-.case-result.show .case-result-card {
+.case-result.show
+.case-result-card {
     transform: scale(1);
 }
 
@@ -681,24 +862,66 @@ button {
     color: var(--text);
 }
 
-.result-close {
+
+/* =====================================================
+   RESULT ACTIONS
+   ===================================================== */
+
+.result-actions {
     width: 100%;
-    min-height: 52px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
 
     margin-top: 22px;
+}
+
+.result-keep,
+.result-sell {
+    width: 100%;
+
+    min-height: 50px;
 
     border-radius: 16px;
 
-    background: #ffffff;
-    color: #080808;
-
+    font-size: 14px;
     font-weight: 850;
 
     cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        background 0.15s ease;
 }
 
-.result-close:active {
+.result-keep {
+    background: #ffffff;
+
+    color: #080808;
+}
+
+.result-sell {
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.10);
+}
+
+.result-keep:active,
+.result-sell:active {
     transform: scale(0.97);
+}
+
+.result-sell:hover {
+    background:
+        rgba(255, 255, 255, 0.12);
 }
 
 
@@ -733,6 +956,234 @@ button {
     color: #ffb84d;
 }
 
+.rarity-mythic {
+    color: #ff4d4d;
+
+    text-shadow:
+        0 0 12px
+        rgba(255, 77, 77, 0.35);
+}
+
+
+/* =====================================================
+   COLLECTION
+   ===================================================== */
+
+.collection-screen {
+    position: fixed;
+
+    z-index: 180;
+
+    inset: 0;
+
+    padding:
+        max(18px, env(safe-area-inset-top))
+        18px
+        max(18px, env(safe-area-inset-bottom));
+
+    background:
+        #080808;
+
+    opacity: 0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+    overflow: hidden;
+}
+
+.collection-screen.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+.collection-panel {
+    width: 100%;
+    max-width: 430px;
+
+    height: 100%;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-header {
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+.collection-header small {
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+}
+
+.collection-header h2 {
+    margin:
+        3px 0 0;
+
+    font-size: 24px;
+}
+
+.collection-close {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.collection-close:active {
+    transform: scale(0.92);
+}
+
+.collection-progress {
+    margin-top: 14px;
+
+    padding: 14px 16px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    border:
+        1px solid
+        var(--border);
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    flex-shrink: 0;
+}
+
+.collection-progress b {
+    color: #ffffff;
+}
+
+.collection-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+    overflow-y: auto;
+
+    padding-bottom: 10px;
+
+    scrollbar-width: none;
+}
+
+.collection-list::-webkit-scrollbar {
+    display: none;
+}
+
+.collection-car {
+    width: 100%;
+
+    min-height: 68px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 8px 12px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.collection-car.locked {
+    opacity: 0.48;
+}
+
+.collection-car-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    font-size: 29px;
+}
+
+.collection-car-info {
+    min-width: 0;
+
+    margin-left: 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.collection-car-info strong {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 14px;
+}
+
+.collection-car-info span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.collection-count {
+    margin-left: auto;
+
+    padding-left: 10px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
 
 /* =====================================================
    SMALL IPHONES
@@ -745,9 +1196,10 @@ button {
     }
 
     .main {
-        height: calc(
-            var(--app-height) - 62px
-        );
+        height:
+            calc(
+                var(--app-height) - 62px
+            );
 
         padding-top: 10px;
     }
@@ -764,7 +1216,7 @@ button {
         margin-top: 16px;
 
         padding-top: 16px;
-        padding-bottom: 15px;
+        padding-bottom: 13px;
     }
 
     .case-image {
@@ -780,10 +1232,17 @@ button {
 
     .main-button {
         margin-top: 15px;
+
         min-height: 48px;
     }
 
     .case-price {
+        margin-top: 8px;
+    }
+
+    .secondary-button {
+        min-height: 46px;
+
         margin-top: 8px;
     }
 }
@@ -824,82 +1283,28 @@ button {
 
     .main-button {
         min-height: 44px;
+
         margin-top: 12px;
 
         font-size: 13px;
     }
+
+    .secondary-button {
+        min-height: 42px;
+
+        font-size: 12px;
+    }
 }
+
+
 /* =====================================================
-   КНОПКИ РЕЗУЛЬТАТА
+   TOUCH DEVICES
    ===================================================== */
 
-.result-actions {
+@media (hover: none) {
 
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-
-    margin-top: 22px;
-}
-
-
-.result-keep,
-.result-sell {
-
-    width: 100%;
-
-    min-height: 50px;
-
-    border-radius: 16px;
-
-    font-size: 14px;
-
-    font-weight: 850;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease,
-        background 0.15s ease;
-}
-
-
-.result-keep {
-
-    background: #ffffff;
-
-    color: #080808;
-}
-
-
-.result-sell {
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    color: #ffffff;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.10);
-}
-
-
-.result-keep:active,
-.result-sell:active {
-
-    transform: scale(0.97);
-
-}
-
-
-.result-sell:hover {
-
-    background:
-        rgba(255, 255, 255, 0.12);
+    .result-sell:hover {
+        background:
+            rgba(255, 255, 255, 0.08);
+    }
 }
